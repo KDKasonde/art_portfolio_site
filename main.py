@@ -1,4 +1,4 @@
-from art_portfolio_site.website import create_website
+from website import create_website
 
 website = create_website()
 
