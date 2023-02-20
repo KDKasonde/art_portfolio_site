@@ -3,3 +3,11 @@
     height: 10em;
     alignment: center;
 }
+
+.side_bar_btn_icon {
+    color: white;
+    margin-right: 5%;
+    font-size: 2em;
+    font-family: "Font Awesome 6 Free";
+    font-weight:900;
+}

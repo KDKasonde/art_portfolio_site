@@ -2,19 +2,25 @@
 <html>
 <head>
 <title>MDurocherArt</title>
-    {% include 'navbar.html' %}
-
     <!-- Retrieve css from online sources -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
           integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
-    <link rel="stylesheet" href="{{ url_for('static', filename='assets/fontawesome-free-6.3.0-web/css/all.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='fontawesome/css/fontawesome.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='fontawesome/css/solid.css') }}" />
+
 
     <link rel="stylesheet" href="{{ url_for('static', filename='css/page.css') }}" />
     <link rel="stylesheet" href="{{ url_for('static', filename='css/background.css') }}" />
     <link rel="stylesheet" href="{{ url_for('static', filename='css/images.css') }}" />
-    <div class="row align-content-center">
-        <img class="logo mx-auto img-fluid" src="{{ url_for('static', filename='assets/logo.png') }}" alt="Responsive image"/>
+    <div class="d-flex align-items-center">
+        <div class="ml-auto">
+            <img class="logo" src="{{ url_for('static', filename='assets/logo.png') }}" alt="Responsive image"/>
+        </div>
+        <div class="ml-auto" style="padding-right: 2em">
+            <i class="fas fa-bars side_bar_btn_icon"></i>
+        </div>
     </div>
+
 </head>
 
 <body>
