@@ -11,3 +11,28 @@
     font-family: "Font Awesome 6 Free";
     font-weight:900;
 }
+
+/*digital works are pretty consistent so can have their own css classes */
+
+.digital_landscape {
+    width: 49em;
+    height: 35em;
+}
+
+.digital_portrait{
+    width: 35em;
+    height: 49em;
+}
+
+/* some exceptional cases of digital works */
+
+.digital_landscape_exception {
+    width: 20em;
+    height: 14em;
+}
+
+.digital_portrait_exception {
+    width: 14em;
+    height: 20em;
+}
+
