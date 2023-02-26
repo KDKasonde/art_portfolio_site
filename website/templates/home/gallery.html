@@ -1,3 +1,13 @@
-<div>
+<ul id="gallery">
+</ul>
 
-</div>
+<script>
+    const gallery_div = document.getElementById("gallery")
+    {% for image_address in image_list %}
+        var li_elem = document.createElement("li")
+        var elem = document.createElement("img")
+        elem.setAttribute("src", "{{ url_for('static', filename = 'assets/gallery/' + image_address) }}" )
+        li_elem.appendChild(elem)
+        gallery_div.appendChild(li_elem)
+    {% endfor %}
+</script>
