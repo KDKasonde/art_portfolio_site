@@ -48,7 +48,7 @@
 ul {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: space-around;
     list-style-type: none;
     justify-self: center;
     padding: 0 0 0 0;
@@ -62,8 +62,8 @@ li {
     flex: none;
 }
 
-img {
-    height: 20vh;
+.gallery_image {
+    height: 100%;
 }
 
 

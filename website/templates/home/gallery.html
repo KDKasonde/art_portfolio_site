@@ -8,6 +8,7 @@
         <p style="color: white">THIS IS A TEST</p>
     </div>
 </div>
+
 <script>
     const gallery_div = document.getElementById("gallery")
 
@@ -35,6 +36,7 @@
         var li_elem = document.createElement("li")
         var elem = document.createElement("img")
         elem.setAttribute("src", "{{ url_for('static', filename = 'assets/gallery/' + image_list[index]) }}" )
+        elem.setAttribute("class", "gallery_image")
         li_elem.appendChild(elem)
         ul_elem.appendChild(li_elem)
         gallery_div.appendChild(ul_elem)
