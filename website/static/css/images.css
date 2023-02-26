@@ -36,3 +36,13 @@
     height: 20em;
 }
 
+.gallery_div{
+    /* want this container to hold multiple images, and wrap them so multiple lines
+       are used. Should create the illusion of a mosiac like effect without js code.
+     */
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+}
+
