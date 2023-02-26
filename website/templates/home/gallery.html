@@ -1,20 +1,35 @@
-<div id="gallery">
+<div class="d-flex justify-content-center">
+    <div style="width:15%;">
+        <p style="color: white">THIS IS A TEST</p>
+    </div>
+    <div id="gallery">
+    </div>
+    <div style="width:15%;">
+        <p style="color: white">THIS IS A TEST</p>
+    </div>
 </div>
-
 <script>
     const gallery_div = document.getElementById("gallery")
-    {% for index in range(image_list|length) %}
 
+    {% for index in range(image_list|length) %}
 
         {% if index == 0 or index%8 == 0 %}
             var ul_elem = document.createElement("ul")
+            ul_elem.setAttribute("id", "ul_{{ index }}")
+
+            {% if index != 0 %}
+                ul_elem.setAttribute("style", "display: none;")
+            {% endif %}
+
         {% endif %}
 
         {% if index%4 == 0 and index > 0 %}
+
             var li_elem = document.createElement("li")
-            li_elem.setAttribute("style", "flex-basis: 100%; height: 0;" )
+            li_elem.setAttribute("style", "flex-basis: 100%; height: 1em;" )
             ul_elem.appendChild(li_elem)
             gallery_div.appendChild(ul_elem)
+
         {% endif %}
 
         var li_elem = document.createElement("li")
@@ -25,4 +40,5 @@
         gallery_div.appendChild(ul_elem)
 
     {% endfor %}
+
 </script>
