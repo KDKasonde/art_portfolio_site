@@ -35,9 +35,8 @@
 
 <script>
     /* scroll right btn js */
-    let image_count = {{ image_list|length }};
-    const element = document.getElementById("scroll_right");
-    element.addEventListener("click", scroll_right);
+    const right_scroll = document.getElementById("scroll_right");
+    right_scroll.addEventListener("click", scroll_right);
 
     function scroll_right() {
         const lists = document.getElementById("gallery").getElementsByTagName('ul')
@@ -68,11 +67,10 @@
 
 <script>
     /* scroll left btn js */
-    let image_count = {{ image_list|length }};
-    const element = document.getElementById("scroll_left");
-    element.addEventListener("click", scroll_right);
+    const left_scroll = document.getElementById("scroll_left");
+    left_scroll.addEventListener("click", scroll_left);
 
-    function scroll_right() {
+    function scroll_left() {
         const lists = document.getElementById("gallery").getElementsByTagName('ul')
         let index;
         for (var i=0; i < lists.length; i++){
@@ -81,13 +79,12 @@
                 break;
             };
         };
-
-        if ((index - 1) > 0){
+        if ((index - 1) >= 0){
             lists[index - 1].style.display = '';
             lists[index].style.display = 'none';
 
         } else {
-            lists[0].style.display = '';
+            lists[lists.length-1].style.display = '';
             lists[index].style.display = 'none';
 
         };
