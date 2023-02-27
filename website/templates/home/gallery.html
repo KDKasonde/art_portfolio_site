@@ -1,6 +1,6 @@
 <div class="d-flex justify-content-center">
     <div class="d-flex justify-content-center" style="width:15%;">
-        <button class=" side_gallery_btn align-self-center justify-self-center">
+        <button class=" side_gallery_btn align-self-center justify-self-center" id="scroll_left">
             <i class="fa-solid fa-circle-chevron-left"></i>
         </button>
     </div>
@@ -62,6 +62,39 @@
 
     };
     /* end of scroll right */
+
+
+</script>
+
+<script>
+    /* scroll left btn js */
+    let image_count = {{ image_list|length }};
+    const element = document.getElementById("scroll_left");
+    element.addEventListener("click", scroll_right);
+
+    function scroll_right() {
+        const lists = document.getElementById("gallery").getElementsByTagName('ul')
+        let index;
+        for (var i=0; i < lists.length; i++){
+            if (lists[i].checkVisibility()){
+                index = i;
+                break;
+            };
+        };
+
+        if ((index - 1) > 0){
+            lists[index - 1].style.display = '';
+            lists[index].style.display = 'none';
+
+        } else {
+            lists[0].style.display = '';
+            lists[index].style.display = 'none';
+
+        };
+
+
+    };
+    /* end of scroll left */
 
 
 </script>
