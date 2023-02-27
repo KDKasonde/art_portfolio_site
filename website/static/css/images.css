@@ -5,12 +5,27 @@
 }
 
 .side_bar_btn_icon {
+    height: 2em;
+    width: 2em;
     color: white;
     margin-right: 5%;
     font-size: 2em;
     font-family: "Font Awesome 6 Free";
     font-weight:900;
+    background-color: transparent;
+    border: 0 solid transparent;
 }
+
+.side_gallery_btn {
+    color: white;
+    font-size: 2em;
+    font-family: "Font Awesome 6 Free";
+    font-weight:900;
+    background-color: transparent;
+    justify-self: start;
+    align-self: center;
+}
+
 
 /*digital works are pretty consistent so can have their own css classes */
 
