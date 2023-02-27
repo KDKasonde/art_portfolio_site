@@ -4,7 +4,7 @@
             <i class="fa-solid fa-circle-chevron-left"></i>
         </button>
     </div>
-    <div id="gallery">
+    <div id="gallery" style="width:70%;">
         {% for index in range(image_list|length) %}
 
             {% if index == 0 or index%8 == 0 %}
@@ -27,44 +27,41 @@
         {% endfor %}
     </div>
     <div class="d-flex justify-content-center" style="width:15%;">
-        <button class=" side_gallery_btn align-self-center justify-self-center">
+        <button class=" side_gallery_btn align-self-center justify-self-center" id="scroll_right">
             <i class="fa-solid fa-circle-chevron-right"></i>
         </button>
     </div>
 </div>
 
 <script>
-    const gallery_div = document.getElementById("gallery")
+    /* scroll right btn js */
+    let image_count = {{ image_list|length }};
+    const element = document.getElementById("scroll_right");
+    element.addEventListener("click", scroll_right);
 
-  /*  {% for index in range(image_list|length) %}
+    function scroll_right() {
+        const lists = document.getElementById("gallery").getElementsByTagName('ul')
+        let index;
+        for (var i=0; i < lists.length; i++){
+            if (lists[i].checkVisibility()){
+                index = i;
+                break;
+            };
+        };
 
-        {% if index == 0 or index%8 == 0 %}
-            var ul_elem = document.createElement("ul")
-            ul_elem.setAttribute("id", "ul_{{ index }}")
+        if ((index + 1) < lists.length){
+            lists[index + 1].style.display = '';
+            lists[index].style.display = 'none';
 
-            {% if index != 0 %}
-                ul_elem.setAttribute("style", "display: none;")
-            {% endif %}
+        } else {
+            lists[0].style.display = '';
+            lists[index].style.display = 'none';
 
-        {% endif %}
+        };
 
-        {% if index%4 == 0 and index > 0 %}
 
-            var li_elem = document.createElement("li")
-            li_elem.setAttribute("style", "flex-basis: 100%; height: 1em;" )
-            ul_elem.appendChild(li_elem)
-            gallery_div.appendChild(ul_elem)
+    };
+    /* end of scroll right */
 
-        {% endif %}
 
-        var li_elem = document.createElement("li")
-        var elem = document.createElement("img")
-        elem.setAttribute("src", "{{ url_for('static', filename = 'assets/gallery/' + image_list[index]) }}" )
-        elem.setAttribute("class", "gallery_image")
-        li_elem.appendChild(elem)
-        ul_elem.appendChild(li_elem)
-        gallery_div.appendChild(ul_elem)
-
-    {% endfor %}
-*/
 </script>
