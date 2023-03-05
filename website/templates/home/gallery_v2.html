@@ -1,22 +1,15 @@
-<div class="row" style="width:100%; height: 40vh;">
-    <button class="side_gallery_btn" id="scroll_left" style="margin-left: 5%;">
-        <i class="fa-solid fa-circle-chevron-left"></i>
-    </button>
-
-    <div id="gallery" style="width:100%; overflow-x: visible;">
-        <ul id="ul_images">
+<div style="width:100%; height: 45vh;">
+    <div class="slider-wrap" id="gallery" style=" width:90%; overflow-x: visible;z-index: 0;">
+        <div class="slider" id="ul_images">
         {% for index in range(image_list|length) %}
-            <li>
+            <div class="slider-item">
                 <img class="gallery_image" src="{{ url_for('static', filename = 'assets/gallery/' + image_list[index]) }}">
-            </li>
+            </div>
         {% endfor %}
         </ul>
     </div>
 
 
-    <button class="side_gallery_btn" id="scroll_right">
-        <i class="fa-solid fa-circle-chevron-right"></i>
-    </button>
 </div>
 
 <script>
@@ -47,37 +40,6 @@
 
     };
     /* end of scroll right */
-
-
-</script>
-
-<script>
-    /* scroll left btn js */
-    //const left_scroll = document.getElementById("scroll_left");
-    //left_scroll.addEventListener("click", scroll_left);
-
-/*    function scroll_left() {
-        const lists = document.getElementById("gallery").getElementsByTagName('ul')
-        let index;
-        for (var i=0; i < lists.length; i++){
-            if (lists[i].checkVisibility()){
-                index = i;
-                break;
-            };
-        };
-        if ((index - 1) >= 0){
-            lists[index - 1].style.display = '';
-            lists[index].style.display = 'none';
-
-        } else {
-            lists[lists.length-1].style.display = '';
-            lists[index].style.display = 'none';
-
-        };*/
-
-
-    };
-    /* end of scroll left */
 
 
 </script>
