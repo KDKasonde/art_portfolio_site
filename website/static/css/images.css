@@ -87,6 +87,10 @@
     overflow: auto;
 }
 
+div.slider::-webkit-scrollbar {
+    display: none;
+}
+
 .slider-item {
     height: 40vh;
 }
