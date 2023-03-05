@@ -17,13 +17,15 @@
 }
 
 .side_gallery_btn {
+    height: 40vh;
     color: white;
     font-size: 2em;
     font-family: "Font Awesome 6 Free";
     font-weight:900;
     background-color: transparent;
-    justify-self: start;
-    align-self: center;
+    position: absolute;
+    margin: auto;
+    z-index: 1;
 }
 
 
@@ -57,13 +59,15 @@
      */
     width: 60%;
     justify-self: center;
+    overflow-x: clip;
+    left:0;
+  	animation: scroll 10s linear 1s infinite;
 
 }
 
 ul {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
+    flex-wrap: nowrap;
     list-style-type: none;
     justify-self: center;
     padding: 0 0 0 0;
@@ -72,13 +76,14 @@ ul {
 }
 
 li {
-    height: 20vh;
-    flex-grow: 1;
-    flex: none;
+    height: 40vh;
 }
 
 .gallery_image {
     height: 100%;
 }
 
+@keyframes scroll {
+	100% { left: 100%; }
+}
 
