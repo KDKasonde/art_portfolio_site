@@ -1,45 +1,76 @@
-<div style="width:100%; height: 45vh;">
-    <div class="slider-wrap" id="gallery" style=" width:90%; overflow-x: visible;z-index: 0;">
-        <div class="slider" id="ul_images">
-        {% for index in range(image_list|length) %}
-            <div class="slider-item">
-                <img class="gallery_image" src="{{ url_for('static', filename = 'assets/gallery/' + image_list[index]) }}">
-            </div>
-        {% endfor %}
-        </ul>
+
+<div class="slider-wrap" id="gallery">
+    <div class="slider" id="div-images">
+    {% for index in range(image_list|length) %}
+        <div class="slider-item">
+             <img class="gallery_image" src="{{ url_for('static', filename = 'assets/gallery/' + image_list[index]) }}">
+        </div>
+    {% endfor %}
     </div>
-
-
 </div>
 
+
+
+
 <script>
-    /* scroll right btn js */
-    const right_scroll = document.getElementById("scroll_right");
-    right_scroll.addEventListener("click", scroll_right);
+  /*  let sliderWrap = document.getElementById('gallery');
+    let slider = document.getElementById('div-images');
+    let clonesWidth;
+    let sliderWidth;
+    let clones = [];
+    let disableScroll = false;
+    let scrollPos;
 
-    function scroll_right() {
-        const lists = document.getElementById("gallery").getElementsByTagName('ul')
-        let index;
-        for (var i=0; i < lists.length; i++){
-            if (lists[i].checkVisibility()){
-                index = i;
-                break;
-            };
-        };
+    let items = [...document.querySelectorAll('.slider-item')];
 
-        if ((index + 1) < lists.length){
-            lists[index + 1].style.display = '';
-            lists[index].style.display = 'none';
+    items.forEach(item => {
+        let clone = item.cloneNode(true);
+        clone.classList.add('clone');
+        slider.appendChild(clone);
+        clones.push(clone);
+    })
+    console.log(clones)
 
-        } else {
-            lists[0].style.display = '';
-            lists[index].style.display = 'none';
+    function getClonesWidth() {
+        let width = 0;
+        clones.forEach(clone => {
+            width += clone.offsetWidth;
+        })
+        return width;
+    }
 
-        };
+    function getScrollPos() {
+        return window.scrollY;
+    }
+
+    function scrollUpdate() {
+        scrollPos = getScrollPos();
+        console.log(scrollPos)
+        if( scrollPos >= sliderWidth){
+            console.log('here')
+            window.scrollTo({top: 1});
+        }else if(scrollPos <= 0){
+            console.log('heresdsd')
+            window.scrollTo({top: sliderWidth - clonesWidth - 1})
+        }
+        slider.style.transform = `translateX(${-window.scrollY}px`
+
+        requestAnimationFrame(scrollUpdate)
+    }
 
 
-    };
-    /* end of scroll right */
+    function calculateDimensions() {
+        sliderWidth = slider.getBoundingClientRect().width;
+        clonesWidth = getClonesWidth();
+    }
 
+    function onLoad(){
+        calculateDimensions();
+        document.body.style.height = `${sliderWidth}px`
+        window.scrollTo({top: 1});
+        scrollUpdate();
+    }
 
+    onLoad();
+*/
 </script>
