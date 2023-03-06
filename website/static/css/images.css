@@ -85,6 +85,10 @@
     display: flex;
     will-change: transform;
     overflow: auto;
+    -webkit-perspective: 600px;
+
+  -webkit-mask-image: -webkit-gradient(linear, left top, right top, color-stop(0, rgba(0,0,0,.2)), color-stop(.1, rgba(0,0,0,
+1)), color-stop(.9, rgba(0,0,0,1)), color-stop(1, rgba(0,0,0,.2)) );
 }
 
 div.slider::-webkit-scrollbar {
@@ -93,14 +97,26 @@ div.slider::-webkit-scrollbar {
 
 .slider-item {
     height: 40vh;
+    will-change: perspective;
+    transform-style: preserve-3d;
 }
 
 .gallery_image {
-    height: 100%;
-}
+    height: 80%;
+    -webkit-box-reflect:
+    below
+    0
+    -webkit-gradient(
+      linear,
+      left top,
+      left bottom,
+      color-stop(0, rgba(255, 255, 255, 0)),
+      color-stop(.5, rgba(255, 255, 255, .3)),
+      color-stop(1, rgba(255, 255, 255, .3))
+    );
 
-@keyframes scroll {
-	100% { left: 100%; }
+    max-width: inherit;
+    max-height: inherit;
 }
 
 .slider-wrap{
