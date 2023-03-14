@@ -2,6 +2,7 @@
     width: 16em;
     height: 12em;
     alignment: center;
+    justify-self: center;
 }
 
 .side_bar_btn_icon {

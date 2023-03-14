@@ -12,20 +12,20 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/page.css') }}" />
     <link rel="stylesheet" href="{{ url_for('static', filename='css/background.css') }}" />
     <link rel="stylesheet" href="{{ url_for('static', filename='css/images.css') }}" />
-    <div class="d-flex align-items-center">
-        <div class="ml-auto">
+    <div class="row align-items-center" style="width: 100%; margin: 0 0 0 0;" >
+        <a href="\" class="ml-auto" style="padding-left: 4em;">
             <img class="logo" src="{{ url_for('static', filename='assets/logo.png') }}" alt="Responsive image"/>
-        </div>
+        </a>
         <!--<div class="d-flex justify-content-end" style="width:15%;">
             <button class=" side_gallery_btn align-self-center justify-self-center">
                 <i class="fas fa-bars side_bar_btn_icon"></i>
             </button>
         </div>-->
-        <div class="ml-auto" style="padding-right: 2em;" >
+        <span class="ml-auto" style="padding-right: 2em;" >
             <button class="side_bar_btn_icon align-self-center justify-self-center">
                 <i class="fas fa-bars"></i>
             </button>
-        </div>
+        </span>
     </div>
 
 </head>
