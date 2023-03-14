@@ -75,14 +75,12 @@
 .slider {
     display: flex;
     flex-wrap: nowrap;
-    list-style-type: none;
     justify-self: center;
     padding: 0 0 0 0;
     margin: 0 0 0 0;
     flex: none;
     width:100%;
     position:absolute;
-    display: flex;
     will-change: transform;
     overflow: auto;
     -webkit-perspective: 600px;
