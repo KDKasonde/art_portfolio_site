@@ -84,9 +84,10 @@
     position:absolute;
     will-change: transform;
     overflow: auto;
+    scroll-snap-type: x mandatory;
     -webkit-perspective: 600px;
 
-  -webkit-mask-image: -webkit-gradient(linear, left top, right top, color-stop(0, rgba(0,0,0,.2)), color-stop(.1, rgba(0,0,0,
+    -webkit-mask-image: -webkit-gradient(linear, left top, right top, color-stop(0, rgba(0,0,0,.2)), color-stop(.1, rgba(0,0,0,
 1)), color-stop(.9, rgba(0,0,0,1)), color-stop(1, rgba(0,0,0,.2)) );
 }
 
@@ -98,6 +99,7 @@ div.slider::-webkit-scrollbar {
     height: 40vh;
     will-change: perspective;
     transform-style: preserve-3d;
+    scroll-snap-align: center;
 }
 
 .gallery_image {

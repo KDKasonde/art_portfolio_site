@@ -8,7 +8,7 @@
         </div>
         {% for index in range(image_list|length) %}
             <div class="slider-item">
-                 <img class="gallery_image" src="{{ url_for('static', filename = 'assets/gallery/' + image_list[index]) }}">
+                 <img class="gallery_image" src="{{ url_for('static', filename = 'assets/gallery_jpg/' + image_list[index]) }}">
 
             </div>
         {% endfor %}
