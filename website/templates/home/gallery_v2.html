@@ -75,10 +75,18 @@
     }
 
     function Onload() {
+        imagesList.forEach(image => {
+            image.addEventListener("click", open_image);
+        });
         document.getElementById("empty-slider-item-start").style.width = `${gallery_center-((firstImage.right - firstImage.left)/2)}px`
         document.getElementById("empty-slider-item-end").style.width = `${gallery_center}px`
 
 
+    }
+
+    function open_image(event) {
+        console.log(event.currentTarget);
+        /*TO DO Add modal opener here*/
     }
 
     const onLoadPromise = new Promise((result, reject) => {
