@@ -1,7 +1,7 @@
 
 <div class="slider-wrap" id="gallery">
     <div class="slider-btn-div">
-        <button class="slider-btn">
+        <button class="slider-btn" id="left-slider-btn">
             <i class="fa-solid fa-circle-chevron-left"></i>
         </button>
     </div>
@@ -12,7 +12,7 @@
             </div>
         </div>
         {% for index in range(image_list|length) %}
-            <div class="slider-item">
+            <div class="slider-item" id="{{ index }}">
                 <a href="#" target="_self">
                     <img class="gallery_image" src="{{ url_for('static', filename = 'assets/gallery_jpg/' + image_list[index]) }}">
                 </a>
@@ -25,7 +25,7 @@
         </div>
     </div>
     <div class="slider-btn-div">
-        <button class="slider-btn">
+        <button class="slider-btn" id="right-slider-btn">
             <i class="fa-solid fa-circle-chevron-right"></i>
         </button>
     </div>
@@ -44,6 +44,8 @@
     const gallery_center = (gallery_rect.right - gallery_rect.left)/2;
     const firstImage = imagesList[0].getBoundingClientRect();
     const lastImage = imagesList.slice(-1)[0].getBoundingClientRect();
+    const leftSliderBtn = document.getElementById('left-slider-btn');
+    const rightSliderBtn = document.getElementById('right-slider-btn');
 
     function checkImages(){
 
@@ -57,6 +59,20 @@
             }
         });
         return in_view;
+    }
+
+    function getCenterImage() {
+
+        const in_view = checkImages();
+        let max = 0;
+        let id;
+        in_view.forEach(image => {
+            if (image.style.scale > max){
+                max = image.style.scale;
+                id = image.id;
+            }
+        })
+        return id;
     }
 
     function scaleImages(){
@@ -79,11 +95,60 @@
         imagesList.forEach(image => {
             image.addEventListener("click", open_image);
         });
+        leftSliderBtn.addEventListener("click", slideLeft);
+        rightSliderBtn.addEventListener("click", slideRight);
+        document.addEventListener('keydown', arrowSlider);
         document.getElementById("empty-slider-item-start").style.width = `${gallery_center-((firstImage.right - firstImage.left)/2)}px`
         document.getElementById("empty-slider-item-end").style.width = `${gallery_center}px`
+    }
 
+    function slideLeft() {
+        const centerImageId = getCenterImage();
+        const targetImage = document.getElementById(`${centerImageId-1}`);
+        targetImage.scrollIntoView({
+            behavior: 'smooth',
+            block: 'center',
+            inline: 'center'
+        });
+
+        if (`${centerImageId-1}` ==0){
+            document.getElementById('left-slider-btn').disabled = true;
+        }
+
+        document.getElementById('right-slider-btn').removeAttribute("disabled");
 
     }
+
+    function slideRight() {
+        const centerImageId = parseInt(getCenterImage());
+        const targetImage = document.getElementById(`${centerImageId+1}`);
+        targetImage.scrollIntoView({
+            behavior: 'smooth',
+            block: 'center',
+            inline: 'center'
+        });
+
+        if (`${centerImageId+1}` == (imagesList.length-1)){
+            document.getElementById('right-slider-btn').disabled = true;
+        }
+
+        document.getElementById('left-slider-btn').removeAttribute("disabled");
+    }
+
+    function arrowSlider(event) {
+        const centerImageId = parseInt(getCenterImage());
+
+        if ((event.which == 37) && (`${centerImageId}` !=0)){
+            /*left key code*/
+            slideLeft();
+        }
+        if ((event.which == 39) && (`${centerImageId}` != (imagesList.length-1))){
+            /*right key code*/
+            slideRight();
+        }
+
+    }
+
 
     function open_image(event) {
         console.log(event.currentTarget);
