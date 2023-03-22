@@ -38,10 +38,9 @@
     let imagesList = [...document.querySelectorAll(".slider-item")];
     imagesList.shift();
     imagesList.pop();
-    let slider = document.getElementById('div-images');
-    let slider_rect = slider.getBoundingClientRect();
-    const gallery_rect = document.getElementById('div-images').getBoundingClientRect();
-    const gallery_center = (gallery_rect.right - gallery_rect.left)/2;
+    var slider = document.getElementById('div-images');
+    var slider_rect = slider.getBoundingClientRect();
+    var slider_center = (slider_rect.right - slider_rect.left)/2;
     const firstImage = imagesList[0].getBoundingClientRect();
     const lastImage = imagesList.slice(-1)[0].getBoundingClientRect();
     const leftSliderBtn = document.getElementById('left-slider-btn');
@@ -92,15 +91,20 @@
     }
 
     function Onload() {
+        slider = document.getElementById('div-images');
+        slider_rect = slider.getBoundingClientRect();
+        slider_center = (slider_rect.right - slider_rect.left)/2;
         imagesList.forEach(image => {
             image.addEventListener("click", open_image);
         });
         leftSliderBtn.addEventListener("click", slideLeft);
         rightSliderBtn.addEventListener("click", slideRight);
         document.addEventListener('keydown', arrowSlider);
-        document.getElementById("empty-slider-item-start").style.width = `${gallery_center-((firstImage.right - firstImage.left)/2)}px`
-        document.getElementById("empty-slider-item-end").style.width = `${gallery_center}px`
+        document.getElementById("empty-slider-item-start").style.width = `${slider_center-((firstImage.right - firstImage.left)/2)}px`
+        document.getElementById("empty-slider-item-end").style.width = `${slider_center}px`
     }
+
+    window.addEventListener("resize", Onload);
 
     function slideLeft() {
         const centerImageId = getCenterImage();
@@ -157,12 +161,12 @@
 
     const onLoadPromise = new Promise((result, reject) => {
         console.log((lastImage.right - lastImage.left));
-        console.log(`${gallery_center-((firstImage.right - firstImage.left)/2)}px`)
+        console.log(`${slider_center-((firstImage.right - firstImage.left)/2)}px`)
         console.log(`${firstImage.right}px`)
         console.log(`${firstImage.left}px`)
-        console.log(`${gallery_center-((firstImage.right - firstImage.left)/2)}px`)
-        document.getElementById("empty-slider-item-start").style.width = `${gallery_center - ((firstImage.right - firstImage.left)/2)}px`
-        document.getElementById("empty-slider-item-end").style.width = `${gallery_center + ((lastImage.right - lastImage.left)/2)}px`
+        console.log(`${slider_center-((firstImage.right - firstImage.left)/2)}px`)
+        document.getElementById("empty-slider-item-start").style.width = `${slider_center - ((firstImage.right - firstImage.left)/2)}px`
+        document.getElementById("empty-slider-item-end").style.width = `${slider_center + ((lastImage.right - lastImage.left)/2)}px`
         if (true) {
             result('images resized successfully!');
         } else{
