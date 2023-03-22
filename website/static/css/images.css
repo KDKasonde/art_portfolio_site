@@ -4,105 +4,7 @@
     alignment: center;
     justify-self: center;
 }
-
-.side_bar_btn_icon {
-    height: 2em;
-    width: 2em;
-    color: white;
-    margin-right: 5%;
-    font-size: 2em;
-    font-family: "Font Awesome 6 Free";
-    font-weight:900;
-    background-color: transparent;
-    border: 0 solid transparent;
-}
-
-.side_gallery_btn {
-    height: 40vh;
-    width: 5%;
-    color: white;
-    background-color: transparent;
-    display: inline-flex;
-    align-items: center;
-    justify-items: center;
-    position: absolute;
-    z-index: 1;
-}
-
-.side_gallery_icon {
-    font-size: 2em;
-    font-family: "Font Awesome 6 Free";
-    font-weight:900;
-    align-self: center;
-
-}
-
-/*digital works are pretty consistent so can have their own css classes */
-
-.digital_landscape {
-    width: 9.8em;
-    height: 7em;
-}
-
-.digital_portrait{
-    width: 5em;
-    height: 7em;
-}
-
-/* some exceptional cases of digital works */
-
-.digital_landscape_exception {
-    width: 20em;
-    height: 14em;
-}
-
-.digital_portrait_exception {
-    width: 14em;
-    height: 20em;
-}
-
-.gallery_div{
-    /* want this container to hold multiple images, and wrap them so multiple lines
-       are used. Should create the illusion of a mosiac like effect without js code.
-     */
-    width: 60%;
-    height: 60vh;
-    justify-self: center;
-    overflow-x: clip;
-    left:0;
-  	animation: scroll 10s linear 1s infinite;
-
-}
-
-.slider {
-    height: 80vh;
-    width: 80%;
-    display: flex;
-    justify-self: center;
-    padding: 0 0 0 0;
-    margin: 0 0 0 0;
-    flex: none;
-    will-change: transform;
-    overflow: auto;
-    scroll-snap-type: x mandatory;
-    -webkit-perspective: 600px;
-
-    -webkit-mask-image: -webkit-gradient(linear, left top, right top, color-stop(0, rgba(0,0,0,.2)), color-stop(.1, rgba(0,0,0,
-1)), color-stop(.9, rgba(0,0,0,1)), color-stop(1, rgba(0,0,0,.2)) );
-}
-
-div.slider::-webkit-scrollbar {
-    display: none;
-}
-
-.slider-item {
-    padding-top: 2em;
-    height: 40vh;
-    will-change: perspective;
-    transform-style: preserve-3d;
-    scroll-snap-align: center;
-}
-
+/* general image formatting */
 .gallery_image {
     height: 80%;
     -webkit-box-reflect:
@@ -121,48 +23,10 @@ div.slider::-webkit-scrollbar {
     max-width: inherit;
     max-height: inherit;
 }
-
+/* hover effect for images */
 .gallery_image:hover{
     scale: 1.1;
     box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(255, 255, 255, 255);
-}
-
-.slider-wrap{
-    width:100vw;
-    height: 50%;
-    position: fixed;
-    overflow-x: visible;
-    z-index: 0;
-    display: flex;
-    justify-content: space-around;
-    align-content: center;
-    padding: 0 0 0 0;
-    margin: 0 0 0 0;
-}
-
-.slider-btn-div{
-    justify-self: center;
-    align-self: center;
-    flex: none;
-}
-
-.slider-btn{
-    height: 2em;
-    width: 2em;
-    color: rgba(255, 255, 255, 0.2);
-    font-size: 2.5em;
-    font-family: "Font Awesome 6 Free";
-    font-weight:900;
-    background-color: transparent;
-    border: 0 solid transparent;
-    border-radius: 50%;
-    padding: 0 0 0 0;
-    transition: scale 500ms ease-out 100ms, color 500ms ease-out 100ms;
-}
-
-.slider-btn:hover{
-    scale: 2;
-    color: white;
 }
 
 
