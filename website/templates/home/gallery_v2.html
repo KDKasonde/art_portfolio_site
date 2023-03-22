@@ -52,7 +52,7 @@
         let in_view = [];
         imagesList.forEach(image => {
             const rect = image.getBoundingClientRect();
-            if((rect.right < slider_rect.right) && (rect.left > slider_rect.left)){
+            if((rect.right > slider_rect.left) && (rect.left < slider_rect.right)){
                 in_view.push(image)
             } else{
                 image.setAttribute("style", "scale: 0;")

@@ -128,7 +128,7 @@ div.slider::-webkit-scrollbar {
 }
 
 .slider-wrap{
-    width:100%;
+    width:100vw;
     height: 50%;
     position: fixed;
     overflow-x: visible;
