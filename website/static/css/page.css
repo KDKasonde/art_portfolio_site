@@ -90,5 +90,5 @@ div.slider::-webkit-scrollbar {
 .side_bar_btn_icon:active {
     background-color: black;
     scale: 0.9;
-    box-shadow: none  !important;
+    box-shadow: none;
 }
