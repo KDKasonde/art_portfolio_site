@@ -25,17 +25,49 @@
             </button>
         </div>-->
         <div class="d-flex justify-content-center" style="width: 10%;">
-            <button class="side_bar_btn_icon align-self-center justify-self-center rounded">
+            <button id="open-sidepanel" class="side_bar_btn_icon align-self-center justify-self-center rounded">
                 <i class="fas fa-bars"></i>
             </button>
         </div>
     </div>
-
+    {% include 'sidebar.html' %}
 </head>
 
 <body style="width: 100%; overflow-x: hidden;";>
 {% block content %}
 {% endblock %}
 </body>
+
+<script>
+
+  function openNav() {
+    console.log()
+
+    document.getElementById("my-side-panel").style.display = "block";
+    document.getElementById("side-panel-content").style.width = "20%";
+  }
+
+  document.getElementById("open-sidepanel").addEventListener('click', function(e) {
+    openNav();
+    e.stopPropagation();
+    }
+  );
+
+
+  function closeNav() {
+    document.getElementById("side-panel-content").style.width = "0";
+    document.getElementById("my-side-panel").style.display = "none";
+
+  }
+
+  window.onclick = function(event) {
+
+    const modal_display = document.getElementById("my-side-panel").style.display;
+    console.log(modal_display)
+    if ((event.target.id != "side-panel-content") && modal_display=='block' ) {
+      closeNav();
+    }
+  }
+</script>
 
 </html>
