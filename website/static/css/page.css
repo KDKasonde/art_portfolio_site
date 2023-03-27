@@ -75,7 +75,6 @@ div.slider::-webkit-scrollbar {
     scroll-snap-align: center;
 }
 
-
 .side_bar_btn_icon {
     height: 2em;
     width: 2em;
@@ -88,22 +87,8 @@ div.slider::-webkit-scrollbar {
     border: 0 solid transparent;
 }
 
-.side_gallery_btn {
-    height: 40vh;
-    width: 5%;
-    color: white;
-    background-color: transparent;
-    display: inline-flex;
-    align-items: center;
-    justify-items: center;
-    position: absolute;
-    z-index: 1;
-}
-
-.side_gallery_icon {
-    font-size: 2em;
-    font-family: "Font Awesome 6 Free";
-    font-weight:900;
-    align-self: center;
-
+.side_bar_btn_icon:active {
+    background-color: black;
+    scale: 0.9;
+    box-shadow: none  !important;
 }
