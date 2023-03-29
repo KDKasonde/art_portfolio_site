@@ -6,6 +6,44 @@ body {
 .center_text {
     text-align: center;
 }
+
+.side_bar_btn {
+    height: 2em;
+    width: 2em;
+    color: white;
+    margin-right: 5%;
+    font-size: 2em;
+    font-family: "Font Awesome 6 Free";
+    font-weight:900;
+    background-color: transparent;
+    border: 0 solid transparent;
+}
+
+.side_bar_btn_icon:active {
+    background-color: black;
+    scale: 0.9;
+    box-shadow: none;
+}
+
+.close-btn{
+    height: 2em;
+    width: 2em;
+    color: darkgrey;
+    font-size: 2em;
+    font-family: "Font Awesome 6 Free";
+    font-weight:900;
+    background-color: transparent;
+    border: 0 solid transparent;
+}
+.close-btn:hover{
+    color: white;
+}
+.close-btn:active {
+    color: white;
+    scale: 0.9;
+    box-shadow: none;
+}
+
 /* Div containing slider */
 .slider-wrap{
     width:100vw;
@@ -74,26 +112,6 @@ div.slider::-webkit-scrollbar {
     transform-style: preserve-3d;
     scroll-snap-align: center;
 }
-
-.side_bar_btn_icon {
-    height: 2em;
-    width: 2em;
-    color: white;
-    margin-right: 5%;
-    font-size: 2em;
-    font-family: "Font Awesome 6 Free";
-    font-weight:900;
-    background-color: transparent;
-    border: 0 solid transparent;
-}
-
-.side_bar_btn_icon:active {
-    background-color: black;
-    scale: 0.9;
-    box-shadow: none;
-}
-
-.close-btn{}
 
 .side-panel-background{
     display: none; /* Hidden by default */
