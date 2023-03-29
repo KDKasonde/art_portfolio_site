@@ -24,24 +24,73 @@ body {
     scale: 0.9;
     box-shadow: none;
 }
+/* side panel elements */
+.side-panel-background{
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    transition: 5s;
+}
+
+.sidepanel {
+    height: 100%;
+    width: 0;
+    float: right;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    right: 0;
+    background-color: black;
+    overflow-x: hidden;
+
+    display: flex;
+    flex-direction: column;
+
+    animation-name: animate_right;
+    animation-duration: 0.8s
+}
+
+@keyframes animate_right {
+  from {right: -300px; opacity: 0}
+  to {right: 0; opacity: 1}
+}
 
 .close-btn{
     height: 2em;
     width: 2em;
-    color: darkgrey;
+    color: white;
     font-size: 2em;
     font-family: "Font Awesome 6 Free";
     font-weight:900;
     background-color: transparent;
     border: 0 solid transparent;
 }
+
 .close-btn:hover{
-    color: white;
+    color: darkgray;
 }
+
 .close-btn:active {
     color: white;
     scale: 0.9;
     box-shadow: none;
+}
+
+.side_bar_link {
+    font-size: 2em;
+    color: white;
+    padding-left: 5%
+}
+
+.side_bar_link:hover {
+    color: darkgray;
 }
 
 /* Div containing slider */
@@ -111,41 +160,4 @@ div.slider::-webkit-scrollbar {
     will-change: perspective;
     transform-style: preserve-3d;
     scroll-snap-align: center;
-}
-
-.side-panel-background{
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
-    left: 0;
-    top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-    transition: 5s;
-}
-
-.sidepanel {
-    height: 100%;
-    width: 0;
-    float: right;
-    position: fixed;
-    z-index: 1;
-    top: 0;
-    right: 0;
-    background-color: black;
-    overflow-x: hidden;
-
-    display: flex;
-    flex-direction: column;
-
-    animation-name: animatetop;
-    animation-duration: 0.8s
-}
-
-@keyframes animatetop {
-  from {right: -300px; opacity: 0}
-  to {right: 0; opacity: 1}
 }

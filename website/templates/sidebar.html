@@ -1,10 +1,11 @@
 <div id="my-side-panel" class="side-panel-background">
   <div id="side-panel-content" class="sidepanel">
     <button href="javascript:void(0)" class="close-btn" onclick="closeNav()">
-      <i class="fa-solid fa-angle-left side_bar_btn_icon"></i>
+      <i class="fa-solid fa-angle-left"></i>
     </button>
-    <a href="{{ url_for('home.homepage') }}">Home</a>
-    <a href="{{ url_for('about.homepage') }}">About</a>
+    <a class='side_bar_link' href="{{ url_for('home.homepage') }}">Home</a>
+    <a class='side_bar_link' href="{{ url_for('about.homepage') }}">About</a>
+    <a class='side_bar_link' href="{{ url_for('about.homepage') }}">Contact</a>
   </div>
 </div>
 
