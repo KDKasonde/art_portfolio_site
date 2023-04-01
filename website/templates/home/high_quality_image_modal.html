@@ -1,27 +1,34 @@
 <div id="my-modal" class="side-panel-background">
     <div id="modal-content" class="modal">
-        This is a test
+        <div class="col justify-content-center ">
+            <div id="image-container" class="modal_image_item">
+
+            </div>
+            <div id="image-description">
+
+            </div>
+        </div>
     </div>
 </div>
 <script>
-    function open_image(event) {
-        console.log(event.currentTarget);
-        console.log('modal open');
+    function openImage(event) {
+        const clone = event.currentTarget.firstElementChild.firstElementChild.cloneNode();
+        clone.classList.replace("gallery_image", "modal_image");
         document.getElementById("my-modal").style.display = "block";
+
+        document.getElementById("image-container").appendChild(clone);
     }
 
 
     function closeModal() {
-        console.log('close')
+        document.getElementById("image-container").innerHTML = '';
         document.getElementById("my-modal").style.display = "none";
 
     }
 
     window.onclick = function(event) {
-        console.log('hehehrhehr')
         const panel_display = document.getElementById("my-side-panel").style.display;
         const modal_display = document.getElementById("my-modal").style.display;
-        console.log(modal_display)
         if ((event.target.id != "side-panel-content") && panel_display=='block' ) {
           closeNav();
         } else if ((event.target.id != "modal-content") && modal_display=='block' ) {

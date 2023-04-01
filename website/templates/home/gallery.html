@@ -31,8 +31,6 @@
     </div>
 </div>
 
-{% include 'home/high_quality_image_modal.html' %}
-
 
 <script>
     let imagesList = [...document.querySelectorAll(".slider-item")];
@@ -90,24 +88,30 @@
         requestAnimationFrame(scaleImages)
     }
 
-    function Onload() {
+    function fitSlider() {
         slider = document.getElementById('div-images');
         slider_rect = slider.getBoundingClientRect();
         slider_center = (slider_rect.right - slider_rect.left)/2;
+        document.getElementById("empty-slider-item-start").style.width = `${slider_center-((firstImage.right - firstImage.left)/2)}px`
+        document.getElementById("empty-slider-item-end").style.width = `${slider_center}px`
+    }
+
+    function Onload() {
+        fitSlider();
         imagesList.forEach(image => {
             image.addEventListener("click", function(event) {
-                open_image(event);
+                centerImage(event.currentTarget.id);
+                openImage(event);
                 event.stopPropagation();
             });
         });
         leftSliderBtn.addEventListener("click", slideLeft);
         rightSliderBtn.addEventListener("click", slideRight);
         document.addEventListener('keydown', arrowSlider);
-        document.getElementById("empty-slider-item-start").style.width = `${slider_center-((firstImage.right - firstImage.left)/2)}px`
-        document.getElementById("empty-slider-item-end").style.width = `${slider_center}px`
+
     }
 
-    window.addEventListener("resize", Onload);
+    window.addEventListener("resize", fitSlider);
 
     function slideLeft() {
         const centerImageId = getCenterImage();
@@ -156,15 +160,19 @@
 
     }
 
+    function centerImage(imageId) {
+        const targetImage = document.getElementById(imageId);
+        targetImage.scrollIntoView({
+                behavior: 'auto',
+                block: 'center',
+                inline: 'center'
+            });
+        targetImage.style.scale = 1;
+    }
 
 
 
     const onLoadPromise = new Promise((result, reject) => {
-        console.log((lastImage.right - lastImage.left));
-        console.log(`${slider_center-((firstImage.right - firstImage.left)/2)}px`)
-        console.log(`${firstImage.right}px`)
-        console.log(`${firstImage.left}px`)
-        console.log(`${slider_center-((firstImage.right - firstImage.left)/2)}px`)
         document.getElementById("empty-slider-item-start").style.width = `${slider_center - ((firstImage.right - firstImage.left)/2)}px`
         document.getElementById("empty-slider-item-end").style.width = `${slider_center + ((lastImage.right - lastImage.left)/2)}px`
         if (true) {
@@ -188,3 +196,5 @@
     Onload();
 
 </script>
+
+{% include 'home/high_quality_image_modal.html' %}
