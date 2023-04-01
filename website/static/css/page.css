@@ -150,6 +150,12 @@ body {
 1)), color-stop(.9, rgba(0,0,0,1)), color-stop(1, rgba(0,0,0,.2)) );
 }
 
+.slider::before,
+.slider::after {
+  content: "";
+  flex: 0 0 50%;
+}
+
 div.slider::-webkit-scrollbar {
     display: none;
 }
@@ -187,4 +193,8 @@ div.slider::-webkit-scrollbar {
 .modal_image_item{
     height: 70vh;
     width: 35vw;
+}
+
+.empty_slider{
+    padding: 0 0 0 0;
 }

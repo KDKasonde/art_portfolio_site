@@ -6,11 +6,7 @@
         </button>
     </div>
     <div class="slider" id="div-images">
-        <div class="slider-item">
-            <div id="empty-slider-item-start">
 
-            </div>
-        </div>
         {% for index in range(image_list|length) %}
             <div class="slider-item" id="{{ index }}">
                 <a href="#" target="_self">
@@ -18,11 +14,7 @@
                 </a>
             </div>
         {% endfor %}
-        <div class="slider-item">
-            <div id="empty-slider-item-end">
 
-            </div>
-        </div>
     </div>
     <div class="slider-btn-div">
         <button class="slider-btn" id="right-slider-btn">
@@ -34,13 +26,8 @@
 
 <script>
     let imagesList = [...document.querySelectorAll(".slider-item")];
-    imagesList.shift();
-    imagesList.pop();
     var slider = document.getElementById('div-images');
     var slider_rect = slider.getBoundingClientRect();
-    var slider_center = (slider_rect.right - slider_rect.left)/2;
-    const firstImage = imagesList[0].getBoundingClientRect();
-    const lastImage = imagesList.slice(-1)[0].getBoundingClientRect();
     const leftSliderBtn = document.getElementById('left-slider-btn');
     const rightSliderBtn = document.getElementById('right-slider-btn');
 
@@ -79,7 +66,6 @@
             const rect = image.getBoundingClientRect();
             if(((rect.right + rect.left)/2) > center){
                 image.style.scale = `${1 - (( rect.right -((rect.right-rect.left)/2) - center)/(center))}`;
-
             } else if(((rect.right + rect.left)/2) < center){
                 image.style.scale = `${((rect.right - ((rect.right-rect.left)/2))/(center))}`;
             }
@@ -88,16 +74,12 @@
         requestAnimationFrame(scaleImages)
     }
 
-    function fitSlider() {
-        slider = document.getElementById('div-images');
+    function resizeSlider() {
         slider_rect = slider.getBoundingClientRect();
-        slider_center = (slider_rect.right - slider_rect.left)/2;
-        document.getElementById("empty-slider-item-start").style.width = `${slider_center-((firstImage.right - firstImage.left)/2)}px`
-        document.getElementById("empty-slider-item-end").style.width = `${slider_center}px`
     }
 
     function Onload() {
-        fitSlider();
+        resizeSlider()
         imagesList.forEach(image => {
             image.addEventListener("click", function(event) {
                 centerImage(event.currentTarget.id);
@@ -111,7 +93,7 @@
 
     }
 
-    window.addEventListener("resize", fitSlider);
+    window.addEventListener("resize", resizeSlider);
 
     function slideLeft() {
         const centerImageId = getCenterImage();
@@ -173,8 +155,7 @@
 
 
     const onLoadPromise = new Promise((result, reject) => {
-        document.getElementById("empty-slider-item-start").style.width = `${slider_center - ((firstImage.right - firstImage.left)/2)}px`
-        document.getElementById("empty-slider-item-end").style.width = `${slider_center + ((lastImage.right - lastImage.left)/2)}px`
+
         if (true) {
             result('images resized successfully!');
         } else{
