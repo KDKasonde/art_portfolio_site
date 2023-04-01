@@ -31,7 +31,7 @@
     </div>
 </div>
 
-
+{% include 'home/high_quality_image_modal.html' %}
 
 
 <script>
@@ -95,7 +95,10 @@
         slider_rect = slider.getBoundingClientRect();
         slider_center = (slider_rect.right - slider_rect.left)/2;
         imagesList.forEach(image => {
-            image.addEventListener("click", open_image);
+            image.addEventListener("click", function(event) {
+                open_image(event);
+                event.stopPropagation();
+            });
         });
         leftSliderBtn.addEventListener("click", slideLeft);
         rightSliderBtn.addEventListener("click", slideRight);
@@ -154,10 +157,7 @@
     }
 
 
-    function open_image(event) {
-        console.log(event.currentTarget);
-        /*TO DO Add modal opener here*/
-    }
+
 
     const onLoadPromise = new Promise((result, reject) => {
         console.log((lastImage.right - lastImage.left));

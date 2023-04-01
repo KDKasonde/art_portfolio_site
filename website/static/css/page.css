@@ -161,3 +161,25 @@ div.slider::-webkit-scrollbar {
     transform-style: preserve-3d;
     scroll-snap-align: center;
 }
+
+.modal {
+    height: auto;
+    width: auto;
+    background-color: black;
+    position: fixed;
+    z-index: 1;
+    right: 0;
+    background-color: black;
+    overflow-x: hidden;
+    margin: 15% 15% 15% 15%;
+    display: flex;
+    flex-direction: column;
+
+    animation-name: animate_top;
+    animation-duration: 0.8s
+}
+
+@keyframes animate_top {
+  from {top: -300px; opacity: 0}
+  to {top: 0; opacity: 1}
+}
