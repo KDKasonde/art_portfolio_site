@@ -4,6 +4,7 @@
     alignment: center;
     justify-self: center;
 }
+
 /* general image formatting */
 .gallery_image {
     height: 80%;
@@ -33,3 +34,15 @@
     height: 100%;
 }
 
+@media only screen and (max-height: 760px){
+    .logo {
+        width: 8em;
+        height: 6em;
+        alignment: center;
+        justify-self: center;
+    }
+
+    .gallery_image{
+        height: 100%
+    }
+}
