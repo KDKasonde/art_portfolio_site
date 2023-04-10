@@ -2,6 +2,7 @@
 <html>
 <head>
 <title>MDurocherArt</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Retrieve css from online sources -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
           integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
@@ -13,7 +14,7 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/background.css') }}" />
     <link rel="stylesheet" href="{{ url_for('static', filename='css/images.css') }}" />
     <div class="row align-items-center" style="width: 100%; margin: 0 0 0 0;" >
-        <div class="d-flex justify-content-center align-content-center" style="width: 30%; height: 1em;">
+        <div class="d-flex justify-content-sm-between align-content-center" style="width: 30%; height: 1em; padding-left: 5%;">
             <a class='page_link' href="{{ url_for('home.homepage') }}">Home</a>
             <a class='page_link' href="{{ url_for('about.homepage') }}">About</a>
             <a class='page_link' href="{{ url_for('about.homepage') }}">Contact</a>
