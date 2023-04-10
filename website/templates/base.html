@@ -13,10 +13,12 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/background.css') }}" />
     <link rel="stylesheet" href="{{ url_for('static', filename='css/images.css') }}" />
     <div class="row align-items-center" style="width: 100%; margin: 0 0 0 0;" >
-        <div style="width: 10%; height: 1em;">
-
+        <div class="d-flex justify-content-center align-content-center" style="width: 30%; height: 1em;">
+            <a class='page_link' href="{{ url_for('home.homepage') }}">Home</a>
+            <a class='page_link' href="{{ url_for('about.homepage') }}">About</a>
+            <a class='page_link' href="{{ url_for('about.homepage') }}">Contact</a>
         </div>
-        <a href="#" class="d-flex justify-content-center" style="width: 80%;">
+        <a href="#" class="d-flex justify-content-center" style="width: 40%;">
             <img class="logo" src="{{ url_for('static', filename='assets/logo.png') }}" alt="Responsive image"/>
         </a>
         <!--<div class="d-flex justify-content-end" style="width:15%;">
@@ -24,8 +26,8 @@
                 <i class="fas fa-bars side_bar_btn_icon"></i>
             </button>
         </div>-->
-        <div class="d-flex justify-content-center" style="width: 10%;">
-            <button id="open-sidepanel" class="side_bar_btn align-self-center justify-self-center rounded">
+        <div class="d-flex justify-content-end" style="width: 30%;">
+            <button id="open-sidepanel" class="side_bar_btn align-self-center rounded">
                 <i class="fas fa-bars"></i>
             </button>
         </div>

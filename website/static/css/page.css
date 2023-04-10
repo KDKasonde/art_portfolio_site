@@ -7,6 +7,27 @@ body {
     text-align: center;
 }
 
+.side_bar_link {
+    font-size: 1.5em;
+    color: white;
+    padding-left: 5%
+}
+
+.page_link {
+    font-size: 1.5em;
+    color: white;
+    padding-left: 5%
+}
+
+.side_bar_link:hover {
+    color: darkgray;
+}
+
+.page_link:hover {
+    color: darkgray;
+}
+
+
 .side_bar_btn {
     height: 2em;
     width: 2em;
@@ -81,16 +102,6 @@ body {
     color: white;
     scale: 0.9;
     box-shadow: none;
-}
-
-.side_bar_link {
-    font-size: 2em;
-    color: white;
-    padding-left: 5%
-}
-
-.side_bar_link:hover {
-    color: darkgray;
 }
 
 /* Div containing slider */
