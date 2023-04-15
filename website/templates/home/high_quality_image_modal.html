@@ -12,6 +12,18 @@
 </div>
 <script>
     function openImage(event) {
+        const image_url = event.currentTarget.firstElementChild.firstElementChild.src.split("/");
+        const image = image_url.pop().split(".")[0];
+        const target_url = "{{ url_for('high_quality_view.homepage') }}".slice(0, -1) + "?image_id=" + image
+        fetch(
+            url=target_url
+        ).then(response => {
+            if (response.redirected){
+                console.log(response)
+                window.location = response.url
+            }
+        })
+
         const clone = event.currentTarget.firstElementChild.firstElementChild.cloneNode();
         clone.classList.replace("gallery_image", "modal_image");
         document.getElementById("my-modal").style.display = "block";
