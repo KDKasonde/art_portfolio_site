@@ -195,6 +195,12 @@ div.slider::-webkit-scrollbar {
     animation-duration: 0.8s
 }
 
+.high-quality-image-div{
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+
 @keyframes animate_top {
   from {top: -300px; opacity: 0}
   to {top: 0; opacity: 1}

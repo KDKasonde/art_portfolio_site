@@ -78,11 +78,28 @@
         slider_rect = slider.getBoundingClientRect();
     }
 
+    async function fetchImageUrl(targetUrl) {
+        try {
+            return fetch(targetUrl)
+        } catch {
+            return console.log('Error retrieving image')
+        }
+    }
+
+    async function openImage(event) {
+        const image_url = event.currentTarget.firstElementChild.firstElementChild.src.split("/");
+        const image = image_url.pop().split(".")[0];
+
+        const targetUrl = "{{ url_for('high_quality_view.get_image') }}" + "?image_id=" + image
+        console.log(targetUrl)
+        const response = await fetchImageUrl(targetUrl)
+        window.location = response.url
+    }
+
     function Onload() {
         resizeSlider()
         imagesList.forEach(image => {
             image.addEventListener("click", function(event) {
-                centerImage(event.currentTarget.id);
                 openImage(event);
                 event.stopPropagation();
             });
@@ -177,5 +194,3 @@
     Onload();
 
 </script>
-
-{% include 'home/high_quality_image_modal.html' %}
