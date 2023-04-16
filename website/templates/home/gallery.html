@@ -159,18 +159,6 @@
 
     }
 
-    function centerImage(imageId) {
-        const targetImage = document.getElementById(imageId);
-        targetImage.scrollIntoView({
-                behavior: 'auto',
-                block: 'center',
-                inline: 'center'
-            });
-        targetImage.style.scale = 1;
-    }
-
-
-
     const onLoadPromise = new Promise((result, reject) => {
 
         if (true) {
