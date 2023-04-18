@@ -159,7 +159,7 @@
 }
 /* slider div */
 .slider {
-    height: 80vh;
+    height: 50vh;
     width: 80%;
     display: flex;
     justify-self: center;
@@ -181,10 +181,6 @@
   flex: 0 0 50%;
 }
 
-div.slider::-webkit-scrollbar {
-    display: none;
-}
-/* div for each slider item (image container) */
 .slider-item {
     padding-top: 2em;
     height: 40vh;
@@ -236,13 +232,13 @@ div.slider::-webkit-scrollbar {
   to {top: 0; opacity: 1}
 }
 
-.modal_image_item{
-    height: 70vh;
-    width: 35vw;
-}
+    .modal_image_item{
+        height: 70vh;
+        width: 35vw;
+    }
 
-.empty_slider{
-    padding: 0 0 0 0;
+    .empty_slider{
+        padding: 0 0 0 0;
 }
 
 @media only screen and (max-height: 760px){
@@ -281,6 +277,10 @@ div.slider::-webkit-scrollbar {
     .page_link{
         font-size: 0;
         z-index: -10;
+    }
+
+    div.slider::-webkit-scrollbar {
+        display: none;
     }
 
 
