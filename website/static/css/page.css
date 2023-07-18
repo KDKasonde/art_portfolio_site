@@ -28,6 +28,17 @@
     line-height: 2em;
 }
 
+.text_box{
+    border-style: solid;
+    border-color: white;
+    border-width: 0;
+    color: white;
+    width: 50%;
+    padding-top: 16px;
+    padding-bottom: 5px;
+    justify-self: center;
+}
+
 .page_text {
     font-family: Zapfino;
     font-size: 1em;
@@ -121,7 +132,7 @@
 /* Div containing slider */
 .slider-wrap{
     width:100vw;
-    height: 50%;
+    height: 70%;
     position: fixed;
     overflow-x: visible;
     z-index: 0;
@@ -159,7 +170,7 @@
 }
 /* slider div */
 .slider {
-    height: 50vh;
+
     width: 80%;
     display: flex;
     justify-self: center;
@@ -183,7 +194,7 @@
 
 .slider-item {
     padding-top: 2em;
-    height: 40vh;
+    height: 60vh;
     will-change: perspective;
     transform-style: preserve-3d;
     scroll-snap-align: center;
