@@ -99,10 +99,67 @@
         const image = image_url.pop().split(".")[0];
 
         const targetUrl = "{{ url_for('high_quality_view.get_image') }}" + "?image_id=" + image
-        console.log(targetUrl)
         const response = await fetchImageUrl(targetUrl)
         window.location = response.url
     }
+
+    const trigger = function (event) {
+        const leftBtn = document.getElementById('left-slider-btn');
+        const rightBtn = document.getElementById('right-slider-btn');
+        const mouseX = event.clientX;
+        const centerOfSlider = (slider_rect.right + slider_rect.left) / 2;
+
+        if ((mouseX <= centerOfSlider)) {
+            if (!leftBtn.disabled) {
+                leftBtn.focus();
+                setTimeout(() => {
+                    leftBtn.blur();
+                }, 1000);
+            } else {
+                rightBtn.focus();
+                setTimeout(() => {
+                    rightBtn.blur();
+                }, 1000);
+            }
+
+        } else {
+            if (!rightBtn.disabled) {
+                rightBtn.focus();
+                setTimeout(() => {
+                    rightBtn.blur();
+                }, 1000);
+            } else {
+                leftBtn.focus();
+                setTimeout(() => {
+                    leftBtn.blur();
+                }, 1000);
+            }
+        }
+
+    }
+    slider.addEventListener("scroll", function () {
+        disableSliderBtn();
+    });
+
+    slider.addEventListener("mouseover", function(event) {
+        trigger(event)
+    });
+
+    function disableSliderBtn() {
+
+        const centerImageId = getCenterImage();
+        if (`${centerImageId}` == 0){
+            document.getElementById('left-slider-btn').disabled = true;
+        } else {
+            document.getElementById('left-slider-btn').removeAttribute("disabled");
+        }
+
+        if (`${centerImageId}` == (imagesList.length-1)){
+            document.getElementById('right-slider-btn').disabled = true;
+        } else {
+            document.getElementById('right-slider-btn').removeAttribute("disabled");
+        }
+    };
 
     function Onload() {
         resizeSlider()
@@ -115,7 +172,7 @@
         leftSliderBtn.addEventListener("click", slideLeft);
         rightSliderBtn.addEventListener("click", slideRight);
         document.addEventListener('keydown', arrowSlider);
-
+        disableSliderBtn()
     }
 
     window.addEventListener("resize", resizeSlider);
@@ -129,12 +186,7 @@
             inline: 'center'
         });
 
-        if (`${centerImageId-1}` ==0){
-            document.getElementById('left-slider-btn').disabled = true;
-        }
-
-        document.getElementById('right-slider-btn').removeAttribute("disabled");
-
+        disableSliderBtn();
     }
 
     function slideRight() {
@@ -146,11 +198,7 @@
             inline: 'center'
         });
 
-        if (`${centerImageId+1}` == (imagesList.length-1)){
-            document.getElementById('right-slider-btn').disabled = true;
-        }
-
-        document.getElementById('left-slider-btn').removeAttribute("disabled");
+        disableSliderBtn();
     }
 
     function arrowSlider(event) {

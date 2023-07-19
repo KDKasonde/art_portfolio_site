@@ -119,7 +119,7 @@
     border: 0 solid transparent;
 }
 
-.close-btn:hover{
+.close-btn:hover {
     color: darkgray;
 }
 
@@ -153,7 +153,7 @@
 .slider-btn{
     height: 2em;
     width: 2em;
-    color: rgba(255, 255, 255, 0.2);
+    color: transparent;
     font-size: 2.5em;
     font-family: "Font Awesome 6 Free";
     font-weight:900;
@@ -164,9 +164,9 @@
     transition: scale 500ms ease-out 100ms, color 500ms ease-out 100ms;
 }
 
-.slider-btn:hover{
-    scale: 2;
+.slider-btn:hover, .slider-btn:focus, .slider-btn-div:hover{
     color: white;
+    outline: none;
 }
 /* slider div */
 .slider {
@@ -184,6 +184,10 @@
 
     -webkit-mask-image: -webkit-gradient(linear, left top, right top, color-stop(0, rgba(0,0,0,.2)), color-stop(.1, rgba(0,0,0,
 1)), color-stop(.9, rgba(0,0,0,1)), color-stop(1, rgba(0,0,0,.2)) );
+}
+
+div.slider::-webkit-scrollbar {
+    display: none;
 }
 
 .slider::before,
