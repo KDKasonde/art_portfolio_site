@@ -1,48 +1,71 @@
+<div class="slide-wrap">
+    <div class="slide-div">
+        <div id="slide-1" class="slide-item" style="background-color: white">
+            <p style="word-break: break-all; white-space: normal;">
+                Welcome to my art page.
+                I am a practicing self taught artist ,who has been refining the craft for over 15 years .
+                This website contains various pieces that I have created over these years using a variety of mediums.
 
-    <div>
-    <div class="slide-wrap">
-        <div class="slide-div">
-            <div class="slide-item" style="background-color: white">
-                <p style="word-break: break-all; white-space: normal;">
-                    Welcome to my art page.
-                    I am a practicing self taught artist ,who has been refining the craft for over 15 years .
-                    This website contains various pieces that I have created over these years using a variety of mediums.
+                Scroll through and click on a piece for more information
+            </p>
+        </div>
+        <div id="slide-2" class="slide-item" style="background-color: red">
+            <p>
+                Welcome to my art page.
+                I am a practicing self taught artist ,who has been refining the craft for over 15 years .
+                This website contains various pieces that I have created over these years using a variety of mediums.
 
-                    Scroll through and click on a piece for more information
-                </p>
-            </div>
-            <div class="slide-item" style="background-color: red">
-                <p>
-                    Welcome to my art page.
-                    I am a practicing self taught artist ,who has been refining the craft for over 15 years .
-                    This website contains various pieces that I have created over these years using a variety of mediums.
+                Scroll through and click on a piece for more information
+            </p>
+        </div>
+        <div id="slide-3" class="slide-item" style="background-color: green">
+            <p>
+                Welcome to my art page.
+                I am a practicing self taught artist ,who has been refining the craft for over 15 years .
+                This website contains various pieces that I have created over these years using a variety of mediums.
 
-                    Scroll through and click on a piece for more information
-                </p>
-            </div>
-            <div class="slide-item" style="background-color: green">
-                <p>
-                    Welcome to my art page.
-                    I am a practicing self taught artist ,who has been refining the craft for over 15 years .
-                    This website contains various pieces that I have created over these years using a variety of mediums.
+                Scroll through and click on a piece for more information
+            </p>
+        </div>
+        <div id="slide-4" class="slide-item" style="background-color: blue">
+            <p>
+                Welcome to my art page.
+                I am a practicing self taught artist ,who has been refining the craft for over 15 years .
+                This website contains various pieces that I have created over these years using a variety of mediums.
 
-                    Scroll through and click on a piece for more information
-                </p>
-            </div>
-            <div class="slide-item" style="background-color: blue">
-                <p>
-                    Welcome to my art page.
-                    I am a practicing self taught artist ,who has been refining the craft for over 15 years .
-                    This website contains various pieces that I have created over these years using a variety of mediums.
-
-                    Scroll through and click on a piece for more information
-                </p>
-            </div>
+                Scroll through and click on a piece for more information
+            </p>
         </div>
     </div>
-    </div>
-    <div class="indicator-div">
-        <div class="slide-point"></div>
-        <div class="slide-point"></div>
-        <div class="slide-point"></div>
-    </div>
+</div>
+
+<div class="indicator-div">
+    <div id="indicator-1" class="slide-point"></div>
+    <div id="indicator-2" class="slide-point"></div>
+    <div id="indicator-3" class="slide-point"></div>
+    <div id="indicator-4" class="slide-point"></div>
+</div>
+
+
+<script>
+
+    function changeSlide(index) {
+        const targetSlide = document.getElementById(`slide-${index+1}`);
+        targetSlide.scrollIntoView({
+            behavior: 'smooth',
+            block: 'center',
+            inline: 'center'
+        });
+    }
+    function onLoad() {
+        const indicators = document.getElementsByClassName("slide-point");
+        Array.from(indicators).forEach(function (element, index) {
+            element.addEventListener("click", function () {
+                changeSlide(index);
+            })
+        })
+    }
+
+    onLoad();
+
+</script>
