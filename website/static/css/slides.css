@@ -2,7 +2,7 @@
 .slide-wrap{
     width:100vw;
     height: 70%;
-    position: fixed;
+    position: sticky;
     overflow-x: visible;
     z-index: 0;
     display: flex;
@@ -41,4 +41,25 @@
     scroll-snap-align: center;
     word-break: break-all; white-space: normal;
 
+}
+
+.indicator-div {
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    position: absolute;
+}
+
+.slide-point {
+    background-color: white;
+    width:10px;
+    height:10px;
+    border-radius: 5px;
+    margin: 30px;
+    cursor: pointer;
+}
+
+.slide-point:hover, .slide-point:active {
+    scale: 1.5;
 }
