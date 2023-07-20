@@ -1,7 +1,7 @@
 /* Div containing slider */
 .slide-wrap{
     width:100vw;
-    height: 70%;
+    height: 70vh;
     position: sticky;
     overflow-x: visible;
     z-index: 0;
@@ -21,6 +21,7 @@
     margin: 0 0 0 0;
     flex: none;
     overflow-x: hidden;
+    overflow-y: hidden;
     scroll-behavior: smooth;
     scroll-snap-type: x mandatory;
     -webkit-perspective: 600px;
@@ -34,14 +35,12 @@
 
 .slide-item {
     height: 100%;
-    padding-left: 5px;
-    padding-right: 5px;
     display: inline-block;
     will-change: perspective;
     transform-style: preserve-3d;
     scroll-snap-align: center;
-    word-break: break-all; white-space: normal;
-
+    word-break: break-all;
+    white-space: normal;
 }
 
 .indicator-div {
