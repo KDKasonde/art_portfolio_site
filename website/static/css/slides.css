@@ -82,15 +82,14 @@ div.slide::-webkit-scrollbar {
 
 .grid-cell {
     display: flex;
-    padding: 0.5em 0.5em 0.5em 0.5em;
 }
 
 .left {
-    justify-content: space-evenly;
+    justify-content: start;
 }
 
 .right {
-    justify-content: stretch;
+    justify-content: end;
 }
 
 #slide-2-content {
@@ -105,4 +104,23 @@ div.slide::-webkit-scrollbar {
         "img_d img_d . img_e img_e" 15%
         "img_d img_d . img_e img_e" 20%;
 }
+
+@supports (-webkit-hyphens:none)
+{
+
+        .grid-cell {
+            display: flex;
+            padding: 0.5em 0.5em 0.5em 0.5em;
+        }
+
+
+        .left {
+            justify-content: space-evenly;
+        }
+
+        .right {
+            justify-content: stretch;
+        }
+    }
+
 
