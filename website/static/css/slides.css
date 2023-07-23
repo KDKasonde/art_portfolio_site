@@ -81,14 +81,16 @@ div.slide::-webkit-scrollbar {
 }
 
 .grid-cell {
+    max-height: inherit;
     display: flex;
+    position: relative;
+    padding: 1em 1em 1em 1em;
+    grid-row: 1/1;
+    grid-column: 1/1;
+    transition: all .3s ease-in;
 }
 
-.left {
-    justify-content: start;
-}
-
-.right {
+.right{
     justify-content: end;
 }
 
@@ -96,31 +98,20 @@ div.slide::-webkit-scrollbar {
     height: 100%;
     width: 100%;
     display: grid;
-    padding-top: 5%;
-    justify-content: center;
-    grid-template:
-        "img_a img_a img_a img_b img_b" 30%
-        "img_a img_a img_a img_c img_c" 30%
-        "img_d img_d . img_e img_e" 15%
-        "img_d img_d . img_e img_e" 20%;
+    padding-left: 3em;
+    grid-template-rows: 1fr;
+    grid-template-columns: 1fr;
+    transition: all .3s ease-in;
 }
+
 
 @supports (-webkit-hyphens:none)
 {
 
         .grid-cell {
             display: flex;
-            padding: 0.5em 0.5em 0.5em 0.5em;
         }
 
-
-        .left {
-            justify-content: space-evenly;
-        }
-
-        .right {
-            justify-content: stretch;
-        }
-    }
+}
 
 

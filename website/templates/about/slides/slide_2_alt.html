@@ -1,0 +1,96 @@
+
+<div class="row ml-0 mr-0" style="height: 100%">
+    <div class="grid-container">
+        <div id="slide-2-content">
+
+            <div id="grid-cell-1" class="grid-cell">
+                <img class="grid-image" src="{{ url_for('static', filename = 'assets/about_pictures/IMG-6050.jpg') }}">
+            </div>
+
+            <div id="grid-cell-2" class="grid-cell">
+                <img class="grid-image" src="{{ url_for('static', filename = 'assets/about_pictures/IMG-8831.jpg') }}">
+            </div>
+
+            <div id="grid-cell-3" class="grid-cell">
+                <img class="grid-image" src="{{ url_for('static', filename = 'assets/about_pictures/IMG-8833.jpg') }}">
+            </div>
+
+            <div id="grid-cell-4" class="grid-cell">
+                <img class="grid-image" src="{{ url_for('static', filename = 'assets/about_pictures/IMG-3300.jpg') }}">
+            </div>
+
+            <div id="grid-cell-5" class="grid-cell">
+                <img class="grid-image" src="{{ url_for('static', filename = 'assets/about_pictures/100A1F68-6AC2-409D-A8AE-BCD95C09CE7D.jpg') }}">
+            </div>
+
+        </div>
+    </div>
+    <div style="width:50%;padding-left: 5px; ">
+        <p>
+            Welcome to my art page.
+            I am a practicing self taught artist ,who has been refining the craft for over 15 years .
+            This website contains various pieces that I have created over these years using a variety of mediums.
+
+            Scroll through and click on a piece for more information
+        </p>
+    </div>
+</div>
+
+<script>
+    const slideContainer = document.getElementById("slide-2-content");
+    let slideRect = slideContainer.getBoundingClientRect();
+    const imageOneDiv = document.getElementById("grid-cell-1");
+    const imageTwoDiv = document.getElementById("grid-cell-2");
+    const imageThreeDiv = document.getElementById("grid-cell-3");
+    const imageFourDiv = document.getElementById("grid-cell-4");
+    const imageFiveDiv = document.getElementById("grid-cell-5");
+
+    function updateContainerDimensions() {
+        slideRect = slideContainer.getBoundingClientRect();
+        return
+    };
+
+    function scaleImages(){
+        // scale images to correct size
+        imageOneDiv.style.height = `${(slideRect.height * 0.6)}px`;
+        imageTwoDiv.style.height = `${(slideRect.height * 0.35)}px`;
+        imageThreeDiv.style.height = `${(slideRect.height * 0.25)}px`;
+        imageFourDiv.style.height = `${(slideRect.height * 0.35)}px`;
+        imageFiveDiv.style.height = `${(slideRect.height * 0.37)}px`;
+    }
+
+    function translateImagesVertically() {
+        scaleImages();
+        // All translations are relative to the main image or 'imageOne'
+        const imageOneRect = imageOneDiv.getBoundingClientRect();
+        imageFourDiv.style.marginTop = `${imageOneRect.height}px`
+        imageFiveDiv.style.marginTop = `${imageOneRect.height}px`
+
+        const imageTwoRect = imageTwoDiv.getBoundingClientRect();
+        imageThreeDiv.style.marginTop = `${imageTwoRect.height}px`
+
+    }
+
+    function translateImagesHorizontally() {
+        translateImagesVertically();
+        const imageOne = imageOneDiv.children[0];
+        console.log(imageOne)
+        const imageOneRect = imageOne.getBoundingClientRect();
+        console.log(imageOneRect)
+        console.log(imageOneRect.width)
+        imageTwoDiv.style.marginLeft = `${(slideRect.width * 0.6)}px`;
+        imageThreeDiv.style.marginLeft = `${(slideRect.width * 0.6)}px`;
+        imageFiveDiv.style.marginLeft = `${(slideRect.width * 0.5)}px`;
+
+    }
+
+    function onLoad() {
+        updateContainerDimensions();
+        translateImagesHorizontally();
+    }
+
+    window.addEventListener("resize", onLoad);
+
+    onLoad();
+
+</script>
