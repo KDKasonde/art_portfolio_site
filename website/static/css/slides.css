@@ -20,7 +20,6 @@
     display: grid;
     grid-auto-flow: column;
     grid-auto-columns: 100%;
-    grid-gap: 10px;
     overflow-x: hidden;
     overflow-y: revert ;
     scroll-behavior: smooth;
@@ -84,10 +83,12 @@ div.slide::-webkit-scrollbar {
     max-height: inherit;
     display: flex;
     position: relative;
+    margin-top: 10%;
+    margin-left: 15%;
     padding: 1em 1em 1em 1em;
     grid-row: 1/1;
     grid-column: 1/1;
-    transition: all .3s ease-in;
+    transition: all 1s ease-in;
 }
 
 .right{
@@ -98,12 +99,35 @@ div.slide::-webkit-scrollbar {
     height: 100%;
     width: 100%;
     display: grid;
-    padding-left: 3em;
     grid-template-rows: 1fr;
     grid-template-columns: 1fr;
     transition: all .3s ease-in;
 }
 
+#grid-cell-1{
+    z-index: 10;
+    transition: all .9s ease;
+}
+
+#grid-cell-2{
+    z-index: 9;
+    transition: all .8s ease;
+}
+
+#grid-cell-3{
+    z-index: 8;
+    transition: all .4s ease-out;
+}
+
+#grid-cell-4{
+    z-index: 7;
+    transition: all .7s ease-out;
+}
+
+#grid-cell-5{
+    z-index: 6;
+    transition: all .5s ease-in-out;
+}
 
 @supports (-webkit-hyphens:none)
 {

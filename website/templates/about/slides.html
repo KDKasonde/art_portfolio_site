@@ -1,13 +1,11 @@
 <div class="slide-wrap">
     <div class="slide-div">
-        <div id="slide-1-alt" class="slide-item" style="background-color: white">
-            {% include 'about/slides/slide_2_alt.html' %}
-        </div>
-        <div id="slide-1" class="slide-item" style="background-color: white">
-            {% include 'about/slides/slide_2.html' %}
-        </div>
-        <div id="slide-2" class="slide-item" style="background-color: red">
+
+        <div id="slide-1" class="slide-item" style="background-color: red">
             {% include 'about/slides/intro_slide.html' %}
+        </div>
+        <div id="slide-2" class="slide-item" style="background-color: white">
+            {% include 'about/slides/slide_2.html' %}
         </div>
         <div id="slide-3" class="slide-item" style="background-color: green">
             <p>
@@ -47,6 +45,9 @@
             block: 'center',
             inline: 'center'
         });
+        if (index+1 == 2){
+            onSlideLoad();
+        }
     }
     function onLoad() {
         const indicators = document.getElementsByClassName("slide-point");
