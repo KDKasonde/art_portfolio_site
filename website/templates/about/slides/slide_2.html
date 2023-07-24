@@ -24,7 +24,7 @@
 
         </div>
     </div>
-    <div style="width:50%;padding-left: 5px; ">
+    <div style="width:50%;">
         <p>
             Welcome to my art page.
             I am a practicing self taught artist ,who has been refining the craft for over 15 years .
@@ -61,7 +61,7 @@
     function scaleImages(){
         // scale images to correct size
         rotateImages();
-        imageOneDiv.style.height = `${(slideRect.height * 0.65)}px`;
+        imageOneDiv.style.height = `${(slideRect.height * 0.6)}px`;
         imageTwoDiv.style.height = `${(slideRect.height * 0.35)}px`;
         imageThreeDiv.style.height = `${(slideRect.height * 0.25)}px`;
         imageFourDiv.style.height = `${(slideRect.height * 0.35)}px`;
@@ -78,8 +78,8 @@
         imageFourDiv.style.marginTop = `${imageOneRect.bottom - imageOneRect.top}px`
         imageFiveDiv.style.marginTop = `${imageOneRect.bottom - imageOneRect.top}px`
 
-        const imageTwoRect = imageTwoDiv.children[0].getBoundingClientRect();
-        imageThreeDiv.style.marginTop = `${imageTwoRect.bottom - imageTwoRect.top + 32}px`
+        const imageTwoRect = imageTwoDiv.getBoundingClientRect();
+        imageThreeDiv.style.marginTop = `${imageTwoRect.bottom - imageTwoRect.top}px`
 
     }
 

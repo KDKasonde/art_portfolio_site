@@ -20,11 +20,41 @@
 </div>
 
 <div class="indicator-div">
-    <div id="indicator-1" class="slide-point"></div>
-    <div id="indicator-2" class="slide-point"></div>
-    <div id="indicator-3" class="slide-point"></div>
-    <div id="indicator-4" class="slide-point"></div>
-    <div id="indicator-5" class="slide-point"></div>
+    <div id="indicator-1" class="row indicator-container">
+        <div class="slide-point">
+        <p id="title-1" class="slide-title">
+            Intro
+        </p>
+        </div>
+    </div>
+    <div id="indicator-2" class="row indicator-container">
+        <div class="slide-point">
+            <p id="title-2" class="slide-title">
+                2007 - 2012
+            </p>
+        </div>
+    </div>
+    <div id="indicator-3" class="row indicator-container">
+        <div class="slide-point">
+            <p id="title-3" class="slide-title">
+                2018
+            </p>
+        </div>
+    </div>
+    <div id="indicator-4" class="row indicator-container">
+        <div class="slide-point">
+            <p id="title-4" class="slide-title">
+                2020
+            </p>
+        </div>
+    </div>
+    <div id="indicator-5" class="row indicator-container">
+        <div class="slide-point">
+            <p id="title-5" class="slide-title">
+                2020 - Present
+            </p>
+        </div>
+    </div>
 </div>
 
 
@@ -50,15 +80,42 @@
 
         }
     }
+
+    function animateText (element){
+        console.log(element)
+        let id = null;
+        const targetText = document.getElementById(`${element}`);
+        let opacity = 0;
+        let transformation = 0;
+        id = setInterval(function (event){
+            easeTextIn(event);
+        }, 5)
+
+        function easeTextIn() {
+            if (transformation > 1){
+                targetText.style.filter = `blur(${0}em)`
+                clearInterval(id)
+            } else {
+                transformation += 0.05;
+                targetText.style.filter = `blur(${1 - transformation}em)`
+            }
+        }
+    }
+
     function onLoad() {
         const indicators = document.getElementsByClassName("slide-point");
         Array.from(indicators).forEach(function (element, index) {
             element.addEventListener("click", function () {
                 changeSlide(index);
             })
+
+            element.addEventListener("mouseover", function () {
+                animateText(element.children[0].id);
+            })
         })
     }
 
-    onLoad();
+    document.addEventListener("DOMContentLoaded", onLoad);
+
 
 </script>

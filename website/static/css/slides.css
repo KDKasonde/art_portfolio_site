@@ -45,23 +45,51 @@
 
 .indicator-div {
     width: 100vw;
+    min-height: 50px;
     display: flex;
     justify-content: center;
+    align-items: center;
     flex-direction: row;
     position: absolute;
 }
 
+.indicator-container {
+    width: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .slide-point {
     background-color: white;
-    width:10px;
+    width: auto;
+    min-width: 10px;
     height:10px;
     border-radius: 5px;
-    margin: 30px;
     cursor: pointer;
 }
 
+.slide-title {
+    margin: 0 0 0 0;
+    opacity: 1;
+    filter: blur(1em);
+    transition: opacity 1s ease-in;
+    white-space: nowrap;
+    display: none;
+}
+
 .slide-point:hover, .slide-point:active {
-    scale: 1.5;
+    scale: 1;
+    background-color: transparent;
+    height: 100%;
+}
+
+.slide-point:hover > .slide-title{
+    display: block;
+}
+
+.slide-point:active > .slide-title{
+    display: block;
 }
 
 div.slide::-webkit-scrollbar {
