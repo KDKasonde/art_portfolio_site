@@ -32,13 +32,22 @@
 
     function changeSlide(index) {
         const targetSlide = document.getElementById(`slide-${index+1}`);
-        targetSlide.scrollIntoView({
-            behavior: 'smooth',
-            block: 'center',
-            inline: 'center'
-        });
-        if (index+1 == 2){
+        if (index+1 == 2 && !visitedBefore) {
+            targetSlide.scrollIntoView({
+                behavior: 'instant',
+                block: 'center',
+                inline: 'center'
+            });
+
             onSlideLoad();
+        } else {
+
+            targetSlide.scrollIntoView({
+                behavior: 'smooth',
+                block: 'center',
+                inline: 'center'
+            });
+
         }
     }
     function onLoad() {

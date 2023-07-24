@@ -36,6 +36,7 @@
 </div>
 
 <script>
+    let visitedBefore = false;
     const slideContainer = document.getElementById("slide-2-content");
     let slideRect = slideContainer.getBoundingClientRect();
     const imageOneDiv = document.getElementById("grid-cell-1");
@@ -95,6 +96,7 @@
     function onSlideLoad() {
         updateContainerDimensions();
         translateImagesHorizontally();
+        visitedBefore=true;
     }
 
     scaleImages();
