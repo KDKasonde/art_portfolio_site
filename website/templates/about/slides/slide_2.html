@@ -3,23 +3,52 @@
         <div id="slide-2-content">
 
             <div id="grid-cell-1" class="grid-cell">
-                <img class="grid-image" src="{{ url_for('static', filename = 'assets/about_pictures/IMG-6050.jpg') }}">
+                <div>
+                    <img class="grid-image" src="{{ url_for('static', filename = 'assets/about_pictures/IMG-6050.jpg') }}">
+                </div>
             </div>
 
             <div id="grid-cell-2" class="grid-cell">
-                <img class="grid-image" src="{{ url_for('static', filename = 'assets/about_pictures/IMG-8831.jpg') }}">
+                <div class="grid-image-div">
+                    <img class="grid-image" src="{{ url_for('static', filename = 'assets/about_pictures/IMG-8831.jpg') }}">
+
+                    <div class="overlay">
+                        <div class="text">Zac Efron <br>-<br> 2009</div>
+                    </div>
+                </div>
             </div>
 
             <div id="grid-cell-3" class="grid-cell">
-                <img class="grid-image" src="{{ url_for('static', filename = 'assets/about_pictures/IMG-8833.jpg') }}">
+                <div class="grid-image-div">
+                    <img class="grid-image" src="{{ url_for('static', filename = 'assets/about_pictures/IMG-8833.jpg') }}" title="prop">
+
+                    <div class="overlay">
+                        <div class="text">Tiger <br>-<br> 2009</div>
+                    </div>
+                </div>
             </div>
 
             <div id="grid-cell-4" class="grid-cell">
-                <img class="grid-image" src="{{ url_for('static', filename = 'assets/about_pictures/IMG-3300.jpg') }}">
+                <div class="grid-image-div">
+                    <img class="grid-image" src="{{ url_for('static', filename = 'assets/about_pictures/IMG-3300.jpg') }}" title="prop">
+
+                    <div class="overlay">
+                        <div class="text">Storm <br>-<br> 2016</div>
+                    </div>
+                </div>
+
             </div>
 
             <div id="grid-cell-5" class="grid-cell">
-                <img class="grid-image" src="{{ url_for('static', filename = 'assets/about_pictures/100A1F68-6AC2-409D-A8AE-BCD95C09CE7D.jpg') }}">
+                <div class="grid-image-div">
+                    <img class="grid-image" src="{{ url_for('static', filename = 'assets/about_pictures/100A1F68-6AC2-409D-A8AE-BCD95C09CE7D.jpg') }}">
+
+                    <div class="overlay">
+                        <div class="text">Tribes Woman <br>-<br> 2016</div>
+                    </div>
+                </div>
+
+
             </div>
 
         </div>
@@ -27,7 +56,7 @@
     <div style="width:50%;">
         <p>
             Welcome to my art page.
-            I am a practicing self taught artist ,who has been refining the craft for over 15 years .
+            I am a practicing self-taught artist ,who has been refining the craft for over 15 years .
             This website contains various pieces that I have created over these years using a variety of mediums.
 
             Scroll through and click on a piece for more information
@@ -50,17 +79,8 @@
         return
     };
 
-    function rotateImages(){
-        imageOneDiv.style.rotate= '0deg';
-        imageTwoDiv.style.rotate= '0deg';
-        imageThreeDiv.style.rotate= '0deg';
-        imageFourDiv.style.rotate= '0deg';
-        imageFiveDiv.style.rotate= '0deg';
-    }
-
     function scaleImages(){
-        // scale images to correct size
-        rotateImages();
+        console.log("scaling")
         imageOneDiv.style.height = `${(slideRect.height * 0.6)}px`;
         imageTwoDiv.style.height = `${(slideRect.height * 0.35)}px`;
         imageThreeDiv.style.height = `${(slideRect.height * 0.25)}px`;
@@ -72,6 +92,7 @@
     function translateImagesVertically() {
         scaleImages();
         // All translations are relative to the main image or 'imageOne'
+        console.log("vertical changes")
         imageOneDiv.style.marginTop = `0`;
         imageTwoDiv.style.marginTop = `0`;
         const imageOneRect = imageOneDiv.getBoundingClientRect();
@@ -85,6 +106,8 @@
 
     function translateImagesHorizontally() {
         translateImagesVertically();
+
+        console.log("horizontal changed")
         imageOneDiv.style.marginLeft = `0`;
         imageFourDiv.style.marginLeft = `0`;
         imageTwoDiv.style.marginLeft = `${(slideRect.width * 0.6)}px`;
@@ -98,6 +121,10 @@
         translateImagesHorizontally();
         visitedBefore=true;
     }
+
+    window.addEventListener("resize", onSlideLoad);
+
+
 
     scaleImages();
 
