@@ -1,1 +1,11 @@
 {% extends 'contact/base.html' %}
+{% block content %}
+<div class="contact-page-container">
+    <div class="contact-details-container">
+        <input class="text-input" type="text" name="input-name" id="input-name" placeholder="Name">
+        <input class="text-input" type="text" name="input-email" id="input-email" placeholder="Email Address">
+        <textarea class="text-input textarea-input" id="input-message" name="input-message" placeholder="Message" rows="10" value=""></textarea>
+    </div>
+</div>
+
+{% endblock %}

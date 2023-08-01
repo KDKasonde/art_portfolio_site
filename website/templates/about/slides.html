@@ -1,19 +1,19 @@
-<div class="slide-wrap">
+<div class="slide-wrap" id="slide-wrap">
     <div class="slide-div">
 
-        <div id="slide-1" class="slide-item" >
+        <div id="slide-1" class="slide-item">
             {% include 'about/slides/intro_slide.html' %}
         </div>
-        <div id="slide-2" class="slide-item" >
+        <div id="slide-2" class="slide-item" style="opacity: 0;" >
             {% include 'about/slides/slide_2.html' %}
         </div>
-        <div id="slide-3" class="slide-item" >
+        <div id="slide-3" class="slide-item" style="opacity: 0;" >
             {% include 'about/slides/slide_3.html' %}
         </div>
-        <div id="slide-4" class="slide-item" >
+        <div id="slide-4" class="slide-item" style="opacity: 0;" >
             {% include 'about/slides/slide_4.html' %}
         </div>
-        <div id="slide-5" class="slide-item" >
+        <div id="slide-5" class="slide-item" style="opacity: 0;" >
             {% include 'about/slides/slide_5.html' %}
         </div>
     </div>
@@ -59,11 +59,37 @@
 
 
 <script>
+    let activeSlide = document.getElementById('slide-1');
+    function fadeIn(slide) {
+        let id = null;
+        let transformation = 0;
+        id = setInterval(function (event){
+            easeTextIn(event);
+        }, 15)
+
+        function easeTextIn() {
+            if (transformation > 1){
+                slide.style.opacity = `1`
+                clearInterval(id)
+            } else {
+                transformation += 0.01;
+                slide.style.opacity = `${transformation}`
+            }
+        }
+    }
+
+    function fadeOut(slide) {
+        slide.style.opacity = `0`
+    }
 
     function changeSlide(index) {
-        const targetSlide = document.getElementById(`slide-${index+1}`);
+        fadeOut(activeSlide);
+        activeSlide.style.opacity = 0;
+
+        activeSlide = document.getElementById(`slide-${index+1}`);
+
         if (index+1 == 2 && !visitedBefore) {
-            targetSlide.scrollIntoView({
+            activeSlide.scrollIntoView({
                 behavior: 'instant',
                 block: 'center',
                 inline: 'center'
@@ -72,26 +98,26 @@
             onSlideLoad();
         } else {
 
-            targetSlide.scrollIntoView({
+            activeSlide.scrollIntoView({
                 behavior: 'smooth',
                 block: 'center',
                 inline: 'center'
             });
 
         }
+        fadeIn(activeSlide);
     }
 
     function animateText (element){
-        console.log(element)
         let id = null;
         const targetText = document.getElementById(`${element}`);
-        let opacity = 0;
+        targetText.style.filter = `blur(${1}em)`
         let transformation = 0;
         id = setInterval(function (event){
-            easeTextIn(event);
+            fadeSLideOut(event);
         }, 5)
 
-        function easeTextIn() {
+        function fadeSLideOut() {
             if (transformation > 1){
                 targetText.style.filter = `blur(${0}em)`
                 clearInterval(id)

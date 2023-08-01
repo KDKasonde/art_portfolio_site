@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/background.css') }}" />
     <link rel="stylesheet" href="{{ url_for('static', filename='css/images.css') }}" />
     <link rel="stylesheet" href="{{ url_for('static', filename='css/slides.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/text.css') }}" />
     <div class="row align-items-center" style="width: 100%; margin: 0 0 0 0;" >
         <div class="d-flex justify-content-sm-between align-content-center" style="width: 30%; height: 1em; padding-left: 5%;">
 <!--            <a class='page_link' href="{{ url_for('home.homepage') }}">Home</a>-->
@@ -40,7 +41,7 @@
         <div class="d-flex justify-content-sm-between align-content-center" style="width: 40%;">
             <a class='page_link' href="{{ url_for('home.homepage') }}" style="padding-left: 0">Home</a>
             <a class='page_link' href="{{ url_for('about.homepage') }}" style="padding-left: 0">About</a>
-            <a class='page_link' href="{{ url_for('about.homepage') }}" style="padding-left: 0">Contact</a>
+            <a class='page_link' href="{{ url_for('contact.homepage') }}" style="padding-left: 0">Contact</a>
         </div>
     </div>
     {% include 'sidebar.html' %}
