@@ -14,4 +14,7 @@ def create_website():
     from website.high_quality_view import bp as high_quality_view
     website.register_blueprint(high_quality_view, url_prefix="/high_quality_view")
 
+    from website.contact import bp as contact
+    website.register_blueprint(contact, url_prefix="/contact")
+
     return website
