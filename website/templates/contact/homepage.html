@@ -2,9 +2,13 @@
 {% block content %}
 <div class="contact-page-container">
     <div class="contact-details-container">
+        <p style="font-size: 2em; padding: 8px; width:60%;">Thank you for visiting my page! If you want to get in contact about commissions, queries, or collaborations</p>
         <input class="text-input" type="text" name="input-name" id="input-name" placeholder="Name">
         <input class="text-input" type="text" name="input-email" id="input-email" placeholder="Email Address">
         <textarea class="text-input textarea-input" id="input-message" name="input-message" placeholder="Message" rows="10" value=""></textarea>
+    </div>
+    <div style="position: relative; width:60%; display: flex; flex-direction: row; justify-content: center; align-items: center;">
+        <img class="gif" style="object-fit: cover; height: 50vh;" src="{{ url_for('static', filename='assets/gifs/maledancer.GIF') }}">
     </div>
 </div>
 

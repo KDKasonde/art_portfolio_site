@@ -1,6 +1,12 @@
 .contact-page-container {
     width: 100%;
     height: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding-top: 5%;
+    gap: 1em;
 }
 
 .contact-details-container {
@@ -16,7 +22,7 @@
     background: linear-gradient(#313030, #5e5e5e);
     border: 1px solid #5e5e5e ;
     border-radius: 5px;
-    width: 60%;
+    width: 80%;
     color: white;
     font-family: "Seravek Regular";
 }

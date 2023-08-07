@@ -74,3 +74,22 @@
     }
 }
 
+@supports (-webkit-hyphens:none)
+{
+
+        .gif {
+    -webkit-box-reflect:
+    below
+    0
+    -webkit-gradient(
+      linear,
+      left top,
+      left bottom,
+      color-stop(0, rgba(255, 255, 255, 0)),
+      color-stop(.5, rgba(255, 255, 255, 0)),
+      color-stop(1, rgba(255, 255, 255, .3))
+    );
+    transition: box-shadow 500ms ease-out 100ms, scale 500ms ease-out 100ms;
+}
+
+}
