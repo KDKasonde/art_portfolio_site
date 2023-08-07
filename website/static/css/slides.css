@@ -43,6 +43,19 @@
     white-space: normal;
 }
 
+.slide-text-box{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    width:40%;
+    word-break: break-word;
+}
+
+.slide-text{
+
+}
+
 .indicator-div {
     width: 100vw;
     min-height: 50px;
