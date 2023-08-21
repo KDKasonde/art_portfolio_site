@@ -20,6 +20,7 @@ def client(app):
 
 @pytest.fixture
 def mail_client(app):
+    print(app.config['MAIL_USERNAME'])
     with app.app_context():
         yield Mail(app)
 

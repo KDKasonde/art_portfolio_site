@@ -10,6 +10,7 @@ python = "^3.11"
 flask = "^2.3"
 pydantic = {version = "^2.2", extras =["email"]}
 flask-mailman = "^0.3.0"
+python-dotenv = "^1.0.0"
 
 
 [tool.poetry.group.test.dependencies]

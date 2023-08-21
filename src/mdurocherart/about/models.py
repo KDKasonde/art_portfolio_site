@@ -1,7 +1,8 @@
 from flask_mailman import EmailMessage
+from flask import current_app
 from mdurocherart.models import Email
 import os
-
+import logging
 
 def send_email(user_message: Email) -> bool:
     """
@@ -21,10 +22,12 @@ def send_email(user_message: Email) -> bool:
         subject=user_message.subject,
         body=user_message.body,
         reply_to=[user_message.email],
-        from_email='user_message.email',
+        from_email=user_message.email,
         to=['d.kasonde99@gmail.com'],
         headers={'Message-ID': 'Automated'}
     )
+    logging.error(current_app.config.get('MAIL_USERNAME'))
+
 
     success = msg.send()
     return bool(success)
