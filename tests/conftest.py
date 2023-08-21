@@ -8,7 +8,11 @@ from flask_mailman import Mail
 @pytest.fixture
 def app():
 
+<<<<<<< HEAD
     app = create_app(env='test')
+=======
+    app = create_app()
+>>>>>>> 2a397a7 (feat: add toml file along with the flask-mailman package, set up poetry env and ensure the package is stable.)
 
     yield app
 
@@ -20,8 +24,12 @@ def client(app):
 
 @pytest.fixture
 def mail_client(app):
+<<<<<<< HEAD
     with app.app_context():
         yield Mail(app)
+=======
+    yield Mail(app)
+>>>>>>> 2a397a7 (feat: add toml file along with the flask-mailman package, set up poetry env and ensure the package is stable.)
 
 
 @pytest.fixture
