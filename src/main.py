@@ -1,4 +1,4 @@
-from art_portfolio_site.src.mdurocherart import create_app
+from mdurocherart import create_app
 
 app = create_app()
 
