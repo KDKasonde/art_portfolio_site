@@ -1,4 +1,4 @@
-from mdurocherart import create_website
+from art_portfolio_site.src.mdurocherart import create_website
 
 website = create_website()
 
