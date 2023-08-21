@@ -1,4 +1,4 @@
-from flask import render_template
+from flask import render_template, current_app
 from pathlib import Path
 from random import shuffle
 import os
