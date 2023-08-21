@@ -1,0 +1,366 @@
+p {
+    color: white;
+    font-family: 'Encode Sans Semi Expanded', sans-serif;
+    font-weight: 400;
+}
+
+.center_text {
+    text-align: center;
+}
+
+.side_bar_link {
+    font-family: Zapfino;
+    font-size: 1.5em;
+    font-weight: normal;
+    color: white;
+    padding-left: 5%;
+    padding-bottom: 10%;
+}
+
+.page_link {
+    font-family: Zapfino;
+    font-size: 1.5em;
+    font-weight: normal;
+    color: white;
+    padding-left: 5%;
+}
+
+.title_text {
+    font-family: Zapfino;
+    font-size: 1.5em;
+    font-weight: bold;
+    text-decoration: underline;
+    color: white;
+    line-height: 2em;
+}
+
+.text_box{
+    border-style: solid;
+    border-color: white;
+    border-width: 0;
+    color: white;
+    width: 50%;
+    padding-top: 16px;
+    padding-bottom: 5px;
+    justify-self: center;
+}
+
+.page_text {
+    font-family: Zapfino;
+    font-size: 1em;
+    font-weight: normal;
+    color: white;
+    line-height: 1.5em;
+}
+
+.side_bar_link:hover {
+    color: darkgray;
+}
+
+.page_link:hover {
+    color: darkgray;
+}
+
+
+.side_bar_btn {
+    height: 0;
+    width: 0;
+    color: white;
+    margin-right: 5%;
+    font-size: 0;
+    font-family: "Font Awesome 6 Free";
+    font-weight:900;
+    background-color: transparent;
+    border: 0 solid transparent;
+}
+
+.side_bar_btn_icon:active {
+    background-color: black;
+    scale: 0.9;
+    box-shadow: none;
+}
+
+.side_panel_background{
+    display: none;
+    position: fixed;
+    height: 100vh;
+    width: 100vw;
+    z-index: 2;
+    left: 0;
+    top: 0;
+    background-color: rgba(0,0,0,0.4);
+    transition: 5s;
+}
+
+.sidepanel {
+    height: 0;
+    float: right;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    right: 0;
+    background-color: black;
+    overflow-x: hidden;
+
+    display: flex;
+    flex-direction: column;
+
+    animation-name: animate_right;
+    animation-duration: 0.8s
+}
+
+@keyframes animate_right {
+  from {right: -20%; opacity: 0}
+  to {right: 0; opacity: 1}
+}
+
+.close-btn{
+    height: 2em;
+    width: 2em;
+    color: white;
+    font-size: 2em;
+    font-family: "Font Awesome 6 Free";
+    font-weight:900;
+    background-color: transparent;
+    border: 0 solid transparent;
+}
+
+.close-btn:hover {
+    color: darkgray;
+}
+
+.close-btn:active {
+    color: white;
+    scale: 0.9;
+    box-shadow: none;
+}
+
+/* Div containing slider */
+.slider-wrap{
+    width:100vw;
+    height: 70%;
+    position: fixed;
+    overflow-x: visible;
+    z-index: 0;
+    display: flex;
+    justify-content: space-around;
+    align-content: center;
+    padding: 0 0 0 0;
+    margin: 0 0 0 0;
+}
+
+/* button for controlling slider */
+.slider-btn-div{
+    justify-self: center;
+    align-self: center;
+    flex: none;
+}
+
+.slider-btn{
+    height: 2em;
+    width: 2em;
+    color: transparent;
+    font-size: 2.5em;
+    font-family: "Font Awesome 6 Free";
+    font-weight:900;
+    background-color: transparent;
+    border: 0 solid transparent;
+    border-radius: 50%;
+    padding: 0 0 0 0;
+    transition: scale 500ms ease-out 100ms, color 500ms ease-out 100ms;
+}
+
+.slider-btn:hover, .slider-btn:focus, .slider-btn-div:hover{
+    color: white;
+    outline: none;
+}
+/* slider div */
+.slider {
+
+    width: 80%;
+    display: flex;
+    padding: 0 0 0 0;
+    margin: 0 0 0 0;
+
+    will-change: transform;
+    overflow: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    -webkit-perspective: 600px;
+
+    -webkit-mask-image: -webkit-gradient(linear, left top, right top, color-stop(0, rgba(0,0,0,.2)), color-stop(.1, rgba(0,0,0,
+1)), color-stop(.9, rgba(0,0,0,1)), color-stop(1, rgba(0,0,0,.2)) );
+}
+
+div.slider::-webkit-scrollbar {
+    display: none;
+}
+
+.slider::before,
+.slider::after {
+  content: "";
+  flex: 0 0 50%;
+}
+
+.slider-item {
+    padding-top: 2em;
+    height: 60vh;
+    will-change: perspective;
+    transform-style: preserve-3d;
+    scroll-snap-align: center;
+}
+
+.modal {
+    height: 70vh;
+    width: 70vw;
+    z-index: 1;
+
+    background-color: black;
+    position: fixed;
+    margin:auto;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+
+    animation-name: animate_top;
+    animation-duration: 0.8s
+}
+
+.detail-view-div{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.high-quality-image-div{
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+
+.high-quality-description-div{
+    width: 50%;
+    display: flex;
+    justify-content: space-between;
+    align-content: flex-start;
+    flex-direction: column;
+}
+
+@keyframes animate_top {
+  from {top: -300px; opacity: 0}
+  to {top: 0; opacity: 1}
+}
+
+    .modal_image_item{
+        height: 70vh;
+        width: 35vw;
+    }
+
+    .empty_slider{
+        padding: 0 0 0 0;
+}
+
+@media only screen and (max-height: 760px){
+    .page_link {
+        font-size: 1em;
+    }
+
+    .slider-item {
+        height: 217px;
+    }
+
+}
+
+@media only screen and (max-width: 960px){
+
+    .slider{
+        width: 100%;
+    }
+
+    .slider-btn{
+        height: 0;
+        width: 0;
+        font-size: 0;
+    }
+
+    .side_bar_btn{
+        height: 2em;
+        width: 2em;
+        font-size: 2em;
+    }
+
+    .sidepanel{
+        height: 100%;
+    }
+
+    .page_link{
+        font-size: 0;
+        z-index: -10;
+    }
+
+    div.slider::-webkit-scrollbar {
+        display: none;
+    }
+
+
+
+}
+
+
+@media only screen and (max-width: 960px) and (max-height: 760px){
+    /* if both width and height small shrink sidebar button*/
+    .side_bar_btn{
+        height: 1.5em;
+        width: 1.5em;
+        font-size: 1em;
+        margin-right: 10%;
+    }
+
+    .sidepanel{
+        height: 100%;
+    }
+
+    .page_link{
+        font-size: 0;
+        z-index: -10;
+    }
+
+    .title_text {
+        font-family: Zapfino;
+        font-size: 1em;
+        font-weight: bold;
+        text-decoration: underline;
+        color: white;
+        line-height: 2em;
+    }
+
+    .page_text {
+        font-family: Zapfino;
+        font-size: 0.5em;
+        font-weight: normal;
+        color: white;
+        line-height: 1.5em;
+    }
+
+}
+
+@media only screen and (max-aspect-ratio: 1/1){
+    .detail-view-div{
+        flex-direction: column;
+    }
+
+    .high-quality-image-div{
+        width: 100vw;
+    }
+
+    .high-quality-description-div{
+        width: 100vw;
+        text-align: center;
+        margin-top: 1em;
+        padding-right: 10%;
+        padding-left: 10%;
+    }
+
+}
