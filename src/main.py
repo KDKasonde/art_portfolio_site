@@ -1,9 +1,9 @@
-from art_portfolio_site.src.mdurocherart import create_website
+from art_portfolio_site.src.mdurocherart import create_app
 
-website = create_website()
+app = create_app()
 
 if __name__ == '__main__':
-    website.run(
+    app.run(
         host="0.0.0.0",
         port=5000,
         debug=True

@@ -2,8 +2,7 @@ import os
 import tempfile
 
 import pytest
-from we import create_app
-from project_cartographer.db import get_db, init_db, close_db
+from mdurocherart import create_app
 
 
 @pytest.fixture

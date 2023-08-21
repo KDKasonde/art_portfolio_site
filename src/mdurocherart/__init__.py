@@ -1,7 +1,7 @@
 from flask import Flask
 
 
-def create_website():
+def create_app():
 
     mdurocherart = Flask(__name__)
 
