@@ -84,7 +84,8 @@
 
 .slide-title {
     margin: 0 0 0 0;
-    font-family: "Seravek Regular";
+    font-family: 'Encode Sans Semi Expanded', sans-serif;
+    font-weight: 400;
     font-size: 1.2em;
     opacity: 1;
     filter: blur(1em);
@@ -160,7 +161,8 @@ div.slide::-webkit-scrollbar {
 }
 
 .text {
-    font-family: "Seravek Regular";
+    font-family: 'Encode Sans Semi Expanded', sans-serif;
+    font-weight: 400;
     color: white;
     font-size: 1em;
     position: absolute;

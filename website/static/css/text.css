@@ -25,7 +25,8 @@
     border-radius: 5px;
     width: 80%;
     color: white;
-    font-family: "Seravek Regular";
+    font-family: 'Encode Sans Semi Expanded', sans-serif;
+    font-weight: 400;
 }
 
 .text-input:focus {
