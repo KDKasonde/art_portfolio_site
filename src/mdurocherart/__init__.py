@@ -1,9 +1,13 @@
 from flask import Flask
+from werkzeug.utils import import_string
+from mdurocherart.config import TestingConfig
 
 
 def create_app():
 
     mdurocherart = Flask(__name__)
+    cfg = import_string('mdurocherart.config.TestingConfig')
+    mdurocherart.config.from_object(cfg)
 
     from mdurocherart.home import bp as home
     mdurocherart.register_blueprint(home)
