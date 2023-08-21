@@ -23,7 +23,6 @@ class ProductionConfig(Config):
     MAIL_FILE_PATH = os.getenv('MAIL_FILE_PATH')
     MAIL_USE_LOCALTIME = os.getenv('MAIL_USE_LOCALTIME')
 
-
 class DevelopmentConfig(Config):
     MAIL_SERVER = os.getenv('MAIL_SERVER', default='smtp.gmail.com')
     MAIL_PORT = os.getenv('MAIL_PORT', default=25)
