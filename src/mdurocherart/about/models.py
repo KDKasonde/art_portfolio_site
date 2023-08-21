@@ -23,10 +23,9 @@ def send_email(user_message: Email) -> bool:
         body=user_message.body,
         reply_to=[user_message.email],
         from_email=user_message.email,
-        to=['d.kasonde99@gmail.com'],
+        to=[current_app.config.get('MAIL_USERNAME')],
         headers={'Message-ID': 'Automated'}
     )
-    logging.error(current_app.config.get('MAIL_USERNAME'))
 
 
     success = msg.send()
