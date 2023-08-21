@@ -8,7 +8,7 @@ readme = "README.md"
 [tool.poetry.dependencies]
 python = "^3.11"
 flask = "^2.3"
-pydantic = "^2.2"
+pydantic = {version = "^2.2", extras =["email"]}
 flask-mailman = "^0.3.0"
 
 

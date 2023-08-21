@@ -20,7 +20,8 @@ def client(app):
 
 @pytest.fixture
 def mail_client(app):
-    yield Mail(app)
+    with app.app_context():
+        yield Mail(app)
 
 
 @pytest.fixture
