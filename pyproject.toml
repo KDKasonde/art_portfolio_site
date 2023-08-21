@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "project-cartographer"
+version = "0.0.1"
+description = ""
+authors = ["Kasonde Kasonde <d.kasonde99@gmail.com"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+flask = "^2.3"
+pydantic = "^2.2"
+flask-mailman = "0.3.0>="
+
+
+[tool.poetry.group.test.dependencies]
+pytest = "^7.4"
