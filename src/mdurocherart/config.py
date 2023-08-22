@@ -1,4 +1,3 @@
-import logging
 import os
 from dotenv import find_dotenv, load_dotenv
 from pathlib import Path
@@ -6,6 +5,7 @@ from pathlib import Path
 dotenv_path = Path(__file__).parent.parent.joinpath('.env')
 
 load_dotenv(dotenv_path)
+
 
 class Config(object):
     """Base config, uses staging database server."""
@@ -48,4 +48,14 @@ class TestingConfig(Config):
     MAIL_BACKEND = os.getenv('MAIL_BACKEND')
     MAIL_FILE_PATH = os.getenv('MAIL_FILE_PATH')
     MAIL_USE_LOCALTIME = os.getenv('MAIL_USE_LOCALTIME')
-    logging.error(os.getenv('MAIL_USERNAME'))
+
+
+def get_config(env: str):
+    if env == 'prod':
+        return ProductionConfig
+    elif env == 'dev':
+        return DevelopmentConfig
+    elif env == 'test':
+        return TestingConfig
+    else:
+        raise ValueError

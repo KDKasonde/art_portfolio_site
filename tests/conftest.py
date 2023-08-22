@@ -8,7 +8,7 @@ from flask_mailman import Mail
 @pytest.fixture
 def app():
 
-    app = create_app()
+    app = create_app(env='test')
 
     yield app
 
