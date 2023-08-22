@@ -1,6 +1,7 @@
 import os
 
 from flask import Flask
+from flask_mailman import Mail
 from werkzeug.utils import import_string
 from mdurocherart.config import TestingConfig, get_config
 from typing import Optional
@@ -16,6 +17,9 @@ def create_app(env: Optional[str] = None):
     config_obj = get_config(env)
     cfg = import_string(f'mdurocherart.config.{config_obj.__name__}')
     mdurocherart.config.from_object(cfg)
+
+    mail = Mail(mdurocherart)
+    mdurocherart.config['MAIL_CLIENT'] = mail
 
     from mdurocherart.home import bp as home
     mdurocherart.register_blueprint(home)

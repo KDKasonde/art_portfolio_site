@@ -17,9 +17,10 @@
 <script>
     function formatEmail() {
         const email_payload = {
-            'sender': document.getElementById('input-email').value,
+            'email': document.getElementById('input-email').value,
             'name': document.getElementById('input-name').value,
-            'message': document.getElementById('input-message').value
+            'body': document.getElementById('input-message').value,
+            'subject': 'New message from ' + document.getElementById('input-name').value
         };
 
         return email_payload;
@@ -27,7 +28,7 @@
     async function sendPayload(payload) {
         try{
             const response = await fetch(
-                url = "{{ url_for('contact.send_email') }}",
+                url = "{{ url_for('contact.process_contact') }}",
                 {
                     method: "POST",
                     headers: {

@@ -1,6 +1,6 @@
 import pytest
 
-from mdurocherart.about.models import send_email
+from mdurocherart.contact.models import send_email
 from mdurocherart.models import Email
 
 
