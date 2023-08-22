@@ -1,8 +1,7 @@
 from flask_mailman import EmailMessage
 from flask import current_app
 from mdurocherart.models import Email
-import os
-import logging
+
 
 def send_email(user_message: Email) -> bool:
     """
@@ -17,6 +16,8 @@ def send_email(user_message: Email) -> bool:
     -------
     bool
         Signifying the success or failure of the email being sent
+        (This is actually the number one emails sent, but we want to send one
+        at a time)
     """
     msg = EmailMessage(
         subject=user_message.subject,
@@ -27,6 +28,10 @@ def send_email(user_message: Email) -> bool:
         headers={'Message-ID': 'Automated'}
     )
 
-
     success = msg.send()
     return bool(success)
+
+
+def format_email() -> Email:
+    pass
+    return

@@ -1,12 +1,20 @@
+import os
+
 from flask import Flask
 from werkzeug.utils import import_string
-from mdurocherart.config import TestingConfig
+from mdurocherart.config import TestingConfig, get_config
+from typing import Optional
 
 
-def create_app():
+def create_app(env: Optional[str] = None):
 
     mdurocherart = Flask(__name__)
-    cfg = import_string('mdurocherart.config.TestingConfig')
+
+    if env is None:
+        env = os.getenv('TARGET_ENV', default='dev')
+
+    config_obj = get_config(env)
+    cfg = import_string(f'mdurocherart.config.{config_obj.__name__}')
     mdurocherart.config.from_object(cfg)
 
     from mdurocherart.home import bp as home
