@@ -15,7 +15,7 @@
 
 
 <script>
-    async function formatEmail() {
+    function formatEmail() {
         const email_payload = {
             'sender': document.getElementById('input-email').value,
             'name': document.getElementById('input-name').value,
@@ -24,9 +24,34 @@
 
         return email_payload;
     }
+    async function sendPayload(payload) {
+        try{
+            const response = await fetch(
+                url = "{{ url_for('contact.send_email') }}",
+                {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(payload)
+                }
+            )
+
+            if (response.ok && response.status === 200){
+                return
+            }
+            throw (
+                new Error('Error sending message to backend')
+            )
+        } catch {
+            alert('there was an issue sending your message please try again!')
+        }
+    }
     const sendBtn = document.getElementById('send-message-btn');
     sendBtn.addEventListener('click', async function () {
-        const payload = await formatEmail();
+        const payload = formatEmail();
+        await sendPayload(payload);
+
     })
 
 </script>
