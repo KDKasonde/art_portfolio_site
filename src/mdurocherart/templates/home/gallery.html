@@ -30,7 +30,7 @@
         </button>
     </div>
 </div>
-
+<script type="text/javascript" src="{{ url_for('static', filename='js/slider.js') }}"></script>
 
 <script>
     let imagesList = [...document.querySelectorAll(".slider-item")];
@@ -39,48 +39,6 @@
     const leftSliderBtn = document.getElementById('left-slider-btn');
     const rightSliderBtn = document.getElementById('right-slider-btn');
 
-    function checkImages(){
-
-        let in_view = [];
-        imagesList.forEach(image => {
-            const rect = image.getBoundingClientRect();
-            if((rect.right > slider_rect.left) && (rect.left < slider_rect.right)){
-                in_view.push(image)
-            } else{
-                image.setAttribute("style", "scale: 0;")
-            }
-        });
-        return in_view;
-    }
-
-    function getCenterImage() {
-
-        const in_view = checkImages();
-        let max = 0;
-        let id;
-        in_view.forEach(image => {
-            if (image.style.scale > max){
-                max = image.style.scale;
-                id = image.id;
-            }
-        })
-        return id;
-    }
-
-    function scaleImages(){
-        const in_view = checkImages();
-        const center = (slider_rect.right + slider_rect.left)/2;
-        in_view.forEach(image => {
-            const rect = image.getBoundingClientRect();
-            if(((rect.right + rect.left)/2) > center){
-                image.style.scale = `${1 - (( rect.right -((rect.right-rect.left)/2) - center)/(center))}`;
-            } else if(((rect.right + rect.left)/2) < center){
-                image.style.scale = `${((rect.right - ((rect.right-rect.left)/2))/(center))}`;
-            }
-        });
-
-        requestAnimationFrame(scaleImages)
-    }
 
     function resizeSlider() {
         slider_rect = slider.getBoundingClientRect();
@@ -103,40 +61,6 @@
         window.location = response.url
     }
 
-    const trigger = function (event) {
-        const leftBtn = document.getElementById('left-slider-btn');
-        const rightBtn = document.getElementById('right-slider-btn');
-        const mouseX = event.clientX;
-        const centerOfSlider = (slider_rect.right + slider_rect.left) / 2;
-
-        if ((mouseX <= centerOfSlider)) {
-            if (!leftBtn.disabled) {
-                leftBtn.focus();
-                setTimeout(() => {
-                    leftBtn.blur();
-                }, 1000);
-            } else {
-                rightBtn.focus();
-                setTimeout(() => {
-                    rightBtn.blur();
-                }, 1000);
-            }
-
-        } else {
-            if (!rightBtn.disabled) {
-                rightBtn.focus();
-                setTimeout(() => {
-                    rightBtn.blur();
-                }, 1000);
-            } else {
-                leftBtn.focus();
-                setTimeout(() => {
-                    leftBtn.blur();
-                }, 1000);
-            }
-        }
-
-    }
     slider.addEventListener("scroll", function () {
         disableSliderBtn();
     });
@@ -145,75 +69,7 @@
         trigger(event)
     });
 
-    function disableSliderBtn() {
-
-        const centerImageId = getCenterImage();
-        if (`${centerImageId}` == 0){
-            document.getElementById('left-slider-btn').disabled = true;
-        } else {
-            document.getElementById('left-slider-btn').removeAttribute("disabled");
-        }
-
-        if (`${centerImageId}` == (imagesList.length-1)){
-            document.getElementById('right-slider-btn').disabled = true;
-        } else {
-            document.getElementById('right-slider-btn').removeAttribute("disabled");
-        }
-    };
-
-    function Onload() {
-        resizeSlider()
-        imagesList.forEach(image => {
-            image.addEventListener("click", function(event) {
-                openImage(event);
-                event.stopPropagation();
-            });
-        });
-        leftSliderBtn.addEventListener("click", slideLeft);
-        rightSliderBtn.addEventListener("click", slideRight);
-        document.addEventListener('keydown', arrowSlider);
-        disableSliderBtn()
-    }
-
     window.addEventListener("resize", resizeSlider);
-
-    function slideLeft() {
-        const centerImageId = getCenterImage();
-        const targetImage = document.getElementById(`${centerImageId-1}`);
-        targetImage.scrollIntoView({
-            behavior: 'smooth',
-            block: 'center',
-            inline: 'center'
-        });
-
-        disableSliderBtn();
-    }
-
-    function slideRight() {
-        const centerImageId = parseInt(getCenterImage());
-        const targetImage = document.getElementById(`${centerImageId+1}`);
-        targetImage.scrollIntoView({
-            behavior: 'smooth',
-            block: 'center',
-            inline: 'center'
-        });
-
-        disableSliderBtn();
-    }
-
-    function arrowSlider(event) {
-        const centerImageId = parseInt(getCenterImage());
-
-        if ((event.which == 37) && (`${centerImageId}` !=0)){
-            /*left key code*/
-            slideLeft();
-        }
-        if ((event.which == 39) && (`${centerImageId}` != (imagesList.length-1))){
-            /*right key code*/
-            slideRight();
-        }
-
-    }
 
     const onLoadPromise = new Promise((result, reject) => {
 
@@ -226,7 +82,7 @@
 
     onLoadPromise.then(result => {
         console.log(result);
-        scaleImages();
+        scaleImages(imagesList);
     });
 
     onLoadPromise.catch(error => {
