@@ -7,7 +7,7 @@ function checkImages(imageList){
         if((rect.right > slider_rect.left) && (rect.left < slider_rect.right)){
             in_view.push(image)
         } else{
-            image.setAttribute("style", "scale: 0;")
+            image.setAttribute("style", "scale: 0.01;")
         }
     });
     return in_view;
