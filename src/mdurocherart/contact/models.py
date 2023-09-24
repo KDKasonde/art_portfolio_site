@@ -24,9 +24,6 @@ def send_email(user_message: Email) -> bool:
         (This is actually the number one emails sent, but we want to send one
         at a time)
     """
-    print('here')
-    print(current_app.config.get('MAIL_USERNAME'))
-    print('heer')
     with get_mail_server_connection() as conn:
         msg = EmailMessage(
             subject=user_message.subject,
@@ -37,8 +34,6 @@ def send_email(user_message: Email) -> bool:
             headers={'Message-ID': 'Automated'},
             connection=conn
         )
-
-
 
         success = msg.send()
     return bool(success)
