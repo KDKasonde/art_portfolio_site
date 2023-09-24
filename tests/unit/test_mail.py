@@ -8,12 +8,14 @@ emails = [
     Email(
         email='tester@testing.com',
         subject='johnny bravo',
-        body='Don\'t you think johnny bravo is buff'
+        body='Don\'t you think johnny bravo is buff',
+        name='johnny bravo',
     ),
     Email(
         email='devloper@deving.com',
         subject='Courage the cowardly dog',
-        body='Don\'t you think courage is courageous'
+        body='Don\'t you think courage is courageous',
+        name='Courage',
     ),
 ]
 

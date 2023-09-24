@@ -39,7 +39,7 @@ class DevelopmentConfig(Config):
 
 class TestingConfig(Config):
     MAIL_SERVER = os.getenv('MAIL_SERVER', default='localhost')
-    MAIL_PORT = os.getenv('MAIL_PORT', default=25)
+    MAIL_PORT = os.getenv('MAIL_PORT', default=1025)
     MAIL_USERNAME = os.getenv('MAIL_USERNAME')
     MAIL_PASSWORD = os.getenv('MAIL_PASSWORD')
     MAIL_USE_TLS = os.getenv('MAIL_USE_TLS', default=False)
