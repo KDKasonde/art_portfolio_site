@@ -2,10 +2,24 @@
 {% block content %}
 <div class="contact-page-container">
     <div class="contact-details-container">
-        <p style="font-size: 2em; padding: 8px; width:60%;">Thank you for visiting my page! If you want to get in contact about commissions, queries, or collaborations</p>
-        <input class="text-input" type="text" name="input-name" id="input-name" placeholder="Name">
-        <input class="text-input" type="text" name="input-email" id="input-email" placeholder="Email Address">
-        <textarea class="text-input textarea-input" id="input-message" name="input-message" placeholder="Message" rows="10" value=""></textarea>
+        <div id="thank-you-message" class="text-box" style="display: none;">
+            <p style="font-size: 1.5em;">
+                Thank you for getting in contact! I will try and get back to you
+                over the next few days.
+            </p>
+        </div>
+        <div class="text-box">
+            <label for="input-name">Your name</label>
+            <input class="text-input" type="text" name="input-name" id="input-name" placeholder="Name">
+        </div>
+        <div class="text-box">
+            <label for="input-email">Your Email Address</label>
+            <input class="text-input" type="text" name="input-email" id="input-email" placeholder="Email Address">
+        </div>
+        <div class="text-box">
+            <label for="input-message">Your Message</label>
+            <textarea class="text-input textarea-input" id="input-message" name="input-message" placeholder="Message" rows="10" value=""></textarea>
+        </div>
         <button id="send-message-btn">Send</button>
     </div>
     <div style="position: relative; width:60%; display: flex; flex-direction: row; justify-content: center; align-items: center;">
