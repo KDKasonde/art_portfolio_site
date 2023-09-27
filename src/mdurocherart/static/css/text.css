@@ -46,6 +46,28 @@
     flex-direction: column;
 }
 
+.send-email-btn {
+    background: #D9D9D9;
+    border: 0;
+    border-radius: 5px;
+}
+
+.send-email-btn > p{
+    color: #484848;
+    margin: 0 0 0 0;
+    text-underline: #484848;
+}
+
+.send-email-btn:hover{
+    background: black;
+}
+
+.send-email-btn:hover > p{
+    color: white;
+    margin: 0 0 0 0;
+    text-underline: #484848;
+}
+
 label {
     vertical-align: top;
     color: white;
