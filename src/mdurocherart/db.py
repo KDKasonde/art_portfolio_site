@@ -56,18 +56,19 @@ class CouchdbConnection:
         port = config.get('COUCHDB_PORT')
         return cls(user=user, password=password, database=database, host=host, port=port)
 
-
     @property
     def end_point(self):
         return "http://" + self.user + ":" + self.password + "@" + self.host + ":" + self.port + "/" + self.database
 
-    def get_revision(self, document: str, design_doc: bool = False) -> str:
+    def get_revision(self, document: str, data: Dict, design_doc: bool = False) -> str:
         """
         Function to get the current revision of the document
         Parameters
         ----------
         document: str
             The document we want to get the latest revision id from.
+        data: Dict
+            The payload being sent to the end point
         design_doc: bool, default: False
             A bool denoting whether the document is a design document.
         Returns
@@ -80,15 +81,10 @@ class CouchdbConnection:
         else:
             end_point = self.end_point + "/" + document
         response = requests.get(url=end_point).json()
-        if "error" in response.keys():
-            if response["error"] == "not_found":
-                msg = f"""Couchdb returned {response["reason"]}, as there was an issue finding the document: {document}, please ensure it exists in couch db.
-                """
-                raise ViewNotFoundError(msg=msg)
         if "_rev" in response.keys():
-            return response
+            return data.update({"_rev": response["_rev"]})
         else:
-            return None
+            return data
 
     def get_view(self, document: str, view: str) -> Dict:
         """
@@ -132,32 +128,66 @@ class CouchdbConnection:
         Response: Dict
             This is the response JSON from the put request.
         """
-        revision_payload = self.get_revision(document=document, design_doc=True)
+        payload = {
+            "views": {
+                view: {
+                    "map": mapping
+                }
+            }
+        }
+        payload = self.get_revision(document=document, design_doc=True, data=payload)
         end_point = self.end_point + "/_design/" + document
-        if "_rev" in revision_payload.keys():
-            payload = dumps(
-                {
-                    "_rev": revision_payload["_rev"],
-                    "views": {
-                        view: {
-                            "map": mapping
-                        }
-                    }
-                }
-            )
-        else:
-            payload = dumps(
-                {
-                    "views": {
-                        view: {
-                            "map": mapping
-                        }
-                    }
-                }
-            )
-        response = requests.put(url=end_point, data=payload).json()
+
+        response = requests.put(url=end_point, json=payload).json()
         if "error" in response.keys():
             if response["error"] == "compilation_error":
                 raise JavaScriptCompilationError(msg=response["reason"])
+            if response["error"] == "not_found":
+                msg = f"""Couchdb returned {response["reason"]}, as there was an issue finding the document: {document}, please ensure it exists in couch db.
+                """
+                raise ViewNotFoundError(msg=msg)
+
+        return response
+
+    def post_document(self, data: Dict) -> Dict:
+        """
+        Post document takes a dictionary of data (which will be coerced to json) and creates
+        a new document with it. If you want to specify an id use `put_document`.
+        Parameters
+        ----------
+        data: Dict
+            Data to be stored in the couchdb database.
+
+        Returns
+        -------
+        response_payload: Dict
+            This payload contains information about the upload, whether it was successful,
+            the id of the document and the revision of the document.
+        """
+
+        endpoint = self.end_point
+        response = requests.post(endpoint, json=data).json()
+        return response
+
+    def put_document(self, document_id: str, data: Dict) -> Dict:
+        """
+        Post document takes a document_id and dictionary of data (which will be coerced to json) and creates/updates
+        a document with it. If you don't want to specify an id and create a new document use `post_document`.
+        Parameters
+        ----------
+        document_id: str
+            The id of the document you want to create/update.
+        data: Dict
+            Data to be stored in the couchdb database.
+
+        Returns
+        -------
+        response_payload: Dict
+            This payload contains information about the upload, whether it was successful,
+            the id of the document and the revision of the document.
+        """
+        data = self.get_revision(document=document_id, design_doc=False, data=data)
+        end_point = self.end_point + "/" + document_id
+        response = requests.put(end_point, json=data).json()
 
         return response
