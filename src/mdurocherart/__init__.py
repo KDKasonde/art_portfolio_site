@@ -5,6 +5,7 @@ from flask_mailman import Mail
 from werkzeug.utils import import_string
 from mdurocherart.config import TestingConfig, get_config
 from typing import Optional
+from mdurocherart.db import CouchdbConnection
 
 
 def create_app(env: Optional[str] = None):
@@ -20,6 +21,9 @@ def create_app(env: Optional[str] = None):
 
     mail = Mail(mdurocherart)
     mdurocherart.config['MAIL_CLIENT'] = mail
+
+    couchdb_conn = CouchdbConnection.from_flask_config(mdurocherart)
+    mdurocherart.config['COUCHDB'] = couchdb_conn
 
     from mdurocherart.home import bp as home
     mdurocherart.register_blueprint(home)

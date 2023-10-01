@@ -1,8 +1,11 @@
+import logging
+
 import requests
 from typing import Tuple, Dict
 from json import loads, dumps
+from flask import app
 
-from errors import JavaScriptCompilationError, ViewNotFoundError
+from mdurocherart.errors import JavaScriptCompilationError, ViewNotFoundError
 
 
 class CouchdbConnection:
@@ -31,6 +34,28 @@ class CouchdbConnection:
         self.database = database
         self.port = str(port)
         self.host = host
+
+    @classmethod
+    def from_flask_config(cls, flask_app: app.Flask):
+        """
+        Init method for flask config objects as opposed to directly inputting each argument.
+        Parameters
+        ----------
+        flask_app: app.Flask
+            flask app in use.
+
+        Returns
+        -------
+            A class instance of the CouchdbConnection.
+        """
+        config = flask_app.config
+        user = config.get('COUCHDB_USERNAME')
+        password = config.get('COUCHDB_PASSWORD')
+        database = config.get('COUCHDB_DATABASE')
+        host = config.get('COUCHDB_HOST')
+        port = config.get('COUCHDB_PORT')
+        return cls(user=user, password=password, database=database, host=host, port=port)
+
 
     @property
     def end_point(self):
@@ -65,12 +90,12 @@ class CouchdbConnection:
         else:
             return None
 
-    def get_view(self, design_document: str, view: str) -> Dict:
+    def get_view(self, document: str, view: str) -> Dict:
         """
-        The get_view method takes a design_document and view name and returns the output of the view input.
+        The get_view method takes a document and view name and returns the output of the view input.
         Parameters
         ----------
-        design_document: str
+        document: str
             This is the name of the design document that holds the view requested.
         view: str
             This is the name of the view requested, this must be defined beforehand.
@@ -79,23 +104,23 @@ class CouchdbConnection:
         response: Dict
             The response returns the views outputs.
         """
-        end_point = self.end_point + "/_design/" + design_document + "/_view/" + view
+        end_point = self.end_point + "/_design/" + document + "/_view/" + view
         response = requests.get(url=end_point).json()
         if "error" in response.keys():
             if response["error"] == "not_found":
-                msg = f"""Couchdb returned {response["reason"]}, as there was an issue finding the document: {design_document} and view: {view}, please ensure these exist in couch db.
+                msg = f"""Couchdb returned {response["reason"]}, as there was an issue finding the document: {document} and view: {view}, please ensure these exist in couch db.
                 """
                 raise ViewNotFoundError(msg=msg)
         return response
 
-    def put_view(self, design_document: str, view: str, mapping: str) -> Dict:
+    def put_view(self, document: str, view: str, mapping: str) -> Dict:
         """
-        The put_view method takes a design_document, view name and a view_map then forms a
+        The put_view method takes a document, view name and a view_map then forms a
         payload for updating the design doc. It will also check if the doc already exists
         and retrieve the revision id before updating it.
         Parameters
         ----------
-        design_document: str
+        document: str
             This is the name of the design document that holds the view requested.
         view: str
             This is the name of the view requested, this must be defined beforehand.
@@ -107,8 +132,8 @@ class CouchdbConnection:
         Response: Dict
             This is the response JSON from the put request.
         """
-        revision_payload = self.get_revision(document=design_document, design_doc=True)
-        end_point = self.end_point + "/_design/" + design_document
+        revision_payload = self.get_revision(document=document, design_doc=True)
+        end_point = self.end_point + "/_design/" + document
         if "_rev" in revision_payload.keys():
             payload = dumps(
                 {
