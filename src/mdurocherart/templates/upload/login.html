@@ -1,0 +1,27 @@
+{% extends 'contact/base.html' %}
+{% block content %}
+<div class="row" style="height: 100%; margin: 0 0 0 0;">
+    <div class="flex-col" style="width: 100vw; align-items: center; justify-content: center; display: flex; flex-direction: column;">
+        {% with messages=get_flashed_messages() %}
+        {% if messages %}
+        <div>
+        {{ messages[0] | safe }}
+        </div>
+        {% endif %}
+        {% endwith %}
+        <form id="login-form" autocomplete="on" method="POST" >
+            <div>
+                <label for="input-username">Username</label>
+                <input autocomplete="username" id="input-username" class="text-input" name="username" type="text" placeholder="Username" required>
+            </div>
+            <div>
+                <label for="current-password">Password</label>
+                <input autocomplete="current-password" id="current-password" class="text-input" name="current-password" type="password" placeholder="Password" required>
+            </div>
+            <div style="display: flex; justify-content: space-between;">
+                <input type="submit" class="send-email-btn" id="signin-btn" name="signin-btn" value="Sign-in">
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

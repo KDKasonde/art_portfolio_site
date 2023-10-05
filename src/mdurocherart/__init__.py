@@ -37,4 +37,7 @@ def create_app(env: Optional[str] = None):
     from mdurocherart.contact import bp as contact
     mdurocherart.register_blueprint(contact, url_prefix="/contact")
 
+    from mdurocherart.upload import bp as upload
+    mdurocherart.register_blueprint(upload, url_prefix=f"/{os.getenv('UPLOAD_URL_PREFIX', default='test')}")
+
     return mdurocherart
