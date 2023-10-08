@@ -1,0 +1,89 @@
+{% extends 'contact/base.html' %}
+{% block content %}
+<div class="slider-wrap" id="gallery">
+    <div class="slider-btn-div">
+        <button class="slider-btn" id="left-slider-btn">
+            <i class="fa-solid fa-circle-chevron-left"></i>
+        </button>
+    </div>
+    <div class="slider" id="div-images">
+
+        {% for index in range(image_list|length) %}
+            <div class="slider-item" id="{{ index }}">
+                <a href="#" target="_self">
+                    <img class="gallery_image" src="{{ url_for('static', filename = 'assets/gallery_jpg/' + image_list[index]) }}">
+                </a>
+            </div>
+        {% endfor %}
+
+    </div>
+    <div class="slider-btn-div">
+        <button class="slider-btn" id="right-slider-btn">
+            <i class="fa-solid fa-circle-chevron-right"></i>
+        </button>
+    </div>
+</div>
+<script type="text/javascript" src="{{ url_for('static', filename='js/slider.js') }}"></script>
+
+<script>
+    let imagesList = [...document.querySelectorAll(".slider-item")];
+    var slider = document.getElementById('div-images');
+    var slider_rect = slider.getBoundingClientRect();
+    const leftSliderBtn = document.getElementById('left-slider-btn');
+    const rightSliderBtn = document.getElementById('right-slider-btn');
+
+    function resizeSlider() {
+        slider_rect = slider.getBoundingClientRect();
+    }
+
+    async function fetchImageUrl(targetUrl) {
+        try {
+            return fetch(targetUrl)
+        } catch {
+            return console.log('Error retrieving image')
+        }
+    }
+
+    async function openImage(event) {
+        const image_url = event.currentTarget.firstElementChild.firstElementChild.src.split("/");
+        const image = image_url.pop().split(".")[0];
+
+        const targetUrl = "{{ url_for('upload.get_image_details') }}" + "?image_id=" + image
+        const response = await fetchImageUrl(targetUrl)
+        window.location = response.url
+    }
+
+    slider.addEventListener("scroll", function () {
+        disableSliderBtn();
+    });
+
+    slider.addEventListener("mouseover", function(event) {
+        trigger(event)
+    });
+
+    window.addEventListener("resize", resizeSlider);
+
+    const onLoadPromise = new Promise((result, reject) => {
+
+        if (true) {
+            result('images resized successfully!');
+        } else{
+            reject('We still have a promise');
+        }
+    })
+
+    onLoadPromise.then(result => {
+        console.log(result);
+        scaleImages(imagesList);
+    });
+
+    onLoadPromise.catch(error => {
+        console.log(error);
+    })
+
+
+
+    Onload();
+
+</script>
+{% endblock %}

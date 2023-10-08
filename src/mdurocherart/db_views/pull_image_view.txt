@@ -1,0 +1,11 @@
+function(doc){
+    if(doc.image_id && doc.location)
+    {
+        emit(doc.image_id, {
+            pieceName: doc.piece_name,
+            pieceDescription: doc.piece_description,
+            artStyle: doc.style,
+            }
+        );
+    }
+}
