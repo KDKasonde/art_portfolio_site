@@ -32,6 +32,7 @@ class ProductionConfig(Config):
 
 class DevelopmentConfig(Config):
     """Development config class"""
+    SECRET_KEY = 'SECRET'
 
 
 
@@ -39,6 +40,7 @@ class TestingConfig(Config):
     """Testing config class"""
     MAIL_SERVER = os.getenv('MAIL_SERVER', default='localhost')
     MAIL_PORT = os.getenv('MAIL_PORT', default=1025)
+    SECRET_KEY = 'SECRET'
 
 
 def get_config(env: str):

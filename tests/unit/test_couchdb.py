@@ -9,6 +9,7 @@ get_view_request = [
 ]
 
 
+@pytest.mark.conn_required
 @pytest.mark.parametrize("payload", get_view_request)
 def test_get_view(couch_db_app_conn, payload):
     couchdb = couch_db_app_conn

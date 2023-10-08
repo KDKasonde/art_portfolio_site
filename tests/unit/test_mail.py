@@ -19,7 +19,7 @@ emails = [
     ),
 ]
 
-
+@pytest.mark.conn_required
 @pytest.mark.parametrize("email", emails)
 def test_send_mail(mail_client, email: Email):
 

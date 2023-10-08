@@ -9,10 +9,10 @@
         </div>
         {% endif %}
         {% endwith %}
-        <form id="login-form" autocomplete="on" method="POST" >
+        <form id="login-form" autocomplete="on" method="POST" action="{{ url_for('upload.login') }}" >
             <div>
                 <label for="input-username">Username</label>
-                <input autocomplete="username" id="input-username" class="text-input" name="username" type="text" placeholder="Username" required>
+                <input autocomplete="username" id="current-username" class="text-input" name="current-username" type="text" placeholder="Username" required>
             </div>
             <div>
                 <label for="current-password">Password</label>
