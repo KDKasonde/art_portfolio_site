@@ -1,7 +1,7 @@
 import logging
 
 import requests
-from typing import Tuple, Dict
+from typing import Tuple, Dict, Any, List
 from json import loads, dumps
 from flask import app
 
@@ -82,11 +82,12 @@ class CouchdbConnection:
             end_point = self.end_point + "/" + document
         response = requests.get(url=end_point).json()
         if "_rev" in response.keys():
-            return data.update({"_rev": response["_rev"]})
+            data.update({"_rev": response["_rev"]})
+            return data
         else:
             return data
 
-    def get_view(self, document: str, view: str) -> Dict:
+    def get_view(self, document: str, view: str, keys: str | List[str] = None) -> Dict:
         """
         The get_view method takes a document and view name and returns the output of the view input.
         Parameters
@@ -95,12 +96,18 @@ class CouchdbConnection:
             This is the name of the design document that holds the view requested.
         view: str
             This is the name of the view requested, this must be defined beforehand.
+        keys: Dict[str, str | List[str]]
+            This is a dictionary with key value pairs for couch db to interpret.
         Returns
         -------
         response: Dict
             The response returns the views outputs.
         """
         end_point = self.end_point + "/_design/" + document + "/_view/" + view
+
+        if keys:
+            end_point += "?key=" + _format_keys(keys)
+
         response = requests.get(url=end_point).json()
         if "error" in response.keys():
             if response["error"] == "not_found":
@@ -109,7 +116,7 @@ class CouchdbConnection:
                 raise ViewNotFoundError(msg=msg)
         return response
 
-    def put_view(self, document: str, view: str, mapping: str) -> Dict:
+    def put_view(self, document: str, view: Dict[str, str]) -> Dict:
         """
         The put_view method takes a document, view name and a view_map then forms a
         payload for updating the design doc. It will also check if the doc already exists
@@ -119,9 +126,8 @@ class CouchdbConnection:
         document: str
             This is the name of the design document that holds the view requested.
         view: str
-            This is the name of the view requested, this must be defined beforehand.
-        mapping: str
-            This is the map the view should provide. Written in JavaScript syntax.
+            This is the name of the view requested, and its map & reduce functions attached,
+            this must be defined beforehand. If there are errors in syntax error will be returned.
 
         Returns
         -------
@@ -129,15 +135,10 @@ class CouchdbConnection:
             This is the response JSON from the put request.
         """
         payload = {
-            "views": {
-                view: {
-                    "map": mapping
-                }
-            }
+            "views": view
         }
         payload = self.get_revision(document=document, design_doc=True, data=payload)
         end_point = self.end_point + "/_design/" + document
-
         response = requests.put(url=end_point, json=payload).json()
         if "error" in response.keys():
             if response["error"] == "compilation_error":
@@ -191,3 +192,11 @@ class CouchdbConnection:
         response = requests.put(end_point, json=data).json()
 
         return response
+
+
+def _format_keys(keys: str | List[str]):
+
+    if isinstance(keys, str):
+        return keys
+    else:
+        return "[" + ",".join(keys) + "]"

@@ -15,10 +15,14 @@ couchdb = CouchdbConnection(
 
 VIEWS_FOLDER = Path(__file__).parent
 VIEWS = sorted(VIEWS_FOLDER.glob('**/*.txt'))
+views = {}
 for view in VIEWS:
     view_name = view.stem
+
     with open(file=view, mode='r') as file:
-        mapping = file.read()
-        couchdb.put_view(document='images', view=view_name, mapping=mapping)
+        mapping = file.read().strip()
+    views[str(view_name)] = {'map': mapping}
+
+couchdb.put_view(document='images', view=views)
 
 

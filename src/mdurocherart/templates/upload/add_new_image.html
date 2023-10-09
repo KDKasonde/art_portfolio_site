@@ -1,0 +1,10 @@
+{% extends 'contact/base.html' %}
+{% block content %}
+<form action="{{ url_for('upload.upload_image') }}" method="post" enctype="multipart/form-data">
+  <label for="name">Name of piece</label>
+  <input type="text" name="name" id="name">
+  <label for="img">Select image:</label>
+  <input type="file" id="img" name="img" accept="image/*">
+  <input type="submit">
+</form>
+{% endblock %}
