@@ -16,8 +16,25 @@ JPEG_FILE_ENDINGS = ['jpg', 'jpeg']
 
 
 def pull_image(image_id: str) -> Dict[str, str]:
-    image_info = current_app.COUCHDB.get_view(document=DOCUMENT, view=PULL_IMAGE_VIEW, keys=image_id)
+
+    try:
+        image_info = current_app.COUCHDB.get_view(document=DOCUMENT, view=PULL_IMAGE_VIEW, keys=image_id)
+    except Exception:
+        return 500
     return loads(image_info)
+
+
+def update_image(image_id: str, name: str, description: str, art_style: str):
+    try:
+        current_app.COUCHDB.put_document(data={
+            'piece_name': name,
+            'piece_description': description,
+            'style': art_style,
+            'image_id': image_id,
+        })
+    except Exception:
+        return 500
+    return 200
 
 
 def put_image(image: FileStorage, name: str, description: str, art_style: str):
@@ -25,17 +42,12 @@ def put_image(image: FileStorage, name: str, description: str, art_style: str):
     status, save_paths = _save_images(image=image, image_name=image_file_name)
     if status == 400:
         return 400
-    try:
-        current_app.COUCHDB.post_document(data={
-            'piece_name': name,
-            'piece_description': description,
-            'style': art_style,
-            'image_id': image_file_name,
-        })
-    except Exception:
+    couchdb_status = update_image(image_id=image_file_name, name=name, description=description, art_style=art_style)
+    if couchdb_status != 200:
         os.remove(path=save_paths[0])
         os.remove(path=save_paths[1])
-    return
+        return 500
+    return 200
 
 
 def _generate_image_filename():
