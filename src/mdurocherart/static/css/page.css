@@ -74,10 +74,28 @@ p {
     border: 0 solid transparent;
 }
 
-.side_bar_btn_icon:active {
+.side_bar_btn:active {
     background-color: black;
     scale: 0.9;
     box-shadow: none;
+}
+
+.option_btn {
+    color: white;
+    font-family: "Font Awesome 6 Free";
+    font-weight:900;
+    background-color: transparent;
+    border: 0 solid transparent;
+}
+
+.option_btn:active {
+    background-color: black;
+    scale: 0.9;
+    box-shadow: none;
+}
+
+.option_btn:hover {
+    background-color: #484848;
 }
 
 .side_panel_background{
@@ -147,6 +165,16 @@ p {
     align-content: center;
     padding: 0 0 0 0;
     margin: 0 0 0 0;
+}
+
+.option-wrap{
+    width:100%;
+    height: 60%;
+    position: fixed;
+    z-index: 0;
+    display: flex;
+    justify-content: space-around;
+    align-content: center;
 }
 
 /* button for controlling slider */

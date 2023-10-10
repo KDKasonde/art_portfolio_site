@@ -4,6 +4,7 @@ from typing import Dict
 from pathlib import Path
 from PIL import Image
 from io import BytesIO
+import os
 from werkzeug.datastructures.file_storage import FileStorage
 
 
@@ -16,34 +17,50 @@ JPEG_FILE_ENDINGS = ['jpg', 'jpeg']
 
 def pull_image(image_id: str) -> Dict[str, str]:
     image_info = current_app.COUCHDB.get_view(document=DOCUMENT, view=PULL_IMAGE_VIEW, keys=image_id)
-
     return loads(image_info)
 
 
 def put_image(image: FileStorage, name: str, description: str, art_style: str):
-    status = _save_images(image=image)
+    image_file_name = _generate_image_filename()
+    status, save_paths = _save_images(image=image, image_name=image_file_name)
     if status == 400:
         return 400
-    #TODO write couchdb put request and handling here
+    try:
+        current_app.COUCHDB.post_document(data={
+            'piece_name': name,
+            'piece_description': description,
+            'style': art_style,
+            'image_id': image_file_name,
+        })
+    except Exception:
+        os.remove(path=save_paths[0])
+        os.remove(path=save_paths[1])
     return
 
 
-def _save_images(image:FileStorage):
+def _generate_image_filename():
+    image_folder = IMAGE_GALLERY.joinpath('gallery')
+    image_count = len(list(image_folder.glob("*")))
+    return f"gallery_image_{image_count+1}"
+
+
+def _save_images(image: FileStorage, image_name: str):
     try:
         file_ending = _check_file_ending(image.filename)
 
         if file_ending in PNG_FILE_ENDING:
             png_image = Image.open(image)
-            # jpg_image = _convert_png_to_jpg(image)
+            jpg_image = _convert_png_to_jpg(png_image)
         else:
             jpg_image = Image.open(image)
-            png_image = _convert_jpg_to_png(image)
-
-        png_image.save(IMAGE_GALLERY.joinpath('gallery/testing.png'))
-        jpg_image.save(IMAGE_GALLERY.joinpath('gallery_jpg/testing.jpg'))
-    except ValueError as e:
-        return 400
-    return 200
+            png_image = _convert_jpg_to_png(jpg_image)
+        save_path_png= IMAGE_GALLERY.joinpath(f'gallery/{image_name}.png')
+        save_path_jpg = IMAGE_GALLERY.joinpath(f'gallery_jpg/{image_name}.jpg')
+        png_image.save(save_path_png)
+        jpg_image.save(save_path_jpg)
+    except ValueError:
+        return 400, None
+    return 200, [save_path_png, save_path_jpg]
 
 
 def _check_file_ending(filename: str):

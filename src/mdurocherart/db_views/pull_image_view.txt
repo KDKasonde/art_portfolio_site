@@ -4,7 +4,7 @@ function(doc){
         emit(doc.image_id, {
             pieceName: doc.piece_name,
             pieceDescription: doc.piece_description,
-            artStyle: doc.style,
+            artStyle: doc.style
             }
         );
     }

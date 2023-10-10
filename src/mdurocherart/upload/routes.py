@@ -33,6 +33,15 @@ def homepage():
     gallery_folder = Path(__file__).parent.parent.joinpath("static", "assets", "gallery_jpg")
     image_list = os.listdir(gallery_folder)
     shuffle(image_list)
+    return render_template("upload/homepage.html", image_list=image_list, logged_in=True)
+
+
+@bp.route("/interactive_view", methods=["GET"])
+@login_required
+def interactive_view():
+    gallery_folder = Path(__file__).parent.parent.joinpath("static", "assets", "gallery_jpg")
+    image_list = os.listdir(gallery_folder)
+    shuffle(image_list)
     return render_template("upload/available_images.html", image_list=image_list, logged_in=True)
 
 
@@ -45,10 +54,12 @@ def get_image_details():
     return
 
 @bp.route("/add_new_image", methods=['GET'])
+@login_required
 def add_new_image():
     return render_template('upload/add_new_image.html')
 
 @bp.route("/upload_image", methods=["POST"])
+@login_required
 def upload_image():
     data = request.form.to_dict()
     image_file = request.files['img']

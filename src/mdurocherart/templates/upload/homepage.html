@@ -1,0 +1,39 @@
+{% extends 'contact/base.html' %}
+{% block content %}
+<div class="option-wrap">
+    <div class="row align-items-center align-items-center justify-content-center" style="width: 100%; margin: 0 0 0 0;" >
+        <div class="d-flex justify-content-center" style="width: 20%;">
+            <div id="edit-pictures" class="d-flex align-items-center" style="width: 30%; flex-direction: column;text-align: center;">
+                <button class="option_btn align-self-center rounded">
+                    <i class="fas fa-plus" style="color: white"></i>
+                    <p style="width: 100%; margin: 0 0 0 0;">Add Image</p>
+                </button>
+            </div>
+        </div>
+        <div class="d-flex justify-content-center" style="width: 20%; align-items: center">
+            <div id="delete-pictures" class="d-flex align-items-center" style="width: 30%;flex-direction: column;text-align: center;">
+                <button class="option_btn align-self-center rounded">
+                    <i class="fas fa-pen" style="color: white"></i>
+                    <p style="width: 100%; margin: 0 0 0 0;">Edit Image</p>
+                </button>
+            </div>
+        </div>
+        <div class="d-flex justify-content-center" style="width: 20%; align-items: center">
+            <div id="add-pictures" class="d-flex align-items-center" style="width: 30%;flex-direction: column;text-align: center;">
+                <button class="option_btn align-self-center rounded">
+                    <i class="fas fa-trash" style="color: white"></i>
+                    <p style="width: 100%; margin: 0 0 0 0;">Delete Image</p>
+                </button>
+            </div>
+        </div>
+        <div class="d-flex justify-content-center" style="width: 20%; align-items: center">
+            <div id="interactive-mode" class="d-flex align-items-center" style="width: 30%;flex-direction: column;text-align: center;">
+                <button class="option_btn align-self-center rounded">
+                    <i class="fas fa-image" style="color: white"></i>
+                    <p style="width: 100%; margin: 0 0 0 0;">Enter Interactive mode</p>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
