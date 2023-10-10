@@ -12,10 +12,17 @@ def home():
     return render_template("upload/login.html")
 
 
+@bp.route("/homepage", methods=["GET"])
+@login_required
+def homepage():
+    return render_template("upload/homepage.html", logged_in=True)
+
+
 @bp.route("/loggedin", methods=['GET'])
 @login_required
 def testing():
     return jsonify(success=True)
+
 
 @bp.route("/login", methods=["POST"])
 def login():
@@ -25,15 +32,6 @@ def login():
         return redirect(url_for('upload.homepage'), code=301)
     else:
         return redirect(url_for('upload.home'), code=301)
-
-
-@bp.route("/homepage", methods=["GET"])
-@login_required
-def homepage():
-    gallery_folder = Path(__file__).parent.parent.joinpath("static", "assets", "gallery_jpg")
-    image_list = os.listdir(gallery_folder)
-    shuffle(image_list)
-    return render_template("upload/homepage.html", image_list=image_list, logged_in=True)
 
 
 @bp.route("/interactive_view", methods=["GET"])
@@ -52,6 +50,7 @@ def get_image_details():
 
     raise NotImplementedError
     return
+
 
 @bp.route("/add_new_image", methods=['GET'])
 @login_required

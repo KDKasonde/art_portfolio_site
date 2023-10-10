@@ -1,10 +1,28 @@
 {% extends 'contact/base.html' %}
 {% block content %}
 <form action="{{ url_for('upload.upload_image') }}" method="post" enctype="multipart/form-data">
-  <label for="name">Name of piece</label>
-  <input type="text" name="name" id="name">
-  <label for="img">Select image:</label>
-  <input type="file" id="img" name="img" accept="image/*">
-  <input type="submit">
+  <div class="form-page-container">
+    <div class="form-container">
+      <div class="text-box">
+        <label for="name">Name of piece</label>
+        <input class="text-input" type="text" name="name" id="name" required>
+      </div>
+      <div class="text-box">
+        <label for="name">Art Style</label>
+        <input class="text-input" type="text" name="art_style" id="art_style" required>
+      </div>
+      <div class="text-box">
+        <label for="name">Piece Description</label>
+        <textarea class="text-input textarea-input" name="art_style" id="description" rows="10" value="" required></textarea>
+      </div>
+      <input type="submit">
+    </div>
+    <div style="position: relative; width:40%; display: flex; flex-direction: row; justify-content: center; align-items: center;">
+      <div class="text-box">
+        <label for="img">Select image:</label>
+        <input type="file" id="img" name="img" accept="image/*" required>
+      </div>
+    </div>
+  </div>
 </form>
 {% endblock %}
