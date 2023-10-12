@@ -50,7 +50,7 @@ def get_image_details():
     image_info = pull_image(image_id=image_id)
     if image_info == 500:
         return jsonify(success=False)
-    return render_template('upload_image.edit_image_view', image_info=image_info)
+    return render_template('upload/edit_image_view.html', image_info=image_info)
 
 
 @bp.route("/add_new_image", methods=['GET'])

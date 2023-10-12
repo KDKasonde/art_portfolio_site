@@ -27,7 +27,7 @@ def create_app(env: Optional[str] = None):
     mdurocherart.config['MAIL_CLIENT'] = mail
 
     couchdb_conn = CouchdbConnection.from_flask_config(mdurocherart)
-    mdurocherart.config['COUCHDB'] = couchdb_conn
+    couchdb_conn.init_app(mdurocherart)
 
     loginmanager = LoginManager(username=os.getenv("USERNAME"),
                                 password=os.getenv("PASSWORD"),

@@ -49,8 +49,7 @@
         const image = image_url.pop().split(".")[0];
 
         const targetUrl = "{{ url_for('upload.get_image_details') }}" + "?image_id=" + image
-        const response = await fetchImageUrl(targetUrl)
-        window.location = response.url
+        await redirectFromGet(targetUrl);
     }
 
     slider.addEventListener("scroll", function () {

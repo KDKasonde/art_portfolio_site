@@ -18,15 +18,16 @@ JPEG_FILE_ENDINGS = ['jpg', 'jpeg']
 def pull_image(image_id: str) -> Dict[str, str]:
 
     try:
-        image_info = current_app.COUCHDB.get_view(document=DOCUMENT, view=PULL_IMAGE_VIEW, keys=image_id)
-    except Exception:
+        image_info = current_app.couchdb.get_view(document=DOCUMENT, view=PULL_IMAGE_VIEW, keys=image_id)
+    except Exception as e:
+        print(Exception, e)
         return 500
-    return loads(image_info)
+    return image_info
 
 
 def update_image(image_id: str, name: str, description: str, art_style: str):
     try:
-        current_app.COUCHDB.put_document(data={
+        current_app.couchdb.put_document(data={
             'piece_name': name,
             'piece_description': description,
             'style': art_style,

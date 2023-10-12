@@ -35,6 +35,10 @@ class CouchdbConnection:
         self.port = str(port)
         self.host = host
 
+    def init_app(self, app: app.Flask):
+        app.couchdb = self
+
+
     @classmethod
     def from_flask_config(cls, flask_app: app.Flask):
         """
@@ -108,13 +112,14 @@ class CouchdbConnection:
         if keys:
             end_point += "?key=" + _format_keys(keys)
 
-        response = requests.get(url=end_point).json()
-        if response.status == 404:
+        response = requests.get(url=end_point)
+        print(response)
+        if response.status_code == 404:
             if response["error"] == "not_found":
                 msg = f"""Couchdb returned {response["reason"]}, as there was an issue finding the document: {document} and view: {view}, please ensure these exist in couch db.
                 """
                 raise ViewNotFoundError(msg=msg)
-        return response
+        return response.json()
 
     def put_view(self, document: str, view: Dict[str, str]) -> Dict:
         """
