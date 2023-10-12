@@ -4,7 +4,7 @@
     <div class="row align-items-center align-items-center justify-content-center" style="width: 100%; margin: 0 0 0 0;" >
         <div class="d-flex justify-content-center" style="width: 40%;">
             <div id="edit-pictures" class="d-flex align-items-center" style="width: 30%; flex-direction: column;text-align: center;">
-                <button class="option_btn align-self-center rounded">
+                <button class="option_btn align-self-center rounded" onclick="gotoAddImage()">
                     <i class="fas fa-plus" style="color: white"></i>
                     <p style="width: 100%; margin: 0 0 0 0;">Add Image</p>
                 </button>
@@ -23,6 +23,11 @@
 <script>
     async function gotoInteractiveMode(){
         let url = "{{ url_for('upload.interactive_view') }}";
+        await redirectFromGet(url);
+    }
+
+    async function gotoAddImage(){
+        let url = "{{ url_for('upload.add_new_image') }}";
         await redirectFromGet(url);
     }
 </script>
