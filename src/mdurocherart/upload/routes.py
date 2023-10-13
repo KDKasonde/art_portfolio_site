@@ -1,6 +1,6 @@
 from flask import render_template, request, jsonify, current_app, redirect, url_for
 from mdurocherart.upload import bp
-from mdurocherart.upload.models import put_image, pull_image, update_image
+from mdurocherart.upload.models import put_image, pull_image, update_image_db
 from mdurocherart.login_manager import login_required, login_user
 from pathlib import Path
 import os
@@ -47,10 +47,10 @@ def interactive_view():
 @login_required
 def get_image_details():
     image_id = request.args.get('image_id')
-    image_info = pull_image(image_id=image_id)
-    if image_info == 500:
+    status, image_info = pull_image(image_id=image_id)
+    if status == 500:
         return jsonify(success=False)
-    return render_template('upload/edit_image_view.html', image_info=image_info)
+    return render_template('upload/edit_image_view.html', image_info=image_info, image_id=image_id)
 
 
 @bp.route("/add_new_image", methods=['GET'])
@@ -69,24 +69,26 @@ def upload_image():
         image=image_file,
         name=data['name'],
         description=data['description'],
-        art_style=data['art_style']
+        art_style=data['art_style'],
+        location=data['location']
     )
     if status != 200:
         return jsonify(success=False)
-    return jsonify(success=True)
+    return redirect(url_for('upload.homepage'), code=301)
 
 
 @bp.route("/update_image", methods=["POST"])
 @login_required
 def update_image():
     data = request.form.to_dict()
-    status = update_image(
-        image=data['image_id'],
+    status, response = update_image_db(
+        image_id=data['image_id'],
         name=data['name'],
         description=data['description'],
-        art_style=data['art_style']
+        art_style=data['art_style'],
+        location=data['location']
     )
     if status != 200:
         return jsonify(success=False)
-    return jsonify(success=True)
+    return redirect(url_for('upload.homepage'), code=301)
 

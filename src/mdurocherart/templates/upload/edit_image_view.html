@@ -3,21 +3,22 @@
 <form action="{{ url_for('upload.update_image') }}" method="post">
     <div class="detail-view-div" style="width: 100%;">
         <div class="high-quality-image-div col">
-            <img class="high-quality-image" src="{{ url_for('static', filename='assets/gallery/' + image_info.image_id + '.png') }}">
+            <img class="high-quality-image" src="{{ url_for('static', filename='assets/gallery/' + image_id + '.png') }}">
         </div>
         <div class="form-container">
-            <input style="display: none;" type="text" name="image_id" id="image_id" value="{{ image_info.image_id }}">
+            <input style="display: none;" type="text" name="image_id" id="image_id" value="{{ image_id }}">
+            <input style="display: none;" type="text" name="location" id="location" value="{{ image_info.location }}">
             <div class="text-box">
                 <label for="name">Name of piece</label>
-                <input class="text-input" type="text" name="name" id="name" value="{{ image_info.piece_name }}">
+                <input class="text-input" type="text" name="name" id="name" value="{{ image_info.pieceName }}">
             </div>
             <div class="text-box">
                 <label for="name">Art Style</label>
-                <input class="text-input" type="text" name="art_style" id="art_style" value="{{ image_info.style }}">
+                <input class="text-input" type="text" name="art_style" id="art_style" value="{{ image_info.artStyle }}">
             </div>
             <div class="text-box">
                 <label for="name">Piece Description</label>
-                <textarea class="text-input textarea-input" name="art_style" id="description" rows="10" value="{{ image_info.description }}"></textarea>
+                <textarea class="text-input textarea-input" name="description" id="description" rows="10" value="{{ image_info.pieceDescription }}">{{ image_info.pieceDescription }}</textarea>
             </div>
         <input type="submit">
         </div>

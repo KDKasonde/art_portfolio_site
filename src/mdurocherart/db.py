@@ -1,8 +1,7 @@
 import logging
 
 import requests
-from typing import Tuple, Dict, Any, List
-from json import loads, dumps
+from typing import Dict, List
 from flask import app
 
 from mdurocherart.errors import JavaScriptCompilationError, ViewNotFoundError
@@ -113,7 +112,6 @@ class CouchdbConnection:
             end_point += "?key=" + _format_keys(keys)
 
         response = requests.get(url=end_point)
-        print(response)
         if response.status_code == 404:
             if response["error"] == "not_found":
                 msg = f"""Couchdb returned {response["reason"]}, as there was an issue finding the document: {document} and view: {view}, please ensure these exist in couch db.
@@ -202,6 +200,11 @@ class CouchdbConnection:
 def _format_keys(keys: str | List[str]):
 
     if isinstance(keys, str):
-        return keys
+        return _jsonify_string(keys)
     else:
+        keys = map(_jsonify_string, keys)
         return "[" + ",".join(keys) + "]"
+
+
+def _jsonify_string(string: str):
+    return "%22" + string + '%22'

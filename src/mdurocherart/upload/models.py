@@ -1,5 +1,4 @@
 from flask import current_app
-from json import loads
 from typing import Dict
 from pathlib import Path
 from PIL import Image
@@ -18,24 +17,31 @@ JPEG_FILE_ENDINGS = ['jpg', 'jpeg']
 def pull_image(image_id: str) -> Dict[str, str]:
 
     try:
-        image_info = current_app.couchdb.get_view(document=DOCUMENT, view=PULL_IMAGE_VIEW, keys=image_id)
+        response = current_app.couchdb.get_view(document=DOCUMENT, view=PULL_IMAGE_VIEW, keys=image_id)
+
     except Exception as e:
-        print(Exception, e)
-        return 500
-    return image_info
+        return 500, response
+    values = response['rows'][0]['value']
+    return 200, values
 
 
-def update_image(image_id: str, name: str, description: str, art_style: str):
+def update_image_db(image_id: str, name: str, description: str, art_style: str, location: str):
     try:
-        current_app.couchdb.put_document(data={
-            'piece_name': name,
-            'piece_description': description,
-            'style': art_style,
-            'image_id': image_id,
-        })
+        data = {
+                'piece_name': name,
+                'piece_description': description,
+                'style': art_style,
+                'image_id': image_id,
+                'location': location
+        }
+
+        response = current_app.couchdb.put_document(
+            document_id=image_id,
+            data=data
+        )
     except Exception:
-        return 500
-    return 200
+        return 500, response
+    return 200, response
 
 
 def put_image(image: FileStorage, name: str, description: str, art_style: str):
@@ -43,12 +49,12 @@ def put_image(image: FileStorage, name: str, description: str, art_style: str):
     status, save_paths = _save_images(image=image, image_name=image_file_name)
     if status == 400:
         return 400
-    couchdb_status = update_image(image_id=image_file_name, name=name, description=description, art_style=art_style)
+    couchdb_status, couchdb_response = update_image_db(image_id=image_file_name, name=name, description=description, art_style=art_style, location=image_file_name)
     if couchdb_status != 200:
         os.remove(path=save_paths[0])
         os.remove(path=save_paths[1])
-        return 500
-    return 200
+        return couchdb_status, couchdb_response
+    return couchdb_status
 
 
 def _generate_image_filename():
