@@ -1,6 +1,6 @@
 from flask import render_template, request, jsonify, current_app, redirect, url_for
 from mdurocherart.upload import bp
-from mdurocherart.upload.models import put_image, pull_image, update_image_db
+from mdurocherart.upload.models import put_image, pull_image, update_image_document, delete_image_document
 from mdurocherart.login_manager import login_required, login_user
 from pathlib import Path
 import os
@@ -70,7 +70,6 @@ def upload_image():
         name=data['name'],
         description=data['description'],
         art_style=data['art_style'],
-        location=data['location']
     )
     if status != 200:
         return jsonify(success=False)
@@ -81,13 +80,23 @@ def upload_image():
 @login_required
 def update_image():
     data = request.form.to_dict()
-    status, response = update_image_db(
+    status, response = update_image_document(
         image_id=data['image_id'],
         name=data['name'],
         description=data['description'],
         art_style=data['art_style'],
         location=data['location']
     )
+    if status != 200:
+        return jsonify(success=False)
+    return redirect(url_for('upload.homepage'), code=301)
+
+
+@bp.route("/delete_image", methods=['POST'])
+@login_required
+def delete_image():
+    req = request.json
+    status, response = delete_image_document(image_id=req['image_id'])
     if status != 200:
         return jsonify(success=False)
     return redirect(url_for('upload.homepage'), code=301)

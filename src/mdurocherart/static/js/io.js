@@ -10,7 +10,7 @@ async function makePostRequest(url, payload){
         }
     )
 
-    if (response.ok && response.status === 200){
+    if (response.ok){
         return response
     }
     throw(
@@ -31,7 +31,7 @@ async function makeGetRequest(url){
             }
         )
 
-        if (response.ok && response.status === 200){
+        if (response.ok){
             return response
         }
         throw(

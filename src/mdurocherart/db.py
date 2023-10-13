@@ -63,15 +63,17 @@ class CouchdbConnection:
     def end_point(self):
         return "http://" + self.user + ":" + self.password + "@" + self.host + ":" + self.port + "/" + self.database
 
-    def get_revision(self, document: str, data: Dict, design_doc: bool = False) -> str:
+    def get_revision(self, document: str, data: Dict = None, design_doc: bool = False) -> str:
         """
         Function to get the current revision of the document
         Parameters
         ----------
         document: str
             The document we want to get the latest revision id from.
-        data: Dict
-            The payload being sent to the end point
+        data: Dict, default: None
+            The payload being sent to the end point, if no payload is given
+            the function returns the revision id as a string as opposed to
+            updating the data dict.
         design_doc: bool, default: False
             A bool denoting whether the document is a design document.
         Returns
@@ -84,11 +86,16 @@ class CouchdbConnection:
         else:
             end_point = self.end_point + "/" + document
         response = requests.get(url=end_point).json()
-        if "_rev" in response.keys():
+
+        if "_rev" in response.keys() and data:
             data.update({"_rev": response["_rev"]})
             return data
-        else:
+        elif data:
             return data
+        elif "_rev" in response.keys():
+            return {"_rev": response["_rev"]}
+
+        return None
 
     def get_view(self, document: str, view: str, keys: str | List[str] = None) -> Dict:
         """
@@ -114,7 +121,8 @@ class CouchdbConnection:
         response = requests.get(url=end_point)
         if response.status_code == 404:
             if response["error"] == "not_found":
-                msg = f"""Couchdb returned {response["reason"]}, as there was an issue finding the document: {document} and view: {view}, please ensure these exist in couch db.
+                msg = f"""Couchdb returned {response["reason"]}, as there was an issue finding the document: 
+                {document} and view: {view}, please ensure these exist in couch db.
                 """
                 raise ViewNotFoundError(msg=msg)
         return response.json()
@@ -147,7 +155,8 @@ class CouchdbConnection:
             if response["error"] == "compilation_error":
                 raise JavaScriptCompilationError(msg=response["reason"])
             if response["error"] == "not_found":
-                msg = f"""Couchdb returned {response["reason"]}, as there was an issue finding the document: {document}, please ensure it exists in couch db.
+                msg = f"""Couchdb returned {response["reason"]}, as there was an issue finding the document: 
+                {document}, please ensure it exists in couch db.
                 """
                 raise ViewNotFoundError(msg=msg)
 
@@ -195,6 +204,36 @@ class CouchdbConnection:
         response = requests.put(end_point, json=data).json()
 
         return response
+
+    def delete_document(self, document_id: str) -> Dict:
+        """
+        Takes a document_id to identify the document required then deletes it using that document_id.
+
+        Parameters
+        ----------
+        document_id: str
+            The id of the document you want to create/update.
+        Returns
+        -------
+        response_payload: Dict
+            This payload contains information about the upload, whether it was successful,
+            the id of the document and the revision of the document.
+        """
+        end_point = self.end_point + "/" + document_id
+        revision = self.get_revision(document=document_id, design_doc=False)
+        if revision:
+            end_point += "?rev=" + revision['_rev']
+
+        response = requests.delete(end_point)
+        if response.status_code == 404:
+            if response["error"] == "not_found":
+                msg = f"""Couchdb returned {response["reason"]}, as there was an issue finding the document: 
+                {document_id} please ensure these exist in couch db.
+                """
+                raise ViewNotFoundError(msg=msg)
+
+        return response.status_code, response.json()
+
 
 
 def _format_keys(keys: str | List[str]):
