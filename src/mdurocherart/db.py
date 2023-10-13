@@ -4,7 +4,7 @@ import requests
 from typing import Dict, List
 from flask import app
 
-from mdurocherart.errors import JavaScriptCompilationError, ViewNotFoundError
+from mdurocherart.errors import JavaScriptCompilationError, NotFoundError, BadRequestError
 
 
 class CouchdbConnection:
@@ -85,7 +85,16 @@ class CouchdbConnection:
             end_point = self.end_point + "/_design/" + document
         else:
             end_point = self.end_point + "/" + document
-        response = requests.get(url=end_point).json()
+        response = requests.get(url=end_point)
+
+        if response.status_code == 404:
+            response_dict = response.json()
+            raise NotFoundError(
+                error=response_dict['error'],
+                reason=response_dict['reason'],
+                status_code=response.status_code,
+                request=end_point,
+            )
 
         if "_rev" in response.keys() and data:
             data.update({"_rev": response["_rev"]})
@@ -119,13 +128,22 @@ class CouchdbConnection:
             end_point += "?key=" + _format_keys(keys)
 
         response = requests.get(url=end_point)
+        response_dict = response.json()
         if response.status_code == 404:
-            if response["error"] == "not_found":
-                msg = f"""Couchdb returned {response["reason"]}, as there was an issue finding the document: 
-                {document} and view: {view}, please ensure these exist in couch db.
-                """
-                raise ViewNotFoundError(msg=msg)
-        return response.json()
+            raise NotFoundError(
+                error=response_dict['error'],
+                reason=response_dict['reason'],
+                status_code=response.status_code,
+                request=end_point,
+            )
+        elif response.status_code == 400:
+            raise BadRequestError(
+                error=response_dict['error'],
+                reason=response_dict['reason'],
+                status_code=response.status_code,
+                request=end_point,
+            )
+        return response_dict
 
     def put_view(self, document: str, view: Dict[str, str]) -> Dict:
         """
@@ -150,17 +168,24 @@ class CouchdbConnection:
         }
         payload = self.get_revision(document=document, design_doc=True, data=payload)
         end_point = self.end_point + "/_design/" + document
-        response = requests.put(url=end_point, json=payload).json()
-        if "error" in response.keys():
-            if response["error"] == "compilation_error":
-                raise JavaScriptCompilationError(msg=response["reason"])
-            if response["error"] == "not_found":
-                msg = f"""Couchdb returned {response["reason"]}, as there was an issue finding the document: 
-                {document}, please ensure it exists in couch db.
-                """
-                raise ViewNotFoundError(msg=msg)
+        response = requests.put(url=end_point, json=payload)
+        response_dict = response.json()
+        if response.status_code == 404:
+            raise NotFoundError(
+                error=response_dict['error'],
+                reason=response_dict['reason'],
+                status_code=response.status_code,
+                request=end_point,
+            )
+        elif response.status_code == 400:
+            raise BadRequestError(
+                error=response_dict['error'],
+                reason=response_dict['reason'],
+                status_code=response.status_code,
+                request=end_point,
+            )
 
-        return response
+        return response_dict
 
     def post_document(self, data: Dict) -> Dict:
         """
@@ -230,7 +255,7 @@ class CouchdbConnection:
                 msg = f"""Couchdb returned {response["reason"]}, as there was an issue finding the document: 
                 {document_id} please ensure these exist in couch db.
                 """
-                raise ViewNotFoundError(msg=msg)
+                raise NotFoundError(msg=msg)
 
         return response.status_code, response.json()
 
