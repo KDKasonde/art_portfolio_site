@@ -1,74 +1,75 @@
 {% extends 'contact/base.html' %}
 {% block content %}
-<div class="form-page-container">
-    <div class="form-container">
-        <div id="thank-you-message" class="text-box" style="display: none;">
-            <p style="font-size: 1.5em;">
-                Thank you for getting in contact! I will try and get back to you
-                over the next few days.
-            </p>
+<form action="{{ url_for('upload.update_image') }}" method="post">
+    <div class="form-page-container">
+        <div class="form-container">
+            <div id="thank-you-message" class="text-box" style="display: none;">
+                <p style="font-size: 1.5em;">
+                    Thank you for getting in contact! I will try and get back to you
+                    over the next few days.
+                </p>
+            </div>
+            <div class="text-box">
+                <label for="input-name">Your name</label>
+                <input class="text-input" type="text" name="input-name" id="input-name" placeholder="Name" autocomplete="given-name" required>
+            </div>
+            <div class="text-box">
+                <label for="input-email">Your Email Address</label>
+                <input class="text-input" type="text" name="input-email" id="input-email" placeholder="Email Address" required>
+            </div>
+            <div class="text-box">
+                <label for="input-subject">Subject line</label>
+                <select class="text-input" type="text" name="input-subject" id="input-subject" required>
+                    <option disabled selected value></option>
+                    <option value="collaboration">Collaboration</option>
+                    <option value="inquiry">Inquiry</option>
+                    <option value="quote">Request a Quote</option>
+                    <option value="other">Other</option>
+                </select>
+            </div>
+            <div class="text-box" style="display: none">
+                <label for="input-background">Background style</label>
+                <select class="text-input" type="text" name="input-background" id="input-background">
+                    <option disabled selected value></option>
+                    <option value="blur">Blurred</option>
+                    <option value="details">Detailed</option>
+                    <option value="solid">Solid Colour</option>
+                </select>
+            </div>
+            <div class="text-box" style="display: none">
+                <label for="input-style">Art Style</label>
+                <select class="text-input" type="text" name="input-art-style" id="input-style">
+                    <option disabled selected value></option>
+                    <option value="acrylic">Acrylic Paint</option>
+                    <option value="digital-real">Digital Realistic</option>
+                    <option value="digital-vector">Digital Vector Drawn</option>
+                    <option value="pencil">Pencil Sketch</option>
+                </select>
+            </div>
+            <div class="text-box" style="display: none">
+                <label for="input-upload">Upload image</label>
+                <input class="text-input" type="file" id="input-upload" name="input-upload"  accept=".png, .jpg, .jpeg">
+            </div>
+            <div class="text-box">
+                <label for="input-message">Your Message</label>
+                <textarea class="text-input textarea-input" id="input-message" name="input-message" placeholder="Message" rows="10" value="" required></textarea>
+            </div>
+            <input type="submit" class="send-email-btn" id="send-message-btn">
         </div>
-        <div class="text-box">
-            <label for="input-name">Your name</label>
-            <input class="text-input" type="text" name="input-name" id="input-name" placeholder="Name">
+        <div style="position: relative; width:50%; display: flex; flex-direction: row; justify-content: center; align-items: center;">
+            <img class="gif" style="object-fit: cover; height: 50vh;" src="{{ url_for('static', filename='assets/gifs/maledancer.GIF') }}">
         </div>
-        <div class="text-box">
-            <label for="input-email">Your Email Address</label>
-            <input class="text-input" type="text" name="input-email" id="input-email" placeholder="Email Address">
-        </div>
-        <div class="text-box">
-            <label for="input-message">Your Message</label>
-            <textarea class="text-input textarea-input" id="input-message" name="input-message" placeholder="Message" rows="10" value=""></textarea>
-        </div>
-        <button class="send-email-btn" id="send-message-btn"><p><u>Send</u></p></button>
     </div>
-    <div style="position: relative; width:50%; display: flex; flex-direction: row; justify-content: center; align-items: center;">
-        <img class="gif" style="object-fit: cover; height: 50vh;" src="{{ url_for('static', filename='assets/gifs/maledancer.GIF') }}">
-    </div>
-</div>
-
+</form>
 
 <script>
-    function formatEmail() {
-        const email_payload = {
-            'email': document.getElementById('input-email').value,
-            'name': document.getElementById('input-name').value,
-            'body': document.getElementById('input-message').value,
-            'subject': 'New message from ' + document.getElementById('input-name').value
-        };
+    const reactiveInputs =['input-background', 'input-style', 'input-upload'];
+    const triggers = 'quote';
+    const selectInput = document.getElementById('input-subject');
 
-        return email_payload;
-    }
-    async function sendPayload(payload) {
-        try{
-            const response = await fetch(
-                url = "{{ url_for('contact.process_contact') }}",
-                {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify(payload)
-                }
-            )
-
-            if (response.ok && response.status === 200){
-                return
-            }
-            throw (
-                new Error('Error sending message to backend')
-            )
-        } catch {
-            alert('there was an issue sending your message please try again!')
-        }
-    }
-    const sendBtn = document.getElementById('send-message-btn');
-    sendBtn.addEventListener('click', async function () {
-        const payload = formatEmail();
-        await sendPayload(payload);
-
+    selectInput.addEventListener('change', function(selectId = 'input-subject' ,trigger=triggers, inputIds=reactiveInputs) {
+        changeForm(selectInput ,trigger, inputIds)
     })
-
 </script>
 
 {% endblock %}
