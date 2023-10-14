@@ -49,7 +49,13 @@ def put_image(image: FileStorage, name: str, description: str, art_style: str):
     status, save_paths = _save_images(image=image, image_name=image_file_name)
     if status == 400:
         return 400
-    couchdb_status, couchdb_response = update_image_document(image_id=image_file_name, name=name, description=description, art_style=art_style, location=image_file_name)
+    couchdb_status, couchdb_response = update_image_document(
+        image_id=image_file_name,
+        name=name,
+        description=description,
+        art_style=art_style,
+        location=image_file_name
+    )
     if couchdb_status != 200:
         os.remove(path=save_paths[0])
         os.remove(path=save_paths[1])

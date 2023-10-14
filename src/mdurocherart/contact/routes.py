@@ -11,7 +11,7 @@ def homepage():
 
 @bp.route("/process_contact", methods=["POST"])
 def process_contact():
-    req = request.json
+    req = request.form.to_dict()
     email_obj = format_email(req)
     status = send_email(email_obj)
     return jsonify(success=True)
