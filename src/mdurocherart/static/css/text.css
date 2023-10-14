@@ -17,6 +17,15 @@
     gap: 10px;
 }
 
+.gif-wrapper {
+    position: relative;
+    width:50%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
 .text-input {
     background: linear-gradient(#313030, transparent);
     border: 0;
@@ -71,4 +80,11 @@
 label {
     vertical-align: top;
     color: white;
+}
+
+
+@media only screen and (max-width: 700px){
+    .gif-wrapper{
+        display: none;
+    }
 }
