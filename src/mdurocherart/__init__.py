@@ -14,6 +14,7 @@ load_dotenv(find_dotenv())
 def create_app(env: Optional[str] = None):
 
     mdurocherart = Flask(__name__)
+    mdurocherart.config['MAX_CONTENT_LENGTH'] = 16 * 1000 * 1000
 
     if env is None:
         env = os.getenv('TARGET_ENV', default='dev')

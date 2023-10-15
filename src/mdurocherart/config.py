@@ -24,6 +24,7 @@ class Config(object):
     COUCHDB_PASSWORD = os.getenv('COUCHDB_PASSWORD')
     COUCHDB_HOST = os.getenv('COUCHDB_HOST', default='127.0.0.1')
     COUCHDB_PORT = os.getenv('COUCHDB_PORT', default=5984)
+    ACCEPTED_FILE_TYPES = {'png', 'jpg', 'jpeg'}
 
 
 class ProductionConfig(Config):

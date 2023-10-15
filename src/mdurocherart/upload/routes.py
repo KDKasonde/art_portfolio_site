@@ -1,7 +1,8 @@
-from flask import render_template, request, jsonify, current_app, redirect, url_for
+from flask import render_template, abort, request, jsonify, current_app, redirect, url_for
 from mdurocherart.upload import bp
 from mdurocherart.upload.models import put_image, pull_image, update_image_document, delete_image_document
 from mdurocherart.login_manager import login_required, login_user
+from mdurocherart.utils import _validate_file
 from pathlib import Path
 import os
 from random import shuffle
@@ -64,7 +65,9 @@ def add_new_image():
 def upload_image():
     data = request.form.to_dict()
     image_file = request.files['img']
-
+    accept_file, status = _validate_file(image_file)
+    if not accept_file:
+        return abort(400)
     status = put_image(
         image=image_file,
         name=data['name'],

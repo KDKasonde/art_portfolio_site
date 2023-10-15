@@ -1,7 +1,7 @@
-from flask import render_template, request, jsonify
-
+from flask import render_template, request, jsonify, abort
 from mdurocherart.contact import bp
 from mdurocherart.contact.models import send_email, format_email, send_email_with_attachments
+from mdurocherart.utils import _validate_file
 
 
 @bp.route("/", methods=["GET"])
@@ -13,6 +13,9 @@ def homepage():
 def process_contact():
     req = request.form.to_dict()
     image_file = request.files['input-upload']
+    accept_file, status = _validate_file(image_file)
+    if not accept_file:
+        return abort(400)
     email_obj = format_email(req, image_file)
     if email_obj.subject == 'quote':
         status = send_email_with_attachments(email_obj)
