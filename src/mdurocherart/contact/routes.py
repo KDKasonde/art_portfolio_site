@@ -1,4 +1,4 @@
-from flask import render_template, request, jsonify, abort
+from flask import render_template, request, jsonify, abort, redirect, url_for, flash
 from mdurocherart.contact import bp
 from mdurocherart.contact.models import send_email, format_email, send_email_with_attachments
 from mdurocherart.utils import _validate_file
@@ -21,4 +21,8 @@ def process_contact():
         status = send_email_with_attachments(email_obj)
     else:
         status = send_email(email_obj)
-    return jsonify(success=True)
+    if status is not True:
+        flash('There seems to be an with error your request given!')
+        return redirect(url_for('contact.homepage'))
+    flash('Thank you for reaching out!')
+    return redirect(url_for('contact.homepage'))

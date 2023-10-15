@@ -49,8 +49,8 @@ def interactive_view():
 def get_image_details():
     image_id = request.args.get('image_id')
     status, image_info = pull_image(image_id=image_id)
-    if status == 500:
-        return jsonify(success=False)
+    if status != 200:
+        return abort(status)
     return render_template('upload/edit_image_view.html', image_info=image_info, image_id=image_id)
 
 
@@ -75,7 +75,7 @@ def upload_image():
         art_style=data['art_style'],
     )
     if status != 200:
-        return jsonify(success=False)
+        return abort(status)
     return redirect(url_for('upload.homepage'), code=301)
 
 
@@ -91,7 +91,7 @@ def update_image():
         location=data['location']
     )
     if status != 200:
-        return jsonify(success=False)
+        return abort(status)
     return redirect(url_for('upload.homepage'), code=301)
 
 
@@ -101,6 +101,6 @@ def delete_image():
     req = request.json
     status, response = delete_image_document(image_id=req['image_id'])
     if status != 200:
-        return jsonify(success=False)
+        return abort(status)
     return redirect(url_for('upload.homepage'), code=301)
 
