@@ -10,12 +10,19 @@ from mdurocherart.constants import (
 import os
 
 
-def check_image_exist(image: str) -> bool:
+def check_image_exist(image: str, strong: bool = False) -> bool:
     image_folder = IMAGE_GALLERY.joinpath('gallery')
     image_list = list(image_folder.glob("*"))
     image_list = map(os.path.basename, image_list)
     image += '.png'
     if image in image_list:
+        if strong:
+            image_folder = IMAGE_GALLERY.joinpath('gallery_jpg')
+            image_list = list(image_folder.glob("*"))
+            image_list = map(os.path.basename, image_list)
+            image += '.jpg'
+            if image not in image_list:
+                return False
         return True
     return False
 
