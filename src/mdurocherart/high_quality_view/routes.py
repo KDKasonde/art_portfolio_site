@@ -1,24 +1,19 @@
-from flask import render_template, request, redirect, url_for, abort
-import os
-from pathlib import Path
+from flask import render_template, request, abort
 from mdurocherart.high_quality_view.models import check_image_exist
 from mdurocherart.high_quality_view import bp
+from mdurocherart.utils import pull_image
 
 
-@bp.route("/", methods=["GET"])
-def homepage():
-    image = request.args.get('image')
-    exists = check_image_exist(image)
-    if exists is not True:
-        return abort(400)
-    return render_template("high_quality_view/homepage.html", image=image)
-
-
-@bp.route("/getImage", methods=["GET"])
+@bp.route("/high_quality_view", methods=["GET"])
 def get_image():
-    image = request.args.get('image_id')
-    exists = check_image_exist(image)
+    image_id = request.args.get('image_id')
+    exists = check_image_exist(image_id)
     if exists is not True:
-        return abort(400)
+        return abort(404)
+    status, image_info = pull_image(image_id=image_id)
+    if status != 200:
+        return abort(status)
+    if image_info:
+        return render_template('high_quality_view/homepage.html', image_info=image_info, image_id=image_id)
 
-    return redirect(url_for("high_quality_view.homepage", image=image), code=301)
+    return abort(404)

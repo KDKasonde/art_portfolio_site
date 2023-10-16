@@ -1,8 +1,8 @@
 from flask import render_template, abort, request, jsonify, current_app, redirect, url_for
 from mdurocherart.upload import bp
-from mdurocherart.upload.models import put_image, pull_image, update_image_document, delete_image_document
+from mdurocherart.upload.models import put_image, update_image_document, delete_image_document
 from mdurocherart.login_manager import login_required, login_user
-from mdurocherart.utils import _validate_file
+from mdurocherart.utils import _validate_file, pull_image
 from pathlib import Path
 import os
 from random import shuffle
@@ -51,6 +51,14 @@ def get_image_details():
     status, image_info = pull_image(image_id=image_id)
     if status != 200:
         return abort(status)
+    if image_info:
+        return render_template('upload/edit_image_view.html', image_info=image_info, image_id=image_id)
+    image_info = {
+        'location': image_id,
+        'pieceName': '',
+        'artStyle': '',
+        'pieceDescription': ''
+    }
     return render_template('upload/edit_image_view.html', image_info=image_info, image_id=image_id)
 
 

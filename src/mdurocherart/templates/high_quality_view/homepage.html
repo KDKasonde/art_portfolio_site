@@ -3,17 +3,17 @@
 
 <div class="detail-view-div" style="width: 100%;">
     <div class="high-quality-image-div col">
-        <img class="high-quality-image" src="{{ url_for('static', filename='assets/gallery/' + image + '.png') }}">
+        <img class="high-quality-image" src="{{ url_for('static', filename='assets/gallery/' + image_id + '.png') }}">
     </div>
 
     <div class="high-quality-description-div col">
         <div>
             <h3 class="title_text">Piece Name</h3>
-            <p class="page_text">Name here</p>
+            <p class="page_text">{{ image_info.pieceName }}</p>
             <h3 class="title_text">Art Style here</h3>
-            <p class="page_text">Style name here</p>
+            <p class="page_text">{{ image_info.artStyle }}</p>
             <h3 class="title_text">Description</h3>
-            <p class="page_text">Drawn on ?? I used a drawing pad and the image was done with x layers</p>
+            <p class="page_text">{{ image_info.pieceDescription }}</p>
         </div>
     </div>
 </div>

@@ -1,28 +1,14 @@
 from flask import current_app
 from typing import Dict
-from pathlib import Path
 from PIL import Image
 from io import BytesIO
 import os
 from werkzeug.datastructures.file_storage import FileStorage
-
-
-DOCUMENT = "images"
-PULL_IMAGE_VIEW = 'pull_image_view'
-IMAGE_GALLERY = Path(__file__).parent.parent.joinpath('static', 'assets')
-PNG_FILE_ENDING = ['png']
-JPEG_FILE_ENDINGS = ['jpg', 'jpeg']
-
-
-def pull_image(image_id: str) -> Dict[str, str]:
-
-    try:
-        response = current_app.couchdb.get_view(document=DOCUMENT, view=PULL_IMAGE_VIEW, keys=image_id)
-
-    except Exception as e:
-        return 500, response
-    values = response['rows'][0]['value']
-    return 200, values
+from mdurocherart.constants import (
+    IMAGE_GALLERY,
+    PNG_FILE_ENDING,
+    JPEG_FILE_ENDINGS
+)
 
 
 def update_image_document(image_id: str, name: str, description: str, art_style: str, location: str):
@@ -34,12 +20,12 @@ def update_image_document(image_id: str, name: str, description: str, art_style:
                 'image_id': image_id,
                 'location': location
         }
-
         response = current_app.couchdb.put_document(
             document_id=image_id,
             data=data
         )
     except Exception:
+        print(response)
         return 500, response
     return 200, response
 

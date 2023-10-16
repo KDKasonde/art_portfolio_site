@@ -1,13 +1,13 @@
-from flask import render_template, current_app
-from pathlib import Path
+from flask import render_template, abort
 from random import shuffle
-import os
 from mdurocherart.home import bp
+from mdurocherart.utils import get_images
 
 
 @bp.route('/', methods=['GET'])
 def homepage():
-    gallery_folder = Path(__file__).parent.parent.joinpath("static", "assets", "gallery_jpg")
-    image_list = os.listdir(gallery_folder)
+    status, image_list = get_images()
+    if status != 200:
+        return abort(404)
     shuffle(image_list)
     return render_template("home/homepage.html", image_list=image_list)

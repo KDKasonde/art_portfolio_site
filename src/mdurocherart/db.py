@@ -85,16 +85,7 @@ class CouchdbConnection:
             end_point = self.end_point + "/_design/" + document
         else:
             end_point = self.end_point + "/" + document
-        response = requests.get(url=end_point)
-
-        if response.status_code == 404:
-            response_dict = response.json()
-            raise NotFoundError(
-                error=response_dict['error'],
-                reason=response_dict['reason'],
-                status_code=response.status_code,
-                request=end_point,
-            )
+        response = requests.get(url=end_point).json()
 
         if "_rev" in response.keys() and data:
             data.update({"_rev": response["_rev"]})
