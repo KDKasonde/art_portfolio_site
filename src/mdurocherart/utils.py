@@ -5,10 +5,19 @@ from mdurocherart.constants import (
     DOCUMENT,
     PULL_IMAGE_VIEW,
     PULL_IMAGE_LOCATION,
-    IMAGE_GALLERY,
-    PNG_FILE_ENDING,
-    JPEG_FILE_ENDINGS
+    IMAGE_GALLERY
 )
+import os
+
+
+def check_image_exist(image: str) -> bool:
+    image_folder = IMAGE_GALLERY.joinpath('gallery')
+    image_list = list(image_folder.glob("*"))
+    image_list = map(os.path.basename, image_list)
+    image += '.png'
+    if image in image_list:
+        return True
+    return False
 
 
 def pull_image(image_id: str) -> Dict[str, str]:
@@ -33,7 +42,7 @@ def get_images():
     except Exception as e:
         return 500, response
     values = response['rows']
-    images = list(map(add_jpg_file_extension, [x['value'] for x in values]))
+    images = list(map(add_jpg_file_extension, [x['value'] for x in values if check_image_exist(x['value'])]))
 
     return 200, images
 

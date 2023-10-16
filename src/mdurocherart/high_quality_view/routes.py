@@ -1,7 +1,6 @@
 from flask import render_template, request, abort
-from mdurocherart.high_quality_view.models import check_image_exist
 from mdurocherart.high_quality_view import bp
-from mdurocherart.utils import pull_image
+from mdurocherart.utils import pull_image, check_image_exist
 
 
 @bp.route("/high_quality_view", methods=["GET"])
@@ -15,5 +14,5 @@ def get_image():
         return abort(status)
     if image_info:
         return render_template('high_quality_view/homepage.html', image_info=image_info, image_id=image_id)
-
+    print(image_info)
     return abort(404)

@@ -1,5 +1,4 @@
-from flask import current_app
-from typing import Dict
+from flask import current_app, abort
 from PIL import Image
 from io import BytesIO
 import os
@@ -9,9 +8,12 @@ from mdurocherart.constants import (
     PNG_FILE_ENDING,
     JPEG_FILE_ENDINGS
 )
+from mdurocherart.utils import check_image_exist
 
 
 def update_image_document(image_id: str, name: str, description: str, art_style: str, location: str):
+    if check_image_exist(image_id) is not True or check_image_exist(location) is not True:
+        return abort(404)
     try:
         data = {
                 'piece_name': name,
