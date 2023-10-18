@@ -98,6 +98,21 @@ p {
     background-color: #484848;
 }
 
+.help-btn{
+    color: white;
+    border-radius: 50%;
+    font-weight:900;
+    background-color: transparent;
+    border: 0 solid transparent;
+}
+
+.help-btn:active{
+    background-color: black;
+    scale: 0.9;
+    box-shadow: none;
+}
+
+
 .side_panel_background{
     display: none;
     position: fixed;
@@ -107,7 +122,23 @@ p {
     left: 0;
     top: 0;
     background-color: rgba(0,0,0,0.4);
-    transition: 5s;
+    transition: 1s;
+}
+
+.modal_content{
+    position: absolute;
+    border-radius: 10px 10px 10px 10px;
+    z-index: 1;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: black;
+
+    display: flex;
+    flex-wrap: wrap;
+
+    animation-name: animate_down;
+    animation-duration: 0.8s
 }
 
 .sidepanel {
@@ -127,9 +158,24 @@ p {
     animation-duration: 0.8s
 }
 
+.helper-image{
+    max-width: 100%;
+}
+
+.helder-image-container{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
 @keyframes animate_right {
   from {right: -20%; opacity: 0}
   to {right: 0; opacity: 1}
+}
+
+@keyframes animate_down {
+    from {transform: translate(-50%, 50%); opacity: 0; }
+  to {transform: translate(-50%, -50%); opacity: 1; }
 }
 
 .close-btn{

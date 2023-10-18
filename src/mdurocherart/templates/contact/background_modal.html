@@ -1,0 +1,29 @@
+<div id="background-helper-modal" class="side_panel_background">
+  <div id="background-helper-content" class="modal_content">
+    <button class="close-btn" onclick="closeNav(document.getElementById('background-helper-content'), document.getElementById('background-helper-modal'))">
+      <span aria-hidden="true">&times;</span>
+    </button>
+    <div style="margin-left: 20px;margin-right: 20px;">
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+        magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+        Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+      </p>
+    </div>
+    <div style="display: grid; grid-template-columns: repeat(3, 1fr);gap: 20px;margin-left: 20px;margin-right: 20px;">
+      <div class="helder-image-container">
+        <img class="helper-image" src="{{ url_for('static', filename='assets/visual_aids/manblurred_watermark_portrait.jpg') }}">
+        <p>Blurred</p>
+      </div>
+      <div class="helder-image-container">
+        <img class="helper-image" src="{{ url_for('static', filename='assets/visual_aids/man_watermark_portrait.jpg') }}">
+        <p>Detailed</p>
+      </div>
+      <div class="helder-image-container">
+        <img class="helper-image" src="{{ url_for('static', filename='assets/visual_aids/mansolidcolour_watermark_portrait.jpg') }}">
+        <p>Solid Colour</p>
+      </div>
+    </div>
+  </div>
+</div>
+

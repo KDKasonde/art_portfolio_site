@@ -25,6 +25,7 @@
     <script type="text/javascript" src="{{ url_for('static', filename='js/slider.js') }}"></script>
     <script type="text/javascript" src="{{ url_for('static', filename='js/slides.js') }}"></script>
     <script type="text/javascript" src="{{ url_for('static', filename='js/form_helpers.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/modal_helper.js') }}"></script>
     <div class="row align-items-center" style="width: 100%; margin: 0 0 0 0;" >
         <div class="d-flex justify-content-sm-between align-content-center" style="width: 30%; height: 1em; padding-left: 5%;">
         </div>
@@ -58,27 +59,16 @@
 </body>
 
 <script>
-
-  function openNav() {
-    console.log()
-
-    document.getElementById("my-side-panel").style.display = "block";
-    document.getElementById("side-panel-content").style.width = "30vw";
-  }
-
-  document.getElementById("open-sidepanel").addEventListener('click', function(event) {
-    openNav();
-    event.stopPropagation();
-    }
-  );
-
-
-  function closeNav() {
-    document.getElementById("side-panel-content").style.width = "0";
-    document.getElementById("my-side-panel").style.display = "none";
-
-  }
-
+    document.getElementById("open-sidepanel").addEventListener(
+        'click', function(event) {
+            openNav(
+                document.getElementById("side-panel-content"),
+                document.getElementById("my-side-panel"),
+                "30vw"
+            );
+            event.stopPropagation();
+        }
+    );
 </script>
 
 </html>

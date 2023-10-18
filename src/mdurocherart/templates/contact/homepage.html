@@ -1,5 +1,7 @@
 {% extends 'contact/base.html' %}
 {% block content %}
+{% include 'contact/background_modal.html' %}
+{% include 'contact/art_style_modal.html' %}
 <form action="{{ url_for('contact.process_contact') }}" method="post" enctype="multipart/form-data">
     <div class="form-page-container">
         <div class="form-container">
@@ -28,7 +30,18 @@
                 </select>
             </div>
             <div class="text-box" style="display: none">
-                <label for="input-background">Background style</label>
+                <label for="input-background">
+                    Background style
+                    <button class="help-btn"
+                            type="button"
+                            onclick="openNav(
+                              document.getElementById('background-helper-content'),
+                              document.getElementById('background-helper-modal'),
+                              '60vw');"
+                    >
+                        <i class="fa-solid fa-circle-question"></i>
+                    </button>
+                </label>
                 <select class="text-input" type="text" name="input-background" id="input-background">
                     <option disabled selected value></option>
                     <option value="blur">Blurred</option>
@@ -37,7 +50,18 @@
                 </select>
             </div>
             <div class="text-box" style="display: none">
-                <label for="input-style">Art Style</label>
+                <label for="input-background">
+                    Art style
+                    <button class="help-btn"
+                            type="button"
+                            onclick="openNav(
+                              document.getElementById('art-style-helper-content'),
+                              document.getElementById('art-style-helper-modal'),
+                              '60vw');"
+                    >
+                        <i class="fa-solid fa-circle-question"></i>
+                    </button>
+                </label>
                 <select class="text-input" type="text" name="input-style" id="input-style">
                     <option disabled selected value></option>
                     <option value="acrylic">Acrylic Paint</option>
