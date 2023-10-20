@@ -1,5 +1,5 @@
 function trigger(event) {
-const leftBtn = document.getElementById('left-slider-btn');
+    const leftBtn = document.getElementById('left-slider-btn');
     // function to determine which side of the screen the mouse is and
     // highlight a scroll button for users who do not have a touchpad
     const rightBtn = document.getElementById('right-slider-btn');
