@@ -63,7 +63,7 @@ def _validate_file(uploaded_file: FileStorage) -> Tuple[bool, int]:
     Function to ensure the file types given are accept able.
     Parameters
     ----------
-    uploaded_files: FileStorage
+    uploaded_file: FileStorage
     the files that have been received.
 
     Returns
@@ -75,3 +75,4 @@ def _validate_file(uploaded_file: FileStorage) -> Tuple[bool, int]:
 
     if len(split_filename) != 2 or split_filename[-1].lower() not in current_app.config['ACCEPTED_FILE_TYPES']:
         return False, 404
+    return True, 200

@@ -1,5 +1,7 @@
 from pathlib import Path
 
+
+STANDARD_HEIGHT = 500
 DOCUMENT = "images"
 PULL_IMAGE_VIEW = 'pull_image_view'
 PULL_IMAGE_LOCATION = 'picture_location_view'

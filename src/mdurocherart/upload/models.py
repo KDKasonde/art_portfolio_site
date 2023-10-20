@@ -6,7 +6,8 @@ from werkzeug.datastructures.file_storage import FileStorage
 from mdurocherart.constants import (
     IMAGE_GALLERY,
     PNG_FILE_ENDING,
-    JPEG_FILE_ENDINGS
+    JPEG_FILE_ENDINGS,
+    STANDARD_HEIGHT
 )
 from mdurocherart.utils import check_image_exist
 
@@ -27,7 +28,6 @@ def update_image_document(image_id: str, name: str, description: str, art_style:
             data=data
         )
     except Exception:
-        print(response)
         return 500, response
     return 200, response
 
@@ -89,6 +89,14 @@ def _save_images(image: FileStorage, image_name: str):
     return 200, [save_path_png, save_path_jpg]
 
 
+def _resize_jpg(image: Image) -> Image:
+    width, height = image.size
+    transform_multiple = STANDARD_HEIGHT/height
+    new_width = int(width * transform_multiple)
+    image = image.resize(size=(new_width, STANDARD_HEIGHT), resample=Image.LANCZOS)
+    return image
+
+
 def _check_file_ending(filename: str):
     file_ending = filename.split('.')[-1]
     if file_ending.lower() not in JPEG_FILE_ENDINGS+PNG_FILE_ENDING:
@@ -113,4 +121,7 @@ def _convert_png_to_jpg(image):
         picture.seek(0)
         picture_jpg = Image.open(picture)
         picture_jpg.load()
+
+    picture_jpg = _resize_jpg(picture_jpg)
+
     return picture_jpg
