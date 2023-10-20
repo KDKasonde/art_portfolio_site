@@ -5,7 +5,6 @@ from mdurocherart.login_manager import login_required, login_user
 from mdurocherart.utils import _validate_file, pull_image
 from pathlib import Path
 import os
-from random import shuffle
 
 
 @bp.route("/", methods=["GET"])
@@ -40,7 +39,6 @@ def login():
 def interactive_view():
     gallery_folder = Path(__file__).parent.parent.joinpath("static", "assets", "gallery_jpg")
     image_list = os.listdir(gallery_folder)
-    shuffle(image_list)
     return render_template("upload/available_images.html", image_list=image_list, logged_in=True)
 
 

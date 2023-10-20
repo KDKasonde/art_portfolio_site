@@ -20,8 +20,10 @@
                 <label for="name">Piece Description</label>
                 <textarea class="text-input textarea-input" name="description" id="description" rows="10" value="{{ image_info.pieceDescription }}">{{ image_info.pieceDescription }}</textarea>
             </div>
-            <input type="submit">
-            <button class="send-email-btn" id="delete_image" onclick="deleteImage()"><p><u>Delete Image</u></p></button>
+            <div class="row">
+                <input class="send-email-btn" style="margin-right: 10px" type="submit">
+                <button type="button" class="send-email-btn" id="delete_image" onclick="deleteImage()"><p>Delete Image</p></button>
+            </div>
 
         </div>
     </div>
@@ -33,7 +35,7 @@ async function deleteImage(){
     const payload = {
             'image_id': '{{ image_id }}'
         };
-    await makePostRequest(url, payload);
+    await redirectFromPost(url, payload);
 }
 </script>
 

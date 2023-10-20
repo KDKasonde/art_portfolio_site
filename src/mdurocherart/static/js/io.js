@@ -45,7 +45,7 @@ async function makeGetRequest(url){
 
 async function redirectFromGet(url){
     let response = await makeGetRequest(url);
-    if (response.ok){
+    if (response.ok === true){
         window.location = response.url;
     } else {
         alert('There was an issue processing your request!')
@@ -55,8 +55,9 @@ async function redirectFromGet(url){
 
 async function redirectFromPost(url, payload){
     let response = await makePostRequest(url, payload);
-    if (response.ok){
+    if (response.ok === true){
         window.location = response.url;
+    } else {
+        alert('There was an issue processing your request!')
     };
-    alert('There was an issue processing your request!')
 }
