@@ -4,16 +4,16 @@
         <div id="slide-1" class="slide-item">
             {% include 'about/slides/intro_slide.html' %}
         </div>
-        <div id="slide-2" class="slide-item" style="opacity: 0;" >
+        <div id="slide-2" class="slide-item" style="opacity: 1;" >
             {% include 'about/slides/slide_2.html' %}
         </div>
-        <div id="slide-3" class="slide-item" style="opacity: 0;" >
+        <div id="slide-3" class="slide-item" style="opacity: 1;" >
             {% include 'about/slides/slide_3.html' %}
         </div>
-        <div id="slide-4" class="slide-item" style="opacity: 0;" >
+        <div id="slide-4" class="slide-item" style="opacity: 1;" >
             {% include 'about/slides/slide_4.html' %}
         </div>
-        <div id="slide-5" class="slide-item" style="opacity: 0;" >
+        <div id="slide-5" class="slide-item" style="opacity: 1;" >
             {% include 'about/slides/slide_5.html' %}
         </div>
     </div>
@@ -59,15 +59,15 @@
 
 
 <script>
-    let currentIndex = 0;
+    let currentIndex = 1;
 
 
 
 
 
     function removePreviousIndicator(){
-        let slidePoint = document.getElementById(`slide-point-${currentIndex + 1}`);
-        let title = document.getElementById(`title-${currentIndex + 1}`);
+        let slidePoint = document.getElementById(`slide-point-${currentIndex}`);
+        let title = document.getElementById(`title-${currentIndex}`);
         slidePoint.style.removeProperty('height');
         slidePoint.style.removeProperty('background-color');
         title.style.removeProperty('display');
@@ -75,8 +75,8 @@
     }
 
     function updateIndicators(index){
-        let slidePoint = document.getElementById(`slide-point-${index+1}`);
-        let title = document.getElementById(`title-${index+1}`);
+        let slidePoint = document.getElementById(`slide-point-${index}`);
+        let title = document.getElementById(`title-${index}`);
         slidePoint.style.height = '100%';
         slidePoint.style.backgroundColor = 'transparent';
         title.style.display = 'block';
@@ -109,11 +109,11 @@
         const indicators = document.getElementsByClassName("slide-point");
         Array.from(indicators).forEach(function (element, index) {
             element.addEventListener("click", function () {
-                changeSlide(index);
+                changeSlide(index+1);
             })
 
             element.addEventListener("mouseover", function () {
-                if (currentIndex != index){
+                if (currentIndex != (index+1)){
                     animateText(element.children[0].id);
                 }
             })

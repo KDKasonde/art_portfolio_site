@@ -21,15 +21,16 @@ function fadeOut(slide) {
 }
 
 function changeSlide(index) {
-    let activeSlide = document.getElementById(`slide-${index+1}`);
+    fadeOut(document.getElementById(`slide-${currentIndex}`));
+    let activeSlide = document.getElementById(`slide-${index}`);
     removePreviousIndicator(index);
     updateIndicators(index);
     fadeOut(activeSlide);
-    activeSlide.style.opacity = 0;
+    activeSlide.style.opacity = '0';
 
-    activeSlide = document.getElementById(`slide-${index+1}`);
+    activeSlide = document.getElementById(`slide-${index}`);
 
-    if (index+1 == 2 && !visitedBefore) {
+    if (index == 2 && !visitedBefore) {
         activeSlide.scrollIntoView({
             behavior: 'instant',
             block: 'center',
@@ -40,7 +41,7 @@ function changeSlide(index) {
     } else {
 
         activeSlide.scrollIntoView({
-            behavior: 'smooth',
+            behavior: 'auto',
             block: 'center',
             inline: 'center'
         });

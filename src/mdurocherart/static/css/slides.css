@@ -20,11 +20,16 @@
     display: grid;
     grid-auto-flow: column;
     grid-auto-columns: 100%;
-    overflow-x: hidden;
+    overflow-x: scroll;
     overflow-y: revert ;
     scroll-behavior: smooth;
     scroll-snap-type: x mandatory;
+    scrollbar-width: none;
     -webkit-perspective: 600px;
+}
+
+div.slide-div::-webkit-scrollbar {
+    display: none;
 }
 
 .slide::before,
