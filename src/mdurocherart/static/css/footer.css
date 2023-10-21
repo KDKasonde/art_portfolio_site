@@ -1,0 +1,48 @@
+.footer-style{
+    background-color: black;
+    height: 100%;
+}
+
+.footer-link {
+    font-family: 'Encode Sans Semi Expanded', sans-serif;
+    font-size: 1em;
+    font-weight: normal;
+    color: white;
+}
+
+.footer-icons{
+    font-size: 2em;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    background-color: transparent;
+    border: 0 solid transparent;
+}
+
+.footer-social-links {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding-top: 20px;
+}
+
+.final-footer-row > p {
+    font-size: 0.75em;
+    color: #484848;
+}
+
+.final-footer-row > i {
+    font-size: 1em;
+    color: #484848;
+}
+
+.final-footer-row > button {
+    font-size: 1.5em;
+    color: #484848;
+    padding: 0 0 0 0;
+}

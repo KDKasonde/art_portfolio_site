@@ -80,6 +80,18 @@ p {
     box-shadow: none;
 }
 
+.social-media-links{
+    width: 2em;
+    font-size: 2em;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    font-family: "Font Awesome 6 Free";
+    font-weight:900;
+    background-color: transparent;
+    border: 0 solid transparent;
+}
+
 .option_btn {
     color: white;
     font-family: "Font Awesome 6 Free";
@@ -203,7 +215,6 @@ p {
 .slider-wrap{
     width:100vw;
     height: 80%;
-    position: fixed;
     overflow-x: visible;
     z-index: 0;
     display: flex;

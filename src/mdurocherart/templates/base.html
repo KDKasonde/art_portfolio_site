@@ -14,9 +14,11 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
           integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ url_for('static', filename='fontawesome/css/fontawesome.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='fontawesome/css/brands.min.css') }}" />
     <link rel="stylesheet" href="{{ url_for('static', filename='fontawesome/css/solid.css') }}" />
 
     <link rel="stylesheet" href="{{ url_for('static', filename='css/page.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/footer.css') }}" />
     <link rel="stylesheet" href="{{ url_for('static', filename='css/background.css') }}" />
     <link rel="stylesheet" href="{{ url_for('static', filename='css/images.css') }}" />
     <link rel="stylesheet" href="{{ url_for('static', filename='css/slides.css') }}" />
@@ -32,7 +34,7 @@
         <a href="#" class="d-flex justify-content-center" style="width: 40%;">
             <img class="logo" src="{{ url_for('static', filename='assets/logo.png') }}" alt="Responsive image"/>
         </a>
-        <div class="d-flex justify-content-end" style="width: 30%;">
+        <div class="d-flex justify-content-start" style="width: 30%;">
             <button id="open-sidepanel" class="side_bar_btn align-self-center rounded">
                 <i class="fas fa-bars"></i>
             </button>
@@ -53,9 +55,36 @@
     {% include 'sidebar.html' %}
 </head>
 
-<body style="width: 100%; height: 100%; overflow-x: hidden;";>
-{% block content %}
-{% endblock %}
+<body style="width: 100%; height: 100%; overflow-x: hidden; display: flex; flex-direction: column";>
+<article style="height: 100vh;">
+    {% block content %}
+    {% endblock %}
+</article>
+<footer class="footer-style">
+    <div class="footer-social-links">
+        <button class="footer-icons align-self-center rounded" onclick="window.open('https://www.facebook.com/manueladurocherart','_blank')">
+            <i class="fa-brands fa-facebook"></i>
+        </button>
+        <button class="footer-icons align-self-center rounded" onclick="window.open('https://www.instagram.com/manueladurocherart/','_blank')">
+            <i class=" fa-brands fa-instagram"></i>
+        </button>
+    </div>
+    <div class="footer-social-links">
+        <a class='footer-link' href="{{ url_for('home.homepage') }}" style="padding-left: 0;"><p style="margin: 0 0 0 0;">Home</p></a>
+        <a class='footer-link' href="{{ url_for('about.homepage') }}" style="padding-left: 0;"><p style="margin: 0 0 0 0;">About</p></a>
+        <a class='footer-link' href="{{ url_for('contact.homepage') }}" style="padding-left: 0;"><p style="margin: 0 0 0 0;">Contact</p></a>
+    </div>
+    <div class="footer-social-links final-footer-row" style="padding-top: 0">
+        <i class="fa-regular fa-copyright"></i>
+        <p style="margin: 0 0 0 0;">MDurocherArt 2023.</p>
+    </div>
+    <div class="footer-social-links final-footer-row" style="padding-bottom: 20px; padding-top: 0">
+        <p style="margin: 0 0 0 0;">How was this made:</p>
+        <button class="footer-icons align-self-center rounded" onclick="window.open('https://github.com/KDKasonde/art_portfolio_site','_blank')">
+            <i class="fa-brands fa-github"></i>
+        </button>
+    </div>
+</footer>
 </body>
 
 <script>
