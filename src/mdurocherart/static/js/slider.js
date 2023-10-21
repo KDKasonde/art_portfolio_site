@@ -77,23 +77,7 @@ function slideRight() {
     disableSliderBtn();
 }
 
-function arrowSlider(event) {
-    // arrow key slider
-    const centerImageId = parseInt(getCenterImage());
-
-    if ((event.which == 37) && (`${centerImageId}` !=0)){
-        /*left key code*/
-        slideLeft()
-    }
-    if ((event.which == 39) && (`${centerImageId}` != (imagesList.length-1))){
-        /*right key code*/
-        slideRight();
-    }
-
-}
-
-
-function Onload(imageList) {
+function Onload() {
     resizeSlider()
     imagesList.forEach(image => {
         image.addEventListener("click", function(event) {
@@ -103,11 +87,10 @@ function Onload(imageList) {
     });
     leftSliderBtn.addEventListener("click", slideLeft);
     rightSliderBtn.addEventListener("click", slideRight);
-    document.addEventListener('keydown', arrowSlider);
     disableSliderBtn();
 }
 
-function checkImages(imageList){
+function checkImages(){
     // Function that takes the list of images being shown
     // and uses the window to distinguish which ones are in view
     let in_view = [];
