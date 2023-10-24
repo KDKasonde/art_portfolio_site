@@ -14,5 +14,4 @@ def get_image():
         return abort(status)
     if image_info:
         return render_template('high_quality_view/homepage.html', image_info=image_info, image_id=image_id)
-    print(image_info)
     return abort(404)

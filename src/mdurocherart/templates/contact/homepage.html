@@ -3,6 +3,13 @@
 {% include 'contact/background_modal.html' %}
 {% include 'contact/art_style_modal.html' %}
 <form action="{{ url_for('contact.process_contact') }}" method="post" enctype="multipart/form-data">
+    <div style="text-align: center;">
+    {% with messages=get_flashed_messages() %}
+    {% if messages %}
+        <p style="margin-top: 1em;">{{ messages[0] | safe }}</p>
+    {% endif %}
+    {% endwith %}
+    </div>
     <div class="form-page-container">
         <div class="form-container">
             <div id="thank-you-message" class="text-box" style="display: none;">
